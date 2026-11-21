@@ -1,0 +1,714 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="متطلبات مشروع React النهائي: مين طالب شو؟ 33 مهمة و29 API محاكاة، مع قواعد العمل ومعايير القبول."><title>مين طالب شو؟ | API Guide</title><style>
+:root{--bg:#0a1120;--panel:#111e31;--panel2:#17273c;--line:#2a3c53;--text:#edf3fc;--muted:#aebfd3;--accent:#72e5c3;--orange:#ffc187;--radius:18px;color-scheme:dark;font-family:Tahoma,Arial,sans-serif}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:28px}body{margin:0;background:var(--bg);color:var(--text);line-height:1.95;font-size:16px}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.5}button,a,input,summary{outline-offset:5px}button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--orange)}aside{width:260px;position:fixed;right:0;top:0;bottom:0;background:#0e192a;border-left:1px solid var(--line);padding:26px 22px;overflow:auto}.brand{font-weight:bold;font-size:24px;line-height:1.7;margin-bottom:7px}.brand small{font-size:13px;color:var(--accent);display:block;letter-spacing:1px}.sidebar-note{color:var(--muted);font-size:14px;line-height:1.9}.nav{display:grid;gap:6px;margin:26px 0}.nav a{padding:9px 13px;border-radius:10px;color:var(--muted);font-size:15px}.nav a:hover{background:var(--panel2);text-decoration:none;color:var(--text)}main{margin-right:260px;max-width:1500px;padding:42px 5vw 80px}.eyebrow{color:var(--accent);font-size:14px;font-weight:bold;letter-spacing:.4px}.hero{padding:38px;background:linear-gradient(135deg,#132d39,#14213b 60%,#1b253e);border:1px solid #30506b;border-radius:24px;position:relative}.hero h1{font-size:clamp(36px,5vw,64px);line-height:1.35;margin:12px 0 18px;letter-spacing:-1px}.hero p{max-width:740px;color:#c7d5e5;margin:10px 0}.hero .intro{font-size:20px}.chips,.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}.chip{border:1px solid #436077;background:#132b3a;padding:5px 12px;border-radius:99px;font-size:14px}.chip.orange{color:var(--orange)}.button,button{border:1px solid #3b5870;border-radius:10px;padding:9px 15px;background:#1c3a49;color:var(--text);display:inline-block}.button.primary{background:var(--accent);color:#07251c;border-color:var(--accent);font-weight:bold}.button:hover{text-decoration:none;filter:brightness(1.1)}section{margin-top:46px;scroll-margin-top:24px}h2{font-size:28px;line-height:1.5;margin:0 0 12px}h3{font-size:20px;line-height:1.7;margin:0 0 10px}p{margin:10px 0}ul,ol{padding-right:24px;margin:12px 0}li{margin:6px 0}.muted{color:var(--muted)}.lead{max-width:850px;color:var(--muted);margin-bottom:22px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.panel,.callout{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px}.callout{border-right:4px solid var(--accent);margin:20px 0}.callout.warn{border-right-color:var(--orange)}.callout p:last-child{margin-bottom:0}bdi,code{unicode-bidi:isolate}p code,li code,td code,.meta code{font-family:Consolas,monospace;font-size:.91em;color:#8eead3;background:#102d35;padding:2px 6px;border-radius:5px;display:inline-block;max-width:100%;overflow-wrap:anywhere;line-height:1.65}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;margin:18px 0}table{border-collapse:collapse;width:100%;min-width:600px;font-size:15px}th,td{padding:13px 16px;text-align:right;vertical-align:top;border-bottom:1px solid var(--line)}th{background:#1a2c43;color:#dce8f6}tr:last-child td{border-bottom:0}td{background:#101d2e}.toolbar{background:#122238;border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:20px 0}input[type=search]{background:#0c1627;color:var(--text);border:1px solid #476179;border-radius:9px;padding:11px 14px;flex:1;min-width:200px}select{background:#0c1627;color:var(--text);border:1px solid #476179;border-radius:9px;padding:11px 14px}.progress{height:8px;border-radius:9px;background:#283a50;overflow:hidden;margin:12px 0}.progress span{height:100%;display:block;background:var(--accent);width:0;transition:width .2s}.progress-label{font-size:14px;color:var(--muted)}.phase{margin:30px 0}.phase-header{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;flex-wrap:wrap}.phase-header h3{margin:0;font-size:23px}.phase-header span{color:var(--muted);font-size:14px}.task{background:var(--panel);border:1px solid var(--line);border-radius:16px;margin:13px 0;overflow:hidden}.task.done{border-color:#3a806f}.task.done .task-title:after{content:'مكتملة';font-size:12px;display:inline-block;margin-right:10px;color:#9aefd5;border:1px solid #386e60;padding:0 8px;border-radius:5px}.task summary{list-style:none;cursor:pointer;padding:20px 23px;display:flex;gap:16px;align-items:start}.task summary::-webkit-details-marker{display:none}.task-no{font-family:Consolas,monospace;flex:0 0 45px;display:flex;align-items:center;justify-content:center;height:42px;background:#1e354b;border-radius:10px;color:var(--accent);font-size:18px}.task-title{font-weight:bold;font-size:19px;display:block}.task-goal{color:var(--muted);font-size:15px;display:block;margin-top:4px}.task summary:after{content:'+';margin-right:auto;color:var(--accent);font-size:24px}.task[open] summary:after{content:'−'}.task-body{border-top:1px solid var(--line);padding:20px 24px}.task-body h4{font-size:16px;color:#a4efda;margin:12px 0}.accept{background:#0e2630;border:1px solid #254e55;border-radius:12px;padding:15px 20px;margin:17px 0}.example{background:#28283a;color:#f2d5b4;border-radius:10px;padding:13px 17px;margin:15px 0}.task-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px}.done-label{display:flex;align-items:center;gap:9px;font-size:15px;cursor:pointer}input[type=checkbox]{width:20px;height:20px;accent-color:#6bdfb9}.api-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin:12px 0;overflow:hidden}.api-card summary{cursor:pointer;padding:18px 21px}.api-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.method{font:700 13px/1.5 Consolas,monospace;border:1px solid #345d62;padding:3px 8px;color:var(--accent);border-radius:5px}.method.POST{color:#a8c6ff;border-color:#48648a}.method.PATCH{color:#ffd29d;border-color:#806746}.method.DELETE{color:#ffb4be;border-color:#865063}.endpoint{direction:ltr;text-align:left;unicode-bidi:isolate;display:block;font:14px/1.8 Consolas,monospace;margin-top:10px;color:#b9d5f1;overflow-wrap:anywhere}.api-body{padding:5px 22px 22px;border-top:1px solid var(--line)}.meta{font-size:14px;color:var(--muted)}pre{background:#070e19;border:1px solid #25394e;border-radius:11px;padding:19px;margin:14px 0;color:#d4e8fa;font:14px/1.8 Consolas,monospace;direction:ltr;text-align:left;unicode-bidi:isolate;overflow:auto;tab-size:2;max-height:440px}pre code{font:inherit}.copy{font-size:13px;padding:4px 12px;margin-top:8px}.flow{display:flex;flex-wrap:wrap;gap:10px;direction:ltr;justify-content:flex-end}.flow div{padding:12px 15px;border:1px solid #33566a;background:#112b38;border-radius:12px;font:15px/1.5 Consolas,monospace}.kpi{font-size:35px;color:var(--accent);line-height:1.4;font-weight:bold}.mobile-nav{display:none}footer{margin-top:55px;border-top:1px solid var(--line);padding-top:22px;color:var(--muted);font-size:14px}[hidden]{display:none!important}.toast{position:fixed;bottom:24px;left:24px;background:#c8f9e8;color:#092e23;border-radius:10px;padding:10px 18px;z-index:100;max-width:80vw;font-size:14px}.small{font-size:14px}.empty{padding:22px;border:1px dashed var(--line);border-radius:12px;color:var(--muted)}.phase-tag{color:var(--orange);font-size:14px}.criteria{margin:0}.criteria td:first-child{width:65%}@media(min-width:1600px){main{margin-left:auto}}@media(max-width:1050px){aside{width:220px;padding:22px 15px}main{margin-right:220px;padding:30px 25px}.hero{padding:28px}.grid{grid-template-columns:1fr}}@media(max-width:760px){aside{display:none}main{margin:0;padding:16px 16px 50px}.hero{padding:24px 20px}.hero h1{font-size:39px}.hero .intro{font-size:18px}h2{font-size:25px}.mobile-nav{display:flex;gap:14px;overflow:auto;white-space:nowrap;font-size:14px;padding:8px 0 18px}.task summary{padding:17px 14px;gap:12px}.task-body{padding:16px}.task-title{font-size:17px}.task-no{flex-basis:36px;height:36px}.task-goal{font-size:14px}.panel,.callout{padding:18px}.toolbar{padding:12px}pre{font-size:13px}.endpoint{font-size:13px}section{margin-top:34px}}@media print{body{background:white;color:#172235;font-size:11pt}aside,.toolbar,.actions,.mobile-nav,.copy,.done-label,.toast{display:none!important}main{margin:0;padding:0;max-width:none}.hero,.panel,.callout,.task,.api-card,td,th,.accept,.example{background:#fff;color:#172235;border-color:#bbb}.hero h1{font-size:32pt}.hero p,.muted,.lead,.task-goal,.meta{color:#334}.grid{display:block}.panel{margin-bottom:15px}.task,.api-card{break-inside:avoid}pre{max-height:none;white-space:pre-wrap;overflow-wrap:anywhere;background:#f4f6f8;color:#123}.task summary,.api-card summary{display:block}.task-no{display:inline-block;width:auto;margin-left:10px}.task-title{display:inline}.task summary:after{display:none}a{color:#164e63}p code,li code,td code{background:#eff5f7;color:#123}.flow div{background:#f4f6f8;color:#123}.task[hidden],.api-card[hidden],.phase[hidden]{display:block!important}}
+</style></head><body><aside><div class="brand"><small>REACT · FINAL PROJECT</small>مين طالب شو؟</div><div class="sidebar-note">مرجع التنفيذ للطالب<br>إعداد: Yanal Abuhadhoud<br>الإصدار 1.1</div><nav class="nav" aria-label="التنقل الرئيسي"><a href="#overview">فكرة المشروع</a><a href="#rules">قواعد العمل</a><a href="#tasks">التاسكات</a><a href="#api">توثيق APIs</a><a href="#data">الحفظ وJSON</a><a href="#delivery">التسليم والتقييم</a></nav><div class="progress-label" id="side-progress">0 من 33 مهمة مكتملة</div><div class="progress"><span id="side-bar"></span></div><p class="sidebar-note">علامات الإنجاز محفوظة على هذا المتصفح، وهي للتنظيم الشخصي وليست تقييمًا تلقائيًا.</p><a class="button" href="#start">طريقة التشغيل</a></aside><main><nav class="mobile-nav" aria-label="تنقل الهاتف"><a href="#overview">فكرة المشروع</a><a href="#rules">قواعد العمل</a><a href="#tasks">التاسكات</a><a href="#api">توثيق APIs</a><a href="#data">الحفظ وJSON</a><a href="#delivery">التسليم والتقييم</a></nav><header class="hero"><div class="eyebrow">مشروع React النهائي · متطلبات الطالب</div><h1>مين طالب شو؟</h1><p class="intro">طلب المكتب، من أول وجبة لآخر حساب.</p><p>ابنِ تطبيقًا ينظّم طلب الطعام الجماعي: شخص يفتح الطلب، زملاؤه يختارون وجباتهم، والمنظّم يراجع الكميات والحسابات ويتابع التوصيل والدفع.</p><div class="chips"><span class="chip">33 مهمة مستقلة</span><span class="chip">29 API محاكاة</span><span class="chip">مشروع فردي</span><span class="chip orange">واجهة React تبنيها بنفسك</span></div><div class="actions"><a class="button" href="#tasks">ابدأ بالتاسكات</a><a class="button" href="#api">افتح توثيق APIs</a><button id="print">طباعة المرجع</button></div></header><section id="overview"><h2>الفكرة التي ستنفّذها</h2><p class="lead">المشروع يجمع ما تعلمته في تطبيق واحد. الواجهات وتنظيم المكوّنات والتنقل وإدارة الحالة مسؤوليتك؛ البنية الجاهزة توفّر البيانات واستجابات APIs فقط.</p><div class="grid"><article class="panel"><h3>مثال من المكتب</h3><p>عمر يفتح طلب غداء من مطبخ المكتب، ويحدد آخر وقت للطلبات ورسوم التوصيل. سارة وليث ينضمان برمز الطلب ويضيف كل منهما وجباته. عمر يقفل الطلب، يراجع الملخص، ثم يؤكده ويسجّل لاحقًا من دفع حصته.</p></article><article class="panel"><h3>أنت ستبني</h3><ul><li>واجهات التسجيل والدخول والمطاعم والطلبات والسلة والحسابات.</li><li>التنقل والصلاحيات وحالات الانتظار والأخطاء وتجربة الهاتف.</li><li>التعامل مع <bdi dir="ltr">APIs</bdi> باستخدام <bdi dir="ltr">fetch</bdi> أو <bdi dir="ltr">Axios</bdi> دون تجاوزها للوصول إلى بيانات المحاكاة مباشرة.</li></ul></article></div><div class="callout"><p>دور المنظّم مرتبط بالطلب نفسه، وليس نوع حساب دائم. يمكن أن تكون منظّمًا في طلب ومشاركًا في طلب آخر. المنظّم عضو عادي فيما يخص سلته وحصته من التوصيل.</p></div></section><section id="roles"><div class="callout"><h3>المطعم لا يملك حسابًا</h3><p>المطعم سجل في قائمة المطاعم فقط: اسم، تصنيف، قائمة طعام، وحالة إتاحة. لا توجد له شاشة <bdi dir="ltr">Login</bdi> أو حساب أو لوحة استقبال طلبات. الأدمن هو الذي يدير هذه البيانات.</p></div><div class="table-wrap"><table><thead><tr><th>الجهة</th><th>ما الذي تستطيع فعله؟</th></tr></thead><tbody><tr><td><strong>أدمن النظام</strong></td><td>حساب بدور <code dir="ltr">admin</code> يضيف المطاعم ويعدّل أسماءها وإتاحتها وقوائم منتجاتها. لا يحصل تلقائيًا على سلال الجروبات أو صلاحية إدارة طلبات غيره. يستطيع أيضًا إنشاء طلب جماعي أو الانضمام برمز مثل أي عضو، ويكون منظّمًا في طلبه فقط.</td></tr><tr><td><strong>العضو</strong></td><td>حساب بدور <code dir="ltr">member</code> يختار من المطاعم المتاحة، وينشئ طلبًا جماعيًا أو ينضم إلى طلب موجود.</td></tr><tr><td><strong>منظّم الجروب</strong></td><td>العضو الذي أنشأ ذلك الطلب. يدير وقت الإغلاق والتأكيد والتوصيل والدفع في طلبه فقط. يمكن أن يكون مشاركًا في طلب آخر.</td></tr><tr><td><strong>المطعم</strong></td><td>بيانات يضيفها الأدمن؛ ليس مستخدمًا في النظام ولا يحتاج اسم مستخدم أو كلمة مرور.</td></tr></tbody></table></div><h3>أكثر من جروب في نفس الوقت</h3><p>الجروب هنا هو طلب جماعي مستقل لوجبة محددة، وليس مجموعة دائمة لها أعضاء ثابتون. كل جروب له <bdi dir="ltr">id</bdi> ورمز انضمام ومطعم ومنظّم وأعضاء وسلال وموعد ورسوم وحسابات خاصة به.</p><div class="table-wrap"><table><thead><tr><th>مثال جاهز</th><th>الجروب الأول</th><th>الجروب الثاني</th></tr></thead><tbody><tr><td>عدد الأعضاء</td><td>5 أشخاص</td><td>4 أشخاص</td></tr><tr><td>المطعم</td><td>مطبخ المكتب</td><td>برغر بريك</td></tr><tr><td>المنظّم</td><td>عمر</td><td>ليث</td></tr><tr><td>رمز الانضمام</td><td><code dir="ltr">TEAM01</code></td><td><code dir="ltr">TEAM02</code></td></tr><tr><td>رسوم التوصيل</td><td>1.000 دينار تخص هذا الجروب</td><td>2.000 دينار تخص هذا الجروب</td></tr></tbody></table></div><ul><li>إغلاق الجروب الأول لا يغلق الثاني؛ السلال والحسابات والمدفوعات مستقلة بالكامل.</li><li>اختيار نفس المطعم لا يدمج جروبين تلقائيًا. الانضمام يكون لرمز طلب محدد.</li><li>يمكن للعضو المشاركة في أكثر من طلب في الوقت نفسه، وتبقى له سلة منفصلة في كل طلب.</li><li>الأعضاء يختارون من المطاعم التي أضافها الأدمن. إنشاء الطلب متاح عندما يكون المطعم مفتوحًا ولديه منتج متاح واحد على الأقل.</li></ul></section><section id="start"><h2>ابدأ من هنا</h2><div class="panel"><p>فك ضغط المشروع، وافتح مجلد <code dir="ltr">Meen-Talab-Sho</code> في المحرّر والطرفية. استخدم <bdi dir="ltr">Node.js</bdi> بإصدار 22.12 أو أحدث.</p><pre dir="ltr"><code>npm install
+npm run dev</code></pre><p>افتح عنوان <bdi dir="ltr">Local</bdi> الذي يبدأ بـ <bdi dir="ltr">localhost</bdi> في الطرفية، وليس عنوان <bdi dir="ltr">Network</bdi>؛ المحاكاة تحتاج <bdi dir="ltr">localhost</bdi> أو <bdi dir="ltr">HTTPS</bdi> لتشغيل <bdi dir="ltr">Service Worker</bdi>. الشاشة الرئيسية فارغة لأن <code dir="ltr">src/App.jsx</code> يرجع <bdi dir="ltr">null</bdi>. هذا مقصود؛ ابدأ بناء التطبيق هناك.</p><ul><li>متطلبات المشروع: <code dir="ltr">/Requirements.html</code>.</li><li>توثيق <bdi dir="ltr">APIs</bdi>: <code dir="ltr">/API_Guide.html</code>.</li><li>أدوات البيانات وتجربة الطلبات: <code dir="ltr">/mock-tools.html</code>.</li><li>فحص المحاكاة: <code dir="ltr">npm test</code>. فحص بناء المشروع: <code dir="ltr">npm run build</code>.</li></ul></div><div class="callout warn"><p>شغّل المشروع عبر <bdi dir="ltr">Vite</bdi>؛ فتح <bdi dir="ltr">index.html</bdi> مباشرة لا يشغّل <bdi dir="ltr">React</bdi> أو المحاكاة. يلزم الإنترنت أول مرة لتنزيل الحزم. بعد ذلك لا تتصل <bdi dir="ltr">APIs</bdi> بخدمة خارجية. استخدم عنوان <bdi dir="ltr">localhost</bdi> ثابتًا حتى تبقى نفس بيانات المتصفح.</p></div></section><section id="rules"><h2>قواعد العمل التي يجب الالتزام بها</h2><p class="lead">هذه القواعد جزء من التقييم. إخفاء الأزرار يساعد المستخدم، بينما المحاكاة تتحقق من الصلاحيات والحالة عند كل طلب.</p><div class="table-wrap"><table><thead><tr><th>الموضوع</th><th>القاعدة</th></tr></thead><tbody><tr><td><strong>إدارة المطاعم</strong></td><td>الأدمن فقط يضيف المطاعم والمنتجات ويعدّلها. التسجيل العام ينشئ <bdi dir="ltr">member</bdi> فقط. يُعطّل المطعم أو المنتج بدل حذفه للحفاظ على سجل الطلبات.</td></tr><tr><td><strong>استقلال الجروبات</strong></td><td>كل <bdi dir="ltr">orderId</bdi> مستقل عن بقية الطلبات: الأعضاء والسلة والرسوم والحساب والحالة. مشاركة المطعم بين طلبين لا تدمجهما.</td></tr><tr><td><strong>المطعم</strong></td><td>كل طلب جماعي مرتبط بمطعم واحد لا يمكن تغييره بعد الإنشاء. المنتجات يجب أن تكون من مطعمه ومتوفرة.</td></tr><tr><td><strong>المشاركة</strong></td><td>المنشئ عضو تلقائي بسلة فارغة. الانضمام الجديد والمغادرة متاحان فقط في <bdi dir="ltr">Open</bdi>. المنظّم لا يغادر طلبه.</td></tr><tr><td><strong>السلة</strong></td><td>كل مستخدم يعدّل سلته وحده. الكمية 1–10 لكل سطر. المنتج والملاحظة المتطابقان يندمجان؛ الملاحظات المختلفة تبقى منفصلة.</td></tr><tr><td><strong>الإغلاق</strong></td><td>عند <bdi dir="ltr">closesAt</bdi> تصبح الحالة <bdi dir="ltr">Locked</bdi>. تفحص المحاكاة الوقت عند <bdi dir="ltr">API</bdi> لاحق. الواجهة تعيد جلب الحالة عند انتهاء الوقت.</td></tr><tr><td><strong>التأكيد</strong></td><td>من <bdi dir="ltr">Locked</bdi> فقط، وبوجود منتجات متاحة ومطعم مفتوح. <bdi dir="ltr">Confirmed</bdi> تثبّت الأسعار والحصص؛ لا تعديل أو إعادة فتح أو إلغاء بعدها.</td></tr><tr><td><strong>التوصيل</strong></td><td>التوصيل بالتساوي على أصحاب السلال غير الفارغة. يُوزع باقي الفلس حسب وقت الانضمام ثم <bdi dir="ltr">userId</bdi>. الأرقام المالية كلها بالفلس الصحيح.</td></tr><tr><td><strong>الدفع</strong></td><td>تسجيل يدوي لكامل حصة المشارك بعد <bdi dir="ltr">Confirmed</bdi>. يمكن تصحيح <bdi dir="ltr">paid</bdi> من <bdi dir="ltr">true</bdi> إلى <bdi dir="ltr">false</bdi>. حالة الدفع مستقلة عن التوصيل.</td></tr><tr><td><strong>الإلغاء</strong></td><td>من <bdi dir="ltr">Open</bdi> أو <bdi dir="ltr">Locked</bdi> فقط. تبقى بياناته للأرشيف، ولا توجد مبالغ للتحصيل. لا يمكن فتحه من جديد.</td></tr><tr><td><strong>التحديث</strong></td><td>لا يوجد <bdi dir="ltr">Real-time</bdi>. حدّث البيانات بعد نجاح العمليات وعند الضغط على زر التحديث أو انتهاء الوقت. العرض القديم لا يتجاوز قواعد <bdi dir="ltr">API</bdi>.</td></tr><tr><td><strong>حدود المشروع</strong></td><td>لا <bdi dir="ltr">Backend</bdi> حقيقي أو قاعدة بيانات مشتركة بين الأجهزة، ولا تكامل مطاعم أو بوابة دفع أو رفع على سيرفر ضمن المطلوب.</td></tr></tbody></table></div><h3>دورة حياة الطلب</h3><div class="flow" aria-label="تسلسل الحالات"><div>1 · Open</div><div>2 · Locked</div><div>3 · Confirmed</div><div>4 · Out for Delivery</div><div>5 · Delivered</div></div><p>إعادة الفتح تسمح بالرجوع من <code dir="ltr">Locked</code> إلى <code dir="ltr">Open</code> بموعد جديد. الإلغاء إلى <code dir="ltr">Cancelled</code> متاح من <code dir="ltr">Open</code> أو <code dir="ltr">Locked</code> فقط.</p><div class="grid"><div class="panel"><h3>مثال حساب واضح</h3><p>عمر عليه طعام بقيمة 4.500 دينار، وسارة 3.000، وليث 2.000. رسوم التوصيل 1.000 دينار. بافتراض أن عمر الأسبق انضمامًا، تصبح الفواتير 4.834 و3.333 و2.333؛ المجموع 10.500 دينار.</p></div><div class="panel"><h3>ماذا عن السلة الفارغة؟</h3><p>إذا كانت سلة ليث فارغة، فلا يدفع توصيلًا. تُقسم رسوم 1.000 دينار على عمر وسارة فقط: 0.500 لكل واحد. عندما تكون كل السلال فارغة، يبقى مجموع الحساب صفرًا ولا يمكن التأكيد.</p></div></div></section><section id="tasks"><h2>التاسكات المطلوبة</h2><p class="lead">ابدأ بالترتيب. افتح كل مهمة لتقرأ المطلوب وشروط قبولها. ضع علامة الإنجاز عندما تنفّذها وتختبرها.</p><div class="toolbar"><input id="search" type="search" placeholder="ابحث في التاسكات وAPIs…" aria-label="البحث في التاسكات وAPIs"><select id="filter" aria-label="فلترة الإنجاز"><option value="all">كل التاسكات</option><option value="todo">غير المكتملة</option><option value="done">المكتملة</option></select><button id="expand">فتح التفاصيل</button><button id="collapse">إغلاق التفاصيل</button><button id="export-progress">تصدير تقدّمي</button></div><p id="task-counter" class="muted small"></p><div id="tasks-empty" class="empty" hidden>لا توجد مهام مطابقة. جرّب تغيير البحث أو الفلتر.</div><div class="phase" data-phase="0"><div class="phase-header"><h3>الانطلاق والحساب</h3><span>أسّس المشروع وتأكد من هوية المستخدم.</span></div><details class="task" id="task-01" data-id="01"><summary><span class="task-no">01</span><span><span class="task-title">شغّل المشروع وافهم الملفات</span><span class="task-goal">جهّز بيئة العمل واختبر المحاكاة قبل كتابة الشاشات.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>ثبّت <bdi dir="ltr">Node.js</bdi> بإصدار 22.12 أو أحدث. فك الضغط ثم افتح مجلد المشروع الذي يحتوي <bdi dir="ltr">package.json</bdi>.</li><li>شغّل <code dir="ltr">npm install</code> ثم <code dir="ltr">npm run dev</code> وافتح رابط <bdi dir="ltr">Local</bdi> الذي يطبعه <bdi dir="ltr">Vite</bdi> (<bdi dir="ltr">localhost</bdi>)، وليس رابط <bdi dir="ltr">Network</bdi>. الشاشة الأساسية فارغة عمدًا.</li><li>افتح <code dir="ltr">/mock-tools.html</code> وسجّل دخولًا تجريبيًا لتتأكد من عمل <bdi dir="ltr">APIs</bdi>. ابدأ واجهتك من <code dir="ltr">src/App.jsx</code>.</li><li>أنشئ <bdi dir="ltr">Git Repository</bdi>. احتفظ بـ <bdi dir="ltr">package-lock.json</bdi>، ولا ترفع <bdi dir="ltr">node_modules</bdi> أو <bdi dir="ltr">dist</bdi>.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>يعمل المشروع دون أخطاء تشغيل.</li><li>نجح <bdi dir="ltr">Login</bdi> من أدوات المحاكاة، وفهمت الفرق بين كودك وملفات <bdi dir="ltr">src/mocks</bdi> الجاهزة.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="01"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 02</bdi></span></div></div></details><details class="task" id="task-02" data-id="02"><summary><span class="task-no">02</span><span><span class="task-title">صمّم الصفحات والمسارات</span><span class="task-goal">رتّب التطبيق إلى صفحات ومكوّنات قابلة لإعادة الاستخدام.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>أنشئ صفحات التسجيل، الدخول، طلباتي، المطاعم، قائمة المطعم، إنشاء طلب، الانضمام، تفاصيل الطلب، سلتي، ملخص المنظّم، وحسابي. يمكن عرض بعض الأقسام داخل تفاصيل الطلب. أضف للأدمن صفحة إدارة المطاعم وصفحة إدارة منتجات المطعم، إضافة لصفحات العضو لأنه يستطيع المشاركة في الطلبات.</li><li>استخدم <bdi dir="ltr">React Router</bdi> ومسارات تحتوي <bdi dir="ltr">orderId</bdi> و<bdi dir="ltr">restaurantId</bdi> عند الحاجة. أضف صفحة غير موجودة.</li><li>أنشئ <bdi dir="ltr">Layout</bdi> للتنقل يعرض اسم المستخدم وتسجيل الخروج. اترك اختيار الألوان والتصميم لك.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>يمكن التنقل دون إعادة تحميل الصفحة بالكامل.</li><li>يوجد مسار واضح لكل وظيفة، والعنوان المباشر لطلب معيّن لا يعتمد على زيارة صفحة سابقة.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="02"> أنجزت المهمة واختبرتها</label><span class="meta">تنفيذ ومراجعة في الواجهة</span></div></div></details><details class="task" id="task-03" data-id="03"><summary><span class="task-no">03</span><span><span class="task-title">نموذج إنشاء الحساب</span><span class="task-goal">مكّن مستخدمًا جديدًا من إنشاء حساب تجريبي.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>حقول النموذج: الاسم، البريد، كلمة المرور، وتأكيد كلمة المرور. التأكيد يُفحص في الواجهة ولا يُرسل إلى <bdi dir="ltr">API</bdi>.</li><li>تحقق من الحقول محليًا ثم اعرض أخطاء <bdi dir="ltr">API</bdi> بجانب الحقول إن توفرت.</li><li>امنع الإرسال المتكرر أثناء <bdi dir="ltr">Loading</bdi>. بعد النجاح انتقل إلى صفحة <bdi dir="ltr">Login</bdi> مع رسالة نجاح.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>البريد المكرر يعرض رسالة واضحة.</li><li>كلمة المرور الأقصر من 8 أحرف غير مقبولة.</li><li>فشل الطلب لا يمسح بيانات النموذج.</li></ul></div><div class="example"><strong>مثال: </strong>مها تنشئ حسابًا ثم تدخل بالبريد وكلمة المرور الجديدة.</div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="03"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 01</bdi></span></div></div></details><details class="task" id="task-04" data-id="04"><summary><span class="task-no">04</span><span><span class="task-title">تسجيل الدخول والجلسة</span><span class="task-goal">احفظ هوية المستخدم لتستمر بعد <bdi dir="ltr">Refresh</bdi> في التبويب نفسه.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>أرسل البريد وكلمة المرور. خزّن <bdi dir="ltr">token</bdi> التجريبي في <bdi dir="ltr">sessionStorage</bdi>، ولا تخزّن كلمة المرور في كود الواجهة أو <bdi dir="ltr">Redux</bdi>.</li><li>أنشئ <bdi dir="ltr">AuthContext</bdi> و<bdi dir="ltr">Custom Hook</bdi> باسم <bdi dir="ltr">useAuth</bdi> للوصول إلى المستخدم وحالة التحقق وعمليات الدخول والخروج.</li><li>عند بدء التطبيق، إن وُجد <bdi dir="ltr">token</bdi> استدعِ <code dir="ltr">/api/auth/me</code> قبل اعتبار المستخدم مسجّلًا. مدة الجلسة 8 ساعات.</li><li>احفظ <bdi dir="ltr">user.role</bdi> من الاستجابة. <bdi dir="ltr">admin</bdi> هو دور إدارة الكتالوج، و<bdi dir="ltr">member</bdi> هو دور العضو. <bdi dir="ltr">isOrganizer</bdi> يخص الطلب الحالي ولا يحل محل <bdi dir="ltr">role</bdi>.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li><bdi dir="ltr">Refresh</bdi> يحافظ على الدخول ما دامت الجلسة صالحة.</li><li>بيانات دخول خاطئة تُظهر رسالة ولا تفتح الصفحات المحمية.</li><li><bdi dir="ltr">token</bdi> غير صالح يعيد المستخدم لتسجيل الدخول.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="04"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 02 + 03</bdi></span></div></div></details><details class="task" id="task-05" data-id="05"><summary><span class="task-no">05</span><span><span class="task-title">حماية الصفحات والصلاحيات</span><span class="task-goal">اعرض المحتوى حسب حالة الدخول وعضوية الطلب.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>أنشئ <bdi dir="ltr">Protected Route</bdi>. أثناء التحقق من الجلسة اعرض <bdi dir="ltr">Loading</bdi> بدل القفز بين الصفحات.</li><li>تعامل مع 401 بانتهاء الجلسة، ومع 403 بعدم السماح، ومع 404 بعدم وجود المورد.</li><li>ملخص المنظّم وأزرار إدارة الحالة تظهر للمنظّم فقط. لا تعتمد على إخفاء الزر وحده: تعامل مع رفض <bdi dir="ltr">API</bdi> أيضًا.</li><li>أنشئ حماية لمسارات إدارة المطاعم تعتمد <bdi dir="ltr">role=admin</bdi>. الحسابات الجديدة لا تختار دور الأدمن في <bdi dir="ltr">Register</bdi>؛ <bdi dir="ltr">API</bdi> يرفض إرسال <bdi dir="ltr">role</bdi>.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>فتح رابط محمي دون <bdi dir="ltr">Login</bdi> يؤدي لصفحة الدخول.</li><li>المشارك لا يرى صفحة حسابات جميع المشاركين.</li><li>معرّف طلب غير موجود لا يسبب شاشة بيضاء.</li><li>العضو الذي يفتح رابط إدارة المطاعم مباشرة لا يحصل على صلاحية الإدارة.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="05"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 03 + 10 + 23</bdi></span></div></div></details><details class="task" id="task-06" data-id="06"><summary><span class="task-no">06</span><span><span class="task-title">تسجيل الخروج وتبديل المستخدم</span><span class="task-goal">امنع ظهور بيانات الحساب السابق بعد تغيّر الهوية.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>استدعِ <bdi dir="ltr">Logout</bdi> ثم امسح <bdi dir="ltr">token</bdi> وحالة <bdi dir="ltr">AuthContext</bdi> وبيانات المستخدم من <bdi dir="ltr">Redux</bdi>.</li><li>امسح الحالة المحلية حتى إذا تعذّر الاتصال أثناء الخروج، ووضّح تعذّر إلغاء الجلسة عند الحاجة.</li><li>إذا عاد طلب قديم بعد تبديل المستخدم، لا تعرض استجابته للحساب الجديد. استخدم <bdi dir="ltr">cleanup</bdi> أو إلغاء الطلب أو تجاهل الاستجابة القديمة.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>دخول عمر ثم خروجه ودخول سارة لا يعرض سلة عمر أو بياناته للحظات.</li><li>زر الرجوع لا يعيد فتح صفحة محمية بعد الخروج.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="06"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 04</bdi></span></div></div></details></div><div class="phase" data-phase="1"><div class="phase-header"><h3>إدارة المطاعم والطلبات</h3><span>الأدمن يجهّز المطاعم، والأعضاء ينشئون طلباتهم.</span></div><details class="task" id="task-07" data-id="07"><summary><span class="task-no">07</span><span><span class="task-title">إدارة المطاعم بواسطة الأدمن</span><span class="task-goal">ابنِ صفحة يضيف منها الأدمن المطاعم التي يختار منها الجميع.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>الدخول بالحساب التجريبي <code dir="ltr">admin@example.test</code>. نفس صفحة <bdi dir="ltr">Login</bdi> تستخدم لجميع الحسابات؛ <bdi dir="ltr">role</bdi> يحدد صلاحية الإدارة.</li><li>اعرض المطاعم من <bdi dir="ltr">API</bdi> القائمة الحالية. أضف نموذج الاسم والتصنيف والوصف، ثم نموذج التعديل وإتاحة المطعم.</li><li>المطعم الجديد يُنشأ مغلقًا. أضف منتجاته ثم اجعل <bdi dir="ltr">isOpen=true</bdi>. يمكن إغلاقه مؤقتًا دون حذف سجله.</li><li>لا تنشئ للمطعم حسابًا أو كلمة مرور أو صفحة استقبال طلبات. الأعضاء لا يضيفون مطاعم من واجهاتهم.</li><li>إدارة الكتالوج لا تجعل الأدمن منظّمًا لكل الجروبات ولا تُطلعه على سلالها. يستطيع إنشاء طلب أو الانضمام برمز كأي عضو، فاعرض له صفحات الطلبات أيضًا؛ صلاحياته داخل الطلب هي صلاحيات العضو، أو المنظّم في طلبه فقط.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>تظهر إضافة الأدمن في قائمة المطاعم لجميع الحسابات ضمن بيئة المحاكاة نفسها بعد التحديث.</li><li><bdi dir="ltr">API</bdi> يرفض الإضافة والتعديل من <bdi dir="ltr">member</bdi> حتى لو أظهر زرًا مزيفًا.</li><li>لا يمكن فتح مطعم بلا منتج متاح، والاسم المكرر يُرفض.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="07"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 05 + 26 + 27</bdi></span></div></div></details><details class="task" id="task-08" data-id="08"><summary><span class="task-no">08</span><span><span class="task-title">إدارة منتجات المطعم</span><span class="task-goal">وفّر المنتجات اللازمة ليختار الأعضاء وجباتهم.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>من صفحة المطعم للأدمن، اعرض منتجاته وأضف نموذج الاسم والتصنيف والسعر بالفلس وحالة التوفر.</li><li>استخدم إضافة منتج وتعديله، ولا تغيّر <bdi dir="ltr">restaurantId</bdi> لمنتج موجود. استخدم <bdi dir="ltr">available=false</bdi> لإيقاف منتج بدل حذفه.</li><li>أغلق المطعم باستخدام <bdi dir="ltr">isOpen=false</bdi> عند إيقافه. ذلك يمنع إنشاء طلبات جديدة، وإضافة عناصر السلال وتعديلها، والتأكيد للطلبات غير المؤكدة. حذف عناصر السلة يبقى متاحًا في <bdi dir="ltr">Open</bdi>، ولا يُلغى أي جروب تلقائيًا.</li><li>تعطيل آخر منتج متاح لا يغلق المطعم تلقائيًا: يبقى <bdi dir="ltr">isOpen=true</bdi> لكن إنشاء الطلبات منه يُرفض بـ <bdi dir="ltr">MENU_EMPTY</bdi>، وأي تعديل على المطعم وهو مفتوح، حتى تغيير الاسم، يُرفض بنفس الرمز. نبّه الأدمن قبل تعطيل آخر منتج، أو أغلق المطعم أولًا.</li><li>تغيير السعر يؤثر على الحسابات التقديرية قبل <bdi dir="ltr">Confirmed</bdi>. لا يغيّر فاتورة طلب تم تأكيده. حدّث عرض الأسعار والحسابات بعد جلب البيانات.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>المنتج الذي أُضيف لمطعم لا يظهر في مطعم آخر.</li><li>تعديل السعر أو التوفر محصور بالأدمن.</li><li>فواتير الطلبات المؤكدة تبقى ثابتة بعد تعديل سعر المنتج.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="08"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 07 + 28 + 29</bdi></span></div></div></details><details class="task" id="task-09" data-id="09"><summary><span class="task-no">09</span><span><span class="task-title">عرض المطاعم والبحث</span><span class="task-goal">ساعد المستخدم على اختيار مطعم وفهم إن كان متاحًا.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>اعرض الاسم والتصنيف والوصف وحالة الفتح لكل مطعم.</li><li>أضف بحثًا بالاسم أو التصنيف. يمكنك استخدام <bdi dir="ltr">q</bdi> أو فلترة النتائج محليًا.</li><li>اعرض <bdi dir="ltr">Loading</bdi> و<bdi dir="ltr">Empty State</bdi> و<bdi dir="ltr">Error State</bdi> مع <bdi dir="ltr">Retry</bdi>. المطعم المغلق يبقى ظاهرًا مع منع إنشاء طلب منه.</li><li>هذه المطاعم بيانات يضيفها الأدمن، وليست حسابات مطاعم. أعد جلب القائمة لتظهر إضافاته.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>البحث الذي لا يطابق شيئًا يعرض رسالة مناسبة.</li><li>المطعم المغلق واضح للمستخدم.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="09"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 05 + 06</bdi></span></div></div></details><details class="task" id="task-10" data-id="10"><summary><span class="task-no">10</span><span><span class="task-title">عرض قائمة الطعام</span><span class="task-goal">اعرض منتجات المطعم مع أسعارها وتوفرها.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>اعرض اسم المنتج وتصنيفه وسعره، وأضف فلترة حسب التصنيف.</li><li>حوّل <bdi dir="ltr">priceFils</bdi> للعرض بالدينار بثلاث منازل عشرية. مثال: 4500 فلس تساوي 4.500 دينار.</li><li>المنتج غير المتوفر يظهر بحالة واضحة ولا يُضاف للسلة. عند الدخول من طلب قائم استخدم مطعم ذلك الطلب.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>قائمة مطعم لا تختلط بمنتجات مطعم آخر.</li><li>السعر معروض بثلاث منازل عشرية دائمًا.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="10"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 07</bdi></span></div></div></details><details class="task" id="task-11" data-id="11"><summary><span class="task-no">11</span><span><span class="task-title">نموذج إنشاء طلب جماعي</span><span class="task-goal">اجمع التفاصيل اللازمة لطلب واحد من مطعم واحد.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>الحقول: المطعم، عنوان الطلب، وقت الإغلاق، وقت الاستلام المتوقع، مكان الاستلام، رسوم التوصيل، وملاحظة اختيارية.</li><li>وقت الإغلاق مستقبلي، ووقت الاستلام بعده. أرسل التواريخ بصيغة <bdi dir="ltr">ISO</bdi> مع المنطقة الزمنية.</li><li>واجهة رسوم التوصيل يمكن أن تستقبل دينارًا حتى 3 منازل. حوّل القيمة إلى عدد صحيح من الفلس قبل الإرسال.</li><li>استخدم <bdi dir="ltr">useReducer</bdi> لتنظيم حالة هذا النموذج: <bdi dir="ltr">values</bdi> و<bdi dir="ltr">errors</bdi> و<bdi dir="ltr">submitting</bdi> و<bdi dir="ltr">reset</bdi>، دون نسخ المستخدم أو السلة إليه.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>تظهر أخطاء الحقول قبل الإرسال.</li><li>لا يمكن إنشاء طلب من مطعم مغلق أو بقيمة توصيل سالبة.</li><li>المطعم يحتاج منتجًا متاحًا واحدًا على الأقل قبل إنشاء طلب منه.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="11"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 08</bdi></span></div></div></details><details class="task" id="task-12" data-id="12"><summary><span class="task-no">12</span><span><span class="task-title">إنشاء الطلب ومشاركة رمزه</span><span class="task-goal">بعد الإنشاء، انقل المنظّم إلى طلبه الجديد.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>استخدم <bdi dir="ltr">id</bdi> و<bdi dir="ltr">joinCode</bdi> من الاستجابة. اعرض الرمز مع إمكانية نسخه أو تحديده يدويًا إذا لم يتوفر <bdi dir="ltr">Clipboard</bdi>.</li><li>المنشئ عضو تلقائي بسلة فارغة. لا تضف وجبة له تلقائيًا.</li><li>امنع ضغط زر الإنشاء عدة مرات أثناء انتظار الرد.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>يظهر الطلب في قائمة طلبات المنظّم.</li><li>الرمز يقود مشاركًا آخر إلى نفس الطلب في نفس بيئة المحاكاة.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="12"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 08 + 10</bdi></span></div></div></details><details class="task" id="task-13" data-id="13"><summary><span class="task-no">13</span><span><span class="task-title">الانضمام إلى طلب</span><span class="task-goal">اسمح للمستخدم بالانضمام عبر رمز من 6 أحرف أو أرقام.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>اعرض نموذج <bdi dir="ltr">joinCode</bdi>. أرسل الرمز ثم افتح تفاصيل الطلب عند النجاح.</li><li>اعرض رسالة للرمز غير الصحيح، ورسالة مختلفة إذا كان الطلب مغلقًا.</li><li>العضو الموجود لا يُضاف مرة ثانية؛ يعود مباشرة إلى الطلب حتى لو أُغلق بعد انضمامه.</li><li>موعد <bdi dir="ltr">TEAM01</bdi> بعد ساعة من أول تشغيل للمحاكاة، وبعده يصبح <bdi dir="ltr">Locked</bdi> ويُرفض الانضمام الجديد. إذا مرّ الموعد: صدّر بياناتك من <code dir="ltr">/mock-tools.html</code>، ثم اضغط «إعادة بيانات البداية» واختبر خلال الساعة. استورد نسختك بعد الاختبار إن احتجت بياناتك.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>بعد إعادة بيانات البداية، الرمز <bdi dir="ltr">TEAM01</bdi> ينضم للطلب التجريبي وهو <bdi dir="ltr">Open</bdi>.</li><li>تكرار الانضمام لا يرفع عدد المشاركين.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="13"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 11</bdi></span></div></div></details><details class="task" id="task-14" data-id="14"><summary><span class="task-no">14</span><span><span class="task-title">طلباتي وتفاصيل الطلب</span><span class="task-goal">ساعد المستخدم على متابعة الطلبات التي تخصه.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>قائمة بطاقات تعرض العنوان، المطعم، الحالة، وقت الإغلاق، ودور المستخدم.</li><li>أضف فلترًا للحالة وفلترًا: جميع طلباتي، التي أنظمها، والتي أشارك فيها.</li><li>صفحة التفاصيل تعرض مكان الاستلام، الوقت المتوقع، الملاحظة، المشاركين، وعدد أصحاب السلال غير الفارغة.</li><li>أضف تحديثًا يدويًا للبيانات. بعد أي تعديل أعد جلب البيانات المتأثرة بدل ترك أرقام قديمة.</li><li>قد توجد عدة جروبات في الوقت نفسه. لا تستخدم مطعمًا واحدًا أو سلة عامة لكل النظام؛ اربط البيانات بـ <bdi dir="ltr">orderId</bdi>.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>لا تظهر طلبات لم ينضم المستخدم إليها.</li><li>عدد المشاركين مختلف بوضوح عن عدد الذين أضافوا منتجات.</li><li>الصفحة تعمل عند فتح رابطها مباشرة ثم <bdi dir="ltr">Refresh</bdi>.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="14"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 09 + 10 + 13</bdi></span></div></div></details></div><div class="phase" data-phase="2"><div class="phase-header"><h3>السلة والمشاركة</h3><span>طبّق الإضافة والتعديل والحذف مع قواعد واضحة.</span></div><details class="task" id="task-15" data-id="15"><summary><span class="task-no">15</span><span><span class="task-title">تعديل بيانات الطلب</span><span class="task-goal">اسمح للمنظّم بتعديل المعلومات قبل الإغلاق.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>افتح نموذج تعديل بالبيانات الحالية. يسمح تعديل العنوان، الأوقات، مكان الاستلام، الرسوم والملاحظة.</li><li>المطعم والمنظّم ثابتان. التعديل متاح في <bdi dir="ltr">Open</bdi> فقط.</li><li>بعد تعديل الرسوم حدّث تقديرات الحسابات الظاهرة.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>المشارك العادي لا يستطيع التعديل.</li><li>طلب تعديل من شاشة قديمة بعد الإغلاق يُرفض برسالة واضحة.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="15"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 12</bdi></span></div></div></details><details class="task" id="task-16" data-id="16"><summary><span class="task-no">16</span><span><span class="task-title">إضافة منتج إلى سلتي</span><span class="task-goal">ابنِ سلة مرتبطة بالمستخدم والطلب الحاليين.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>حدد المنتج والكمية وملاحظة التحضير الاختيارية.</li><li>الكمية عدد صحيح من 1 إلى 10 لكل سطر. <bdi dir="ltr">note</bdi> حتى 200 حرف.</li><li>المحاكاة تدمج المنتج والملاحظة المتطابقين. اختلاف الملاحظة ينتج سطرًا مستقلًا.</li><li>بعد النجاح حدّث السلة والعداد. لا تغيّر الواجهة وكأن الإضافة نجحت إذا فشل <bdi dir="ltr">API</bdi>.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>إضافة وجبة مرتين بنفس الملاحظة تزيد كمية السطر نفسه.</li><li>لا يمكن إضافة منتج من مطعم آخر أو منتج غير متوفر.</li></ul></div><div class="example"><strong>مثال: </strong>دجاج بدون مخلل ودجاج مع مخلل يظهران كسطرين مختلفين.</div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="16"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 16</bdi></span></div></div></details><details class="task" id="task-17" data-id="17"><summary><span class="task-no">17</span><span><span class="task-title">عرض السلة وتعديلها وحذف عناصرها</span><span class="task-goal">أكمل عمليات <bdi dir="ltr">CRUD</bdi> على سلة المستخدم.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>اعرض اسم المنتج والملاحظة والكمية وسعر الوحدة ومجموع السطر ومجموع الطعام.</li><li>عدّل <bdi dir="ltr">quantity</bdi> أو <bdi dir="ltr">note</bdi> عبر <bdi dir="ltr">PATCH</bdi>، واحذف العنصر عبر <bdi dir="ltr">DELETE</bdi>. استخدم <bdi dir="ltr">itemId</bdi> وليس <bdi dir="ltr">productId</bdi>.</li><li>لو تعديل الملاحظة دمج سطرين، أعد جلب السلة لتعرض النتيجة الصحيحة.</li><li>إذا أصبح المنتج غير متوفر أو أُغلق المطعم، يرفض <bdi dir="ltr">API</bdi> تعديل الكمية أو الملاحظة (<bdi dir="ltr">PRODUCT_UNAVAILABLE</bdi> أو <bdi dir="ltr">RESTAURANT_CLOSED</bdi>)، ويبقى الحذف متاحًا. اعرض الرسالة ووضّح للمستخدم أن الحل حذف العنصر.</li><li>اعرض تأكيدًا للحذف وحالة فارغة عند حذف آخر عنصر.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>مجموع السطر يساوي السعر مضروبًا بالكمية.</li><li>الكمية صفر غير مقبولة؛ الإزالة تتم بزر الحذف.</li><li>لا يستطيع المنظّم تعديل سلة مشارك آخر.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="17"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 15 + 17 + 18</bdi></span></div></div></details><details class="task" id="task-18" data-id="18"><summary><span class="task-no">18</span><span><span class="task-title">عداد السلة وحالة <bdi dir="ltr">Redux</bdi></span><span class="task-goal">وحّد البيانات المشتركة بين الصفحات.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>استخدم <bdi dir="ltr">Redux Toolkit</bdi> لإدارة قائمة الطلبات والطلب الحالي وسلة المستخدم، مع حالات <bdi dir="ltr">loading</bdi> و<bdi dir="ltr">error</bdi> اللازمة.</li><li>عداد السلة يعرض مجموع القطع، لا عدد الأسطر. حافظ على الفصل بين بيانات كل <bdi dir="ltr">orderId</bdi> وكل مستخدم.</li><li>اجعل البيانات المشتقة، مثل عدد القطع، محسوبة من المصدر بدل نسخها يدويًا في أماكن متعددة.</li><li>لا تضع كل حقل إدخال صغير في <bdi dir="ltr">Redux</bdi>؛ استخدم <bdi dir="ltr">State</bdi> محلية حيث يكفي ذلك.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>تغيير الكمية في صفحة السلة ينعكس على العداد.</li><li>التنقل بين طلبين لا يخلط سلتيهما.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="18"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 09 + 10 + 15</bdi></span></div></div></details><details class="task" id="task-19" data-id="19"><summary><span class="task-no">19</span><span><span class="task-title">المشاركون ومغادرة الطلب</span><span class="task-goal">اسمح بالخروج من طلب مفتوح مع توضيح أثره.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>اعرض أسماء المشاركين والمنظّم ومن لديه منتجات، دون عرض سلال الآخرين للمشارك العادي.</li><li>للمشارك غير المنظّم: زر مغادرة في <bdi dir="ltr">Open</bdi> مع تأكيد أن السلة ستُحذف.</li><li>بعد النجاح اخرج من صفحة الطلب وحدّث قائمة طلباتي.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>المغادرة تحذف سلة صاحبها وتزيل عضويته.</li><li>المنظّم لا يستطيع المغادرة؛ يستطيع إلغاء طلب مفتوح أو مقفل.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="19"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 13 + 14</bdi></span></div></div></details><details class="task" id="task-20" data-id="20"><summary><span class="task-no">20</span><span><span class="task-title">التعامل مع موعد الإغلاق</span><span class="task-goal">اجعل الواجهة تستجيب لانتهاء مهلة الطلب.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>اعرض الوقت المتبقي بصورة بسيطة. عند انتهاء الوقت أعد جلب الطلب مرة واحدة وحدّث الأزرار.</li><li>نظّف <bdi dir="ltr">timer</bdi> في <bdi dir="ltr">useEffect</bdi> عند مغادرة الصفحة. استجابة <bdi dir="ltr">API</bdi> هي المرجع النهائي للحالة.</li><li>المحاكاة تتحقق من الموعد عند كل طلب <bdi dir="ltr">API</bdi>؛ لا توجد خدمة تعمل في الخلفية عندما تكون كل الصفحات مغلقة.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>إذا انتهت المهلة أثناء وجود المستخدم في السلة، تتوقف التعديلات.</li><li>حتى لو بقي زر قديم ظاهرًا، يعرض رفض <bdi dir="ltr">API</bdi> رسالة مفهومة.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="20"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 10 + 16 + 17 + 18</bdi></span></div></div></details></div><div class="phase" data-phase="3"><div class="phase-header"><h3>الحالات والحسابات</h3><span>أكمل دورة الطلب واختبر استقلال الجروبات.</span></div><details class="task" id="task-21" data-id="21"><summary><span class="task-no">21</span><span><span class="task-title">إغلاق الطلب وإعادة فتحه</span><span class="task-goal">طبّق الانتقال بين <bdi dir="ltr">Open</bdi> و<bdi dir="ltr">Locked</bdi>.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>للمنظّم زر إغلاق مبكر مع تأكيد. <bdi dir="ltr">Locked</bdi> تمنع تعديل السلال والانضمام الجديد والمغادرة وتعديل بيانات الطلب.</li><li>يمكن للمنظّم إعادة فتح <bdi dir="ltr">Locked</bdi> مع موعد جديد في المستقبل. عدّل وقت الاستلام أيضًا إذا لزم ليبقى بعد الإغلاق.</li><li>لا تسمح بإعادة فتح <bdi dir="ltr">Confirmed</bdi> أو الحالات اللاحقة.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>تُحدّث الواجهة بعد نجاح العملية.</li><li>لا يمكن استخدام وقت إغلاق قديم عند إعادة الفتح.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="21"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 19 + 20</bdi></span></div></div></details><details class="task" id="task-22" data-id="22"><summary><span class="task-no">22</span><span><span class="task-title">ملخص المطعم وتأكيد الطلب</span><span class="task-goal">أعطِ المنظّم قائمة موحّدة قبل تأكيد الطلب.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>اعرض تجميع المنتجات حسب <bdi dir="ltr">productId</bdi> والملاحظة، مع مجموع الكميات والأسعار.</li><li>اعرض كذلك حساب كل مشارك من <bdi dir="ltr">summary</bdi>. هذه الصفحة متاحة للمنظّم فقط.</li><li>من <bdi dir="ltr">Locked</bdi> يمكن التأكيد إذا وُجدت منتجات وكانت متاحة والمطعم مفتوحًا.</li><li>وضّح أن <bdi dir="ltr">Confirmed</bdi> تعني أن المنظّم أرسل الطلب للمطعم خارجيًا. بعد النجاح يثبت الحساب ويمنع التعديل.</li><li>إذا رُفض التأكيد بـ <bdi dir="ltr">PRODUCT_UNAVAILABLE</bdi> أو <bdi dir="ltr">RESTAURANT_CLOSED</bdi>، فلا أحد يستطيع تعديل السلال في <bdi dir="ltr">Locked</bdi>، والمنظّم لا يحذف عناصر غيره في أي حالة. اعرض الرسالة ووضّح الخيارات: انتظار فتح المطعم، أو إعادة فتح الطلب بموعد جديد ليحذف صاحب العنصر عنصره ثم إغلاقه وتأكيده، أو إلغاء الطلب.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>طلبات دجاج بنفس الملاحظة من عدة مشاركين تظهر مجمعة.</li><li>الطلب الفارغ لا يُؤكد.</li><li>التأكيد لا يدّعي إرسال طلب حقيقي إلى مطعم.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="22"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 21 + 23</bdi></span></div></div></details><details class="task" id="task-23" data-id="23"><summary><span class="task-no">23</span><span><span class="task-title">الحساب الشخصي وتوزيع التوصيل</span><span class="task-goal">اعرض ما يدفعه كل مشارك بصورة مفهومة.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>اعرض مجموع الطعام، حصة التوصيل، الإجمالي، هل الحساب تقديري أم نهائي، وحالة الدفع.</li><li>قسّم التوصيل فقط على المشاركين ذوي السلال غير الفارغة. المنظّم يخضع لنفس القاعدة.</li><li>المحاكاة ترجع الحصص محسوبة. اشرح القاعدة في الواجهة ولا تُعد توزيعها بطريقة مختلفة.</li><li>العملة <bdi dir="ltr">JOD</bdi> وكل الأرقام عبر <bdi dir="ltr">API</bdi> بالفلس الصحيح. اعرض الدينار بثلاث منازل.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>تساوي حصص التوصيل مجموع الرسوم تمامًا.</li><li>المشارك بسلة فارغة عليه صفر.</li><li>تتغير التقديرات قبل التأكيد وتثبت بعده.</li></ul></div><div class="example"><strong>مثال: </strong>رسوم 1.000 دينار وثلاث سلال: 0.334 + 0.333 + 0.333. الفلس الإضافي للأسبق انضمامًا؛ وعند التعادل يُستخدم <bdi dir="ltr">userId</bdi>.</div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="23"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 24 + 23</bdi></span></div></div></details><details class="task" id="task-24" data-id="24"><summary><span class="task-no">24</span><span><span class="task-title">متابعة التوصيل والإلغاء</span><span class="task-goal">أكمل الحالات المسموحة فقط.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>للمنظّم: <bdi dir="ltr">Confirmed</bdi> ثم <bdi dir="ltr">Out for Delivery</bdi> ثم <bdi dir="ltr">Delivered</bdi>. لا قفز ولا رجوع للخلف.</li><li>يمكن الإلغاء من <bdi dir="ltr">Open</bdi> أو <bdi dir="ltr">Locked</bdi> فقط، مع تأكيد واضح.</li><li>الطلب الملغى يبقى في السجل. لا تعديل ولا تحصيل مبالغ، وتظهر رسالة إلغاء بدل فاتورة مستحقة.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>لا يظهر زر <bdi dir="ltr">Delivered</bdi> قبل <bdi dir="ltr">Out for Delivery</bdi>.</li><li>لا يمكن إلغاء طلب <bdi dir="ltr">Confirmed</bdi>.</li><li><bdi dir="ltr">Delivered</bdi> لا تعني تلقائيًا أن الجميع دفع.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="24"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 22</bdi></span></div></div></details><details class="task" id="task-25" data-id="25"><summary><span class="task-no">25</span><span><span class="task-title">تسجيل الدفع وتصحيحه</span><span class="task-goal">مكّن المنظّم من متابعة التحصيل اليدوي.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>بعد <bdi dir="ltr">Confirmed</bdi>، اعرض قائمة فواتير المشاركين وحالة دفع كل منهم.</li><li>أرسل <bdi dir="ltr">paid=true</bdi> عند استلام كامل المبلغ، و<bdi dir="ltr">paid=false</bdi> لتصحيح تسجيل خاطئ.</li><li>اعرض <bdi dir="ltr">paidAt</bdi> وإجمالي المدفوع والمتبقي. المشارك العادي يشاهد حالته فقط.</li><li>لا توجد بوابة دفع أو دفع جزئي. لا تسجل دفعًا على فاتورة صفرية.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>تسجيل الدفع لا يغيّر حالة التوصيل.</li><li>إلغاء علامة الدفع يعيد المبلغ إلى المتبقي.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="25"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 25 + 23 + 24</bdi></span></div></div></details><details class="task" id="task-26" data-id="26"><summary><span class="task-no">26</span><span><span class="task-title">اختبر جروبين مستقلين</span><span class="task-goal">تأكد أن النظام يدعم عدة طلبات جماعية في الوقت نفسه.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>قبل البدء صدّر بياناتك ثم اضغط «إعادة بيانات البداية» من <code dir="ltr">/mock-tools.html</code>. الجروبان يصبحان <bdi dir="ltr">Locked</bdi> تلقائيًا بعد ساعة وساعة ونصف من التهيئة، فأنهِ خطوات الإضافة والإغلاق ضمن هذه المدة.</li><li>استخدم <bdi dir="ltr">TEAM01</bdi> المكوّن من خمسة أعضاء في مطبخ المكتب، و<bdi dir="ltr">TEAM02</bdi> المكوّن من أربعة أعضاء في برغر بريك. الحسابات موجودة في قسم البيانات.</li><li>أضف منتجات لكل أعضاء الجروب الأول. الجروب الثاني يحتوي منتجات تجريبية لأعضائه الأربعة.</li><li>افحص رسوم 1.000 دينار على خمسة أصحاب سلال: 0.200 لكل واحد. افحص رسوم 2.000 على أربعة: 0.500 لكل واحد.</li><li>أغلق الجروب الأول وتأكد أن الثاني بقي <bdi dir="ltr">Open</bdi>. سجّل دفعة في طلب مؤكد وافحص أنها لا تغيّر حسابات الطلب الآخر.</li><li>جرّب انضمام عضو إلى الطلبين؛ يجب أن تكون له سلتان مستقلتان حتى لو ظهر نفس المنتج في أكثر من طلب.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>كل جروب يملك رمزًا ومطعمًا ومنظّمًا وحسابات مستقلة.</li><li>إغلاق أو تعديل جروب لا يغيّر حالة أو سلال الجروب الآخر.</li><li>طلبان من نفس المطعم لا يندمجان تلقائيًا.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="26"> أنجزت المهمة واختبرتها</label><span class="meta"><bdi dir="ltr">API 09 + 10 + 11 + 15 + 19 + 23 + 24</bdi></span></div></div></details></div><div class="phase" data-phase="4"><div class="phase-header"><h3>الجودة والتسليم</h3><span>راجع البيانات والأخطاء والكود والتجربة كاملة.</span></div><details class="task" id="task-27" data-id="27"><summary><span class="task-no">27</span><span><span class="task-title"><bdi dir="ltr">Loading</bdi> و<bdi dir="ltr">Empty</bdi> و<bdi dir="ltr">Error</bdi> و<bdi dir="ltr">Retry</bdi></span><span class="task-goal">اجعل كل شاشة قابلة للاستخدام عند بطء الطلب أو فشله.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>أظهر حالة انتظار واضحة وعطّل زر العملية أثناء الطلب.</li><li>أظهر حالات عدم وجود طلبات أو نتائج أو عناصر سلة.</li><li>اعرض رسالة الخطأ القادمة من <bdi dir="ltr">API</bdi> وخيار المحاولة عند ملاءمته. حافظ على مدخلات النموذج.</li><li>اختبر تأخير 2000<bdi dir="ltr">ms</bdi> وخطأ 503 واحدًا من أدوات المحاكاة. الإعدادان يخصّان التبويب نفسه، والفشل يصيب أول طلب <bdi dir="ltr">API</bdi> بعده. عند الرجوع للتطبيق يُعاد تحميله، فإذا كنت مسجّلًا يكون أول طلب <code dir="ltr">/api/auth/me</code>: تأكد أن فشل فحص الجلسة يعرض خطأ مع <bdi dir="ltr">Retry</bdi> ولا يُعامل كتسجيل خروج، لأن 503 ليس 401.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>الضغط المتكرر لا ينشئ طلبات أو إضافات مكررة.</li><li>الخطأ لا يترك <bdi dir="ltr">spinner</bdi> لا ينتهي.</li><li>يمكن للمستخدم إعادة المحاولة بنجاح.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="27"> أنجزت المهمة واختبرتها</label><span class="meta">تنفيذ ومراجعة في الواجهة</span></div></div></details><details class="task" id="task-28" data-id="28"><summary><span class="task-no">28</span><span><span class="task-title">نظّم <bdi dir="ltr">Hooks</bdi> وطلبات البيانات</span><span class="task-goal">استخدم ما تعلمته في أماكن تخدم التطبيق.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>استخدم <bdi dir="ltr">useEffect</bdi> لجلب البيانات ومزامنة ما يحتاج ذلك مع <bdi dir="ltr">cleanup</bdi> مناسب. نفّذ الإضافة والدفع داخل <bdi dir="ltr">event handlers</bdi>.</li><li>استخدم <bdi dir="ltr">useRef</bdi> لتركيز حقل غير صالح أو حقل رمز الانضمام.</li><li><bdi dir="ltr">AuthContext</bdi> و<bdi dir="ltr">useAuth</bdi> مطلوبان. <bdi dir="ltr">useReducer</bdi> لنموذج إنشاء الطلب و<bdi dir="ltr">Redux Toolkit</bdi> للبيانات المشتركة مطلوبان.</li><li>استخدم <bdi dir="ltr">useMemo</bdi> أو <bdi dir="ltr">useCallback</bdi> فقط إن احتجتهما مع سبب تستطيع شرحه؛ ليس مطلوبًا وضعهما في كل <bdi dir="ltr">Component</bdi>.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>لا توجد طلبات إنشاء أو دفع داخل <bdi dir="ltr">useEffect</bdi> تعمل تلقائيًا عند العرض.</li><li>يمكنك شرح مكان كل <bdi dir="ltr">State</bdi> ولماذا اخترته.</li><li>لا تعرض استجابة متأخرة تخص طلبًا أو مستخدمًا سابقًا.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="28"> أنجزت المهمة واختبرتها</label><span class="meta">تنفيذ ومراجعة في الواجهة</span></div></div></details><details class="task" id="task-29" data-id="29"><summary><span class="task-no">29</span><span><span class="task-title">واجهة عربية واضحة ومتجاوبة</span><span class="task-goal">ابنِ تجربة يمكن استخدامها على الهاتف والكمبيوتر.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>استخدم اتجاه <bdi dir="ltr">RTL</bdi> للنص العربي واعزل الأكواد والأرقام و<bdi dir="ltr">URLs</bdi> والمصطلحات الإنجليزية باتجاه <bdi dir="ltr">LTR</bdi> عند الحاجة.</li><li>أضف <bdi dir="ltr">Labels</bdi> للحقول ورسائل واضحة وأزرارًا قابلة للاستخدام بلوحة المفاتيح.</li><li>افحص عرض الهاتف من وضع الأجهزة في <bdi dir="ltr">DevTools</bdi>. الجداول والقوائم لا تقطع الأزرار أو تضغط النص. رابط <bdi dir="ltr">Network</bdi> الذي يطبعه <bdi dir="ltr">Vite</bdi> لا يشغّل المحاكاة على هاتف حقيقي، لأن <bdi dir="ltr">Service Worker</bdi> يحتاج <bdi dir="ltr">localhost</bdi> أو <bdi dir="ltr">HTTPS</bdi>.</li><li>لا تعتمد على اللون وحده لشرح الحالة؛ اكتب اسم الحالة أيضًا.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>يمكن قراءة العربي والإنجليزي دون انقلاب ترتيب الكلمات.</li><li>يمكن إكمال تسجيل الدخول وإنشاء طلب وتعديل السلة على شاشة ضيقة.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="29"> أنجزت المهمة واختبرتها</label><span class="meta">تنفيذ ومراجعة في الواجهة</span></div></div></details><details class="task" id="task-30" data-id="30"><summary><span class="task-no">30</span><span><span class="task-title">اختبر الحفظ وملف <bdi dir="ltr">JSON</bdi></span><span class="task-goal">تأكد أن البيانات لا تختفي بعد إعادة تحميل الصفحة.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>أنشئ حسابًا وطلبًا ثم <bdi dir="ltr">Refresh</bdi>؛ يجب بقاء البيانات في المتصفح نفسه.</li><li>صدّر <bdi dir="ltr">JSON</bdi> من <bdi dir="ltr">mock-tools</bdi>، واحتفظ به مع التسليم كبيانات تجريبية. التصدير يستبعد <bdi dir="ltr">sessions</bdi>.</li><li>جرّب استيراد النسخة ثم سجّل الدخول مجددًا. تعديل ملف <bdi dir="ltr">db.json</bdi> وحده لا يغيّر قاعدة متصفح سبق تهيئتها؛ استخدم إعادة بيانات البداية.</li><li>ملفات المحاكاة جاهزة: لا تستبدل قواعد <bdi dir="ltr">API</bdi> أو تتجاوزها بالقراءة المباشرة من <bdi dir="ltr">localStorage</bdi> داخل واجهتك.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>نسخة <bdi dir="ltr">JSON</bdi> تحتوي التغييرات الفعلية.</li><li>تسترجع البيانات بعد الاستيراد، ولا تُستعاد جلسات قديمة.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="30"> أنجزت المهمة واختبرتها</label><span class="meta">تنفيذ ومراجعة في الواجهة</span></div></div></details><details class="task" id="task-31" data-id="31"><summary><span class="task-no">31</span><span><span class="task-title">نفّذ سيناريو كامل بأكثر من مستخدم</span><span class="task-goal">راجع رحلة المشروع من البداية للنهاية.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>عمر ينشئ طلبًا، وسارة وليث ينضمان ويضيفان وجبات، ثم يراجع عمر الملخص ويقفل الطلب ويؤكده.</li><li>جرّب مستخدمًا بسلة فارغة، وغيّر الكمية، وغيّر الملاحظة، ثم افحص التوصيل.</li><li>جرّب انتهاء الموعد، دخول رابط محمي، معرّفًا غير موجود، وانتهاء الجلسة.</li><li>يمكن استخدام تبويبات من نفس المتصفح والموقع مع <bdi dir="ltr">token</bdi> مستقل لكل تبويب، أو تبديل الحساب في التبويب نفسه. حدّث البيانات يدويًا؛ لا يوجد <bdi dir="ltr">Real-time</bdi>.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>لا تختلط بيانات المستخدمين.</li><li>تتطابق إجماليات الأفراد مع الإجمالي الجماعي.</li><li>لا يستطيع المشارك تنفيذ عملية خاصة بالمنظّم.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="31"> أنجزت المهمة واختبرتها</label><span class="meta">تنفيذ ومراجعة في الواجهة</span></div></div></details><details class="task" id="task-32" data-id="32"><summary><span class="task-no">32</span><span><span class="task-title">جهّز <bdi dir="ltr">GitHub</bdi> و<bdi dir="ltr">README</bdi> والتسليم</span><span class="task-goal">سلّم مشروعًا يستطيع شخص آخر تشغيله وفهمه.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>ارفع الكود على <bdi dir="ltr">GitHub</bdi> مع <bdi dir="ltr">Commits</bdi> تصف تغييرات فعلية أثناء العمل. لا ترفع <bdi dir="ltr">node_modules</bdi> أو بيانات حقيقية.</li><li>اكتب <bdi dir="ltr">README</bdi> يشرح التشغيل والصفحات والحسابات التجريبية وقرارات إدارة <bdi dir="ltr">State</bdi> وأي جزء لم يكتمل.</li><li>أرفق <bdi dir="ltr">db-export.json</bdi> ببيانات تجريبية، ولقطات للشاشات، وقائمة فحص للسيناريوهات.</li><li>شغّل <bdi dir="ltr">npm test</bdi> لفحص المحاكاة و<bdi dir="ltr">npm run build</bdi> لفحص البناء. راجع <bdi dir="ltr">Console</bdi> أثناء استخدام واجهتك.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>يعمل المشروع بعد تنزيله وتثبيت الحزم.</li><li>واضح ما أنجزته وما لم يكتمل.</li><li>لا يوجد رفع إلزامي على سيرفر ضمن هذا المشروع.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="32"> أنجزت المهمة واختبرتها</label><span class="meta">تنفيذ ومراجعة في الواجهة</span></div></div></details><details class="task" id="task-33" data-id="33"><summary><span class="task-no">33</span><span><span class="task-title">استعد للمناقشة والتعديل المباشر</span><span class="task-goal">أثبت قدرتك على شرح المشروع وتطويره بنفسك.</span></span></summary><div class="task-body"><h4>المطلوب تنفيذه</h4><ul><li>المشروع فردي، ويُمنع استخدام أدوات <bdi dir="ltr">AI</bdi> في كتابة الحل أو تصحيحه أو توليده. المسموح: السلايدات، تمارينك السابقة، <bdi dir="ltr">Documentation</bdi> والإكمال العادي للمحرّر.</li><li>حضّر شرحًا لرحلة ضغطة زر: الحدث، طلب <bdi dir="ltr">API</bdi>، تحديث <bdi dir="ltr">State</bdi>، ثم تحديث الشاشة.</li><li>ستوجد مراجعات مرحلية ومهام قصيرة تحت الإشراف، ومناقشة فردية مع تعديل صغير من المواضيع المدروسة.</li><li>بيّن المصادر التي رجعت إليها. كود المحاكاة المرفق جزء جاهز من التكليف، ولا تحتاج لإعادة بنائه.</li></ul><div class="accept"><h4>تُعتبر المهمة مكتملة عندما</h4><ul><li>تستطيع شرح أجزاء الواجهة التي كتبتها.</li><li>تستطيع تنفيذ تعديل صغير باستخدام المراجع المسموحة.</li></ul></div><div class="task-foot"><label class="done-label"><input type="checkbox" data-check="33"> أنجزت المهمة واختبرتها</label><span class="meta">تنفيذ ومراجعة في الواجهة</span></div></div></details></div></section><section id="api"><h2>مرجع APIs — 29 عملية جاهزة</h2><p class="lead">الأمثلة أدناه مولّدة من استجابات المحاكاة نفسها، كتسلسل واحد على الطلب <bdi dir="ltr">o-demo</bdi>؛ لذلك تتغير أرقامه من مثال لآخر. استخدم <bdi dir="ltr">IDs</bdi> و<bdi dir="ltr">token</bdi> العائدة لبياناتك الحالية، وحدّث تواريخ الأمثلة إلى المستقبل.</p><div class="panel"><h3>الاتفاق العام</h3><ul><li>كل <bdi dir="ltr">URL</bdi> يبدأ بـ <code dir="ltr">/api</code>. كل العمليات محمية ما عدا <bdi dir="ltr">Register</bdi> و<bdi dir="ltr">Login</bdi>.</li><li>أرسل <code dir="ltr">Authorization: Bearer YOUR_TOKEN</code> في الطلبات المحمية و<code dir="ltr">Content-Type: application/json</code> عندما ترسل <bdi dir="ltr">JSON</bdi>.</li><li>النجاح داخل <bdi dir="ltr">data</bdi>، والخطأ داخل <bdi dir="ltr">error</bdi> ويحتوي <bdi dir="ltr">code</bdi> و<bdi dir="ltr">message</bdi> وقد يحتوي <bdi dir="ltr">fields</bdi>.</li><li>التواريخ <bdi dir="ltr">ISO</bdi> مع المنطقة الزمنية. حالات الطلب حساسة للأحرف. القيم المالية عدد صحيح بالفلس: 1000 فلس = 1.000 دينار.</li><li><bdi dir="ltr">DELETE</bdi> و<bdi dir="ltr">POST</bdi> دون مدخلات يقبلان جسمًا فارغًا. نجاح الحذف والخروج يرجع 200 مع رسالة.</li><li>الأمثلة التي تستخدم <bdi dir="ltr">o-demo</bdi> تخص الطلب التجريبي. بدّل <bdi dir="ltr">:itemId</bdi> بمعرّف عنصر سلة حقيقي.</li><li>ترتيب التسلسل: في المثال 11 انضم ليث، منظّم <bdi dir="ltr">TEAM02</bdi>، إلى <bdi dir="ltr">TEAM01</bdi> فصار عدد الأعضاء 6، وفي المثال 14 غادر فعاد العدد 5. بين المثالين 20 و21 أُغلق الطلب مجددًا بالعملية 19 قبل تأكيده، لأن التأكيد من <bdi dir="ltr">Open</bdi> مرفوض.</li><li>كل مسار يبدأ بـ <code dir="ltr">/api/group-orders/:orderId</code> قد يرجع <bdi dir="ltr">404 NOT_FOUND</bdi> إذا لم يوجد الطلب، و<bdi dir="ltr">403 NOT_MEMBER</bdi> إذا لم تكن عضوًا فيه، إضافة لأخطاء كل عملية. الحقول النصية والتواريخ غير الصالحة ترجع <bdi dir="ltr">422 VALIDATION_ERROR</bdi>، ومعها <bdi dir="ltr">fields</bdi> أحيانًا.</li><li>استخدم <bdi dir="ltr">fetch</bdi> أو <bdi dir="ltr">Axios</bdi> من تطبيق المتصفح. <bdi dir="ltr">MSW</bdi> يعترض الطلبات محليًا؛ <bdi dir="ltr">Postman</bdi> و<bdi dir="ltr">curl</bdi> لا يشغّلان هذه <bdi dir="ltr">APIs</bdi>.</li></ul></div><div class="grid"><div class="panel"><h3>مثال اتصال فقط</h3><pre dir="ltr"><code>const response = await fetch(&#x27;/api/auth/login&#x27;, {
+  method: &#x27;POST&#x27;,
+  headers: { &#x27;Content-Type&#x27;: &#x27;application/json&#x27; },
+  body: JSON.stringify({
+    email: &#x27;omar@example.test&#x27;,
+    password: &#x27;Demo123!&#x27;
+  })
+});
+const result = await response.json();
+if (!response.ok) {
+  throw new Error(result.error?.message || &#x27;Request failed&#x27;);
+}
+console.log(result.data.user);</code></pre><p>هذا المثال يوضح شكل الاتصال. بناء <bdi dir="ltr">Login Form</bdi> وإدارة الجلسة والـ <bdi dir="ltr">State</bdi> من مهامك.</p></div><div class="panel"><h3>معنى رموز الأخطاء</h3><ul><li>400: <bdi dir="ltr">JSON</bdi> غير صحيح.</li><li>401: بيانات دخول خاطئة أو جلسة منتهية. افحص <bdi dir="ltr">error.code</bdi>.</li><li>403: لا تملك الصلاحية أو لست عضوًا.</li><li>404: المورد أو الرمز غير موجود.</li><li>409: تعارض مع حالة الطلب أو قاعدة العمل.</li><li>422: قيم الحقول غير مقبولة.</li><li>503: فشل تجريبي من أدوات المحاكاة، قبل أي تغيير.</li><li>500: مشكلة في تخزين المحاكاة؛ راجع <bdi dir="ltr">Console</bdi>.</li></ul><p>الطلب الفاشل لا يحفظ تعديلًا جزئيًا. انتهاء الوقت قد يقفل الطلب حتى لو فشلت محاولة تعديل السلة.</p></div></div><p id="api-counter" class="small muted">29 عملية</p><div id="apis-empty" class="empty" hidden>لا توجد APIs مطابقة للبحث.</div><details class="api-card" id="api-01"><summary><span class="api-top"><span class="method POST">POST</span><strong>01 · إنشاء حساب</strong></span><span class="endpoint">/api/auth/register</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>متاح دون تسجيل دخول</p><p><bdi dir="ltr">name</bdi>: من 2 إلى 60 حرفًا. <bdi dir="ltr">email</bdi>: بريد صالح وفريد ويُحوّل إلى أحرف صغيرة. <bdi dir="ltr">password</bdi>: من 8 إلى 72 حرفًا. النجاح لا يسجّل الدخول تلقائيًا. التسجيل ينشئ <bdi dir="ltr">role=member</bdi> فقط؛ إرسال <bdi dir="ltr">role</bdi> مرفوض.</p><p class="meta"><strong>أخطاء شائعة: </strong>409 <bdi dir="ltr">EMAIL_EXISTS</bdi> · 422 <bdi dir="ltr">VALIDATION_ERROR / ROLE_NOT_ALLOWED</bdi></p><h4>Request</h4><pre dir="ltr"><code>POST /api/auth/register
+Content-Type: application/json
+
+{
+  &quot;name&quot;: &quot;مها&quot;,
+  &quot;email&quot;: &quot;maha@example.test&quot;,
+  &quot;password&quot;: &quot;Demo123!&quot;
+}</code></pre><h4>Response · HTTP 201</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;user&quot;: {
+      &quot;id&quot;: &quot;u-e195e034-339d-4f45-9877-46c0a48d161a&quot;,
+      &quot;name&quot;: &quot;مها&quot;,
+      &quot;email&quot;: &quot;maha@example.test&quot;,
+      &quot;role&quot;: &quot;member&quot;
+    }
+  }
+}</code></pre></div></details><details class="api-card" id="api-02"><summary><span class="api-top"><span class="method POST">POST</span><strong>02 · تسجيل الدخول</strong></span><span class="endpoint">/api/auth/login</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>متاح دون تسجيل دخول</p><p>يرجع <bdi dir="ltr">token</bdi> تجريبيًا و<bdi dir="ltr">expiresAt</bdi>. الجلسة صالحة 8 ساعات؛ ليست <bdi dir="ltr">JWT</bdi>. احفظ <bdi dir="ltr">token</bdi> في <bdi dir="ltr">sessionStorage</bdi> لهذه المحاكاة فقط. <bdi dir="ltr">user.role</bdi> يحدد <bdi dir="ltr">admin</bdi> أو <bdi dir="ltr">member</bdi>. المنظّم ليس دور حساب دائمًا.</p><p class="meta"><strong>أخطاء شائعة: </strong>401 <bdi dir="ltr">INVALID_CREDENTIALS</bdi></p><h4>Request</h4><pre dir="ltr"><code>POST /api/auth/login
+Content-Type: application/json
+
+{
+  &quot;email&quot;: &quot;omar@example.test&quot;,
+  &quot;password&quot;: &quot;Demo123!&quot;
+}</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;user&quot;: {
+      &quot;id&quot;: &quot;u1&quot;,
+      &quot;name&quot;: &quot;عمر&quot;,
+      &quot;email&quot;: &quot;omar@example.test&quot;,
+      &quot;role&quot;: &quot;member&quot;
+    },
+    &quot;token&quot;: &quot;demo-token-EXAMPLE&quot;,
+    &quot;expiresAt&quot;: &quot;2026-11-19T18:32:39.807Z&quot;
+  }
+}</code></pre></div></details><details class="api-card" id="api-03"><summary><span class="api-top"><span class="method GET">GET</span><strong>03 · التحقق من الجلسة</strong></span><span class="endpoint">/api/auth/me</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>مستخدم مسجّل دخوله</p><p>استدعِه عند فتح التطبيق أو <bdi dir="ltr">Refresh</bdi> قبل عرض الصفحات المحمية. لا تُعد وجود <bdi dir="ltr">token</bdi> وحده إثباتًا لتسجيل الدخول.</p><p class="meta"><strong>أخطاء شائعة: </strong>401 <bdi dir="ltr">UNAUTHENTICATED</bdi></p><h4>Request</h4><pre dir="ltr"><code>GET /api/auth/me
+Authorization: Bearer YOUR_TOKEN
+</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;user&quot;: {
+      &quot;id&quot;: &quot;u1&quot;,
+      &quot;name&quot;: &quot;عمر&quot;,
+      &quot;email&quot;: &quot;omar@example.test&quot;,
+      &quot;role&quot;: &quot;member&quot;
+    },
+    &quot;expiresAt&quot;: &quot;2026-11-19T18:32:39.807Z&quot;
+  }
+}</code></pre></div></details><details class="api-card" id="api-04"><summary><span class="api-top"><span class="method POST">POST</span><strong>04 · تسجيل الخروج</strong></span><span class="endpoint">/api/auth/logout</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>مستخدم مسجّل دخوله</p><p>يلغي <bdi dir="ltr">token</bdi> الحالي فقط. امسح بعدها <bdi dir="ltr">Session</bdi> و<bdi dir="ltr">Context</bdi> و<bdi dir="ltr">Redux</bdi> الخاصة بالمستخدم من الواجهة.</p><p class="meta"><strong>أخطاء شائعة: </strong>401 <bdi dir="ltr">UNAUTHENTICATED</bdi></p><h4>Request</h4><pre dir="ltr"><code>POST /api/auth/logout
+Authorization: Bearer YOUR_TOKEN
+</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;message&quot;: &quot;تم تسجيل الخروج&quot;
+  }
+}</code></pre></div></details><details class="api-card" id="api-05"><summary><span class="api-top"><span class="method GET">GET</span><strong>05 · قائمة المطاعم والبحث</strong></span><span class="endpoint">/api/restaurants</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>مستخدم مسجّل دخوله</p><p>فلتر اختياري: <bdi dir="ltr">?q=برغر</bdi>. تتضمن النتائج المطاعم المغلقة؛ <bdi dir="ltr">isOpen</bdi> يحدد إمكانية إنشاء طلب.</p><p class="meta"><strong>أخطاء شائعة: </strong>401 <bdi dir="ltr">UNAUTHENTICATED</bdi></p><h4>Request</h4><pre dir="ltr"><code>GET /api/restaurants
+Authorization: Bearer YOUR_TOKEN
+</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: [
+    {
+      &quot;id&quot;: &quot;r1&quot;,
+      &quot;name&quot;: &quot;مطبخ المكتب&quot;,
+      &quot;category&quot;: &quot;وجبات عربية&quot;,
+      &quot;description&quot;: &quot;أرز ووجبات يومية&quot;,
+      &quot;isOpen&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;r2&quot;,
+      &quot;name&quot;: &quot;برغر بريك&quot;,
+      &quot;category&quot;: &quot;برغر&quot;,
+      &quot;description&quot;: &quot;برغر وسناكات&quot;,
+      &quot;isOpen&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;r3&quot;,
+      &quot;name&quot;: &quot;قهوة الفريق&quot;,
+      &quot;category&quot;: &quot;قهوة وفطور&quot;,
+      &quot;description&quot;: &quot;فطور وقهوة&quot;,
+      &quot;isOpen&quot;: false
+    }
+  ]
+}</code></pre></div></details><details class="api-card" id="api-06"><summary><span class="api-top"><span class="method GET">GET</span><strong>06 · تفاصيل مطعم</strong></span><span class="endpoint">/api/restaurants/:restaurantId</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>مستخدم مسجّل دخوله</p><p>استبدل <bdi dir="ltr">r1</bdi> بمعرّف المطعم.</p><p class="meta"><strong>أخطاء شائعة: </strong>401 <bdi dir="ltr">UNAUTHENTICATED</bdi> · 404 <bdi dir="ltr">NOT_FOUND</bdi></p><h4>Request</h4><pre dir="ltr"><code>GET /api/restaurants/r1
+Authorization: Bearer YOUR_TOKEN
+</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;r1&quot;,
+    &quot;name&quot;: &quot;مطبخ المكتب&quot;,
+    &quot;category&quot;: &quot;وجبات عربية&quot;,
+    &quot;description&quot;: &quot;أرز ووجبات يومية&quot;,
+    &quot;isOpen&quot;: true
+  }
+}</code></pre></div></details><details class="api-card" id="api-07"><summary><span class="api-top"><span class="method GET">GET</span><strong>07 · قائمة المنتجات</strong></span><span class="endpoint">/api/restaurants/:restaurantId/menu</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>مستخدم مسجّل دخوله</p><p>فلتر اختياري: <bdi dir="ltr">?category=مشروبات</bdi>. سعر المنتج <bdi dir="ltr">priceFils</bdi> عدد صحيح. <bdi dir="ltr">available=false</bdi> يعني أنه غير متاح للإضافة.</p><p class="meta"><strong>أخطاء شائعة: </strong>401 <bdi dir="ltr">UNAUTHENTICATED</bdi> · 404 <bdi dir="ltr">NOT_FOUND</bdi></p><h4>Request</h4><pre dir="ltr"><code>GET /api/restaurants/r1/menu
+Authorization: Bearer YOUR_TOKEN
+</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: [
+    {
+      &quot;id&quot;: &quot;m1&quot;,
+      &quot;restaurantId&quot;: &quot;r1&quot;,
+      &quot;name&quot;: &quot;وجبة دجاج&quot;,
+      &quot;category&quot;: &quot;وجبات&quot;,
+      &quot;priceFils&quot;: 4500,
+      &quot;available&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;m2&quot;,
+      &quot;restaurantId&quot;: &quot;r1&quot;,
+      &quot;name&quot;: &quot;سلطة&quot;,
+      &quot;category&quot;: &quot;مقبلات&quot;,
+      &quot;priceFils&quot;: 1500,
+      &quot;available&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;m3&quot;,
+      &quot;restaurantId&quot;: &quot;r1&quot;,
+      &quot;name&quot;: &quot;مياه&quot;,
+      &quot;category&quot;: &quot;مشروبات&quot;,
+      &quot;priceFils&quot;: 500,
+      &quot;available&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;m4&quot;,
+      &quot;restaurantId&quot;: &quot;r1&quot;,
+      &quot;name&quot;: &quot;وجبة لحم&quot;,
+      &quot;category&quot;: &quot;وجبات&quot;,
+      &quot;priceFils&quot;: 6500,
+      &quot;available&quot;: false
+    }
+  ]
+}</code></pre></div></details><details class="api-card" id="api-08"><summary><span class="api-top"><span class="method POST">POST</span><strong>08 · إنشاء طلب جماعي</strong></span><span class="endpoint">/api/group-orders</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>مستخدم مسجّل دخوله</p><p><bdi dir="ltr">title</bdi>: 3–80 حرفًا. <bdi dir="ltr">pickupLocation</bdi>: 3–160. <bdi dir="ltr">note</bdi>: حتى 300. <bdi dir="ltr">deliveryFeeFils</bdi>: عدد صحيح 0–100000. <bdi dir="ltr">closesAt</bdi> مستقبلي و<bdi dir="ltr">expectedAt</bdi> بعده. حدّث تواريخ المثال قبل التجربة. المنظّم يصبح عضوًا بسلة فارغة.</p><p class="meta"><strong>أخطاء شائعة: </strong>422 <bdi dir="ltr">VALIDATION_ERROR / INVALID_DEADLINE / INVALID_DELIVERY_TIME / INVALID_FEE / INVALID_RESTAURANT</bdi> · 409 <bdi dir="ltr">RESTAURANT_CLOSED</bdi> · 409 <bdi dir="ltr">MENU_EMPTY</bdi></p><h4>Request</h4><pre dir="ltr"><code>POST /api/group-orders
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+
+{
+  &quot;restaurantId&quot;: &quot;r1&quot;,
+  &quot;title&quot;: &quot;غداء فريق التطوير&quot;,
+  &quot;closesAt&quot;: &quot;2026-11-19T11:32:39.807Z&quot;,
+  &quot;expectedAt&quot;: &quot;2026-11-19T12:32:39.807Z&quot;,
+  &quot;pickupLocation&quot;: &quot;مكتب الاستقبال&quot;,
+  &quot;deliveryFeeFils&quot;: 1000,
+  &quot;note&quot;: &quot;التجمّع عند الاستقبال&quot;
+}</code></pre><h4>Response · HTTP 201</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;o-e33bcac4-34c4-4b2b-a4f7-a3aa5bee19e9&quot;,
+    &quot;organizerId&quot;: &quot;u1&quot;,
+    &quot;restaurantId&quot;: &quot;r1&quot;,
+    &quot;title&quot;: &quot;غداء فريق التطوير&quot;,
+    &quot;pickupLocation&quot;: &quot;مكتب الاستقبال&quot;,
+    &quot;note&quot;: &quot;التجمّع عند الاستقبال&quot;,
+    &quot;closesAt&quot;: &quot;2026-11-19T11:32:39.807Z&quot;,
+    &quot;expectedAt&quot;: &quot;2026-11-19T12:32:39.807Z&quot;,
+    &quot;deliveryFeeFils&quot;: 1000,
+    &quot;joinCode&quot;: &quot;549C8B&quot;,
+    &quot;status&quot;: &quot;Open&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-19T10:32:39.807Z&quot;,
+    &quot;restaurantName&quot;: &quot;مطبخ المكتب&quot;,
+    &quot;isOrganizer&quot;: true,
+    &quot;memberCount&quot;: 1,
+    &quot;orderingMemberCount&quot;: 0,
+    &quot;myQuantity&quot;: 0
+  }
+}</code></pre></div></details><details class="api-card" id="api-09"><summary><span class="api-top"><span class="method GET">GET</span><strong>09 · طلباتي والفلترة</strong></span><span class="endpoint">/api/group-orders</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>مستخدم مسجّل دخوله</p><p>يعرض الطلبات التي أنا عضو فيها فقط. <bdi dir="ltr">role=all</bdi>|<bdi dir="ltr">organizer</bdi>|<bdi dir="ltr">member</bdi>؛ <bdi dir="ltr">member</bdi> يعني مشاركًا ولست المنظّم. <bdi dir="ltr">status</bdi> يطابق اسم الحالة تمامًا. مثال: <bdi dir="ltr">?role=organizer&amp;status=Open</bdi>. كل طلب يمثل جروبًا مستقلًا؛ لا يُدمج طلبان لمجرد اختيار نفس المطعم.</p><p class="meta"><strong>أخطاء شائعة: </strong>401 <bdi dir="ltr">UNAUTHENTICATED</bdi> · 422 <bdi dir="ltr">INVALID_FILTER</bdi></p><h4>Request</h4><pre dir="ltr"><code>GET /api/group-orders
+Authorization: Bearer YOUR_TOKEN
+</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: [
+    {
+      &quot;id&quot;: &quot;o-e33bcac4-34c4-4b2b-a4f7-a3aa5bee19e9&quot;,
+      &quot;organizerId&quot;: &quot;u1&quot;,
+      &quot;restaurantId&quot;: &quot;r1&quot;,
+      &quot;title&quot;: &quot;غداء فريق التطوير&quot;,
+      &quot;pickupLocation&quot;: &quot;مكتب الاستقبال&quot;,
+      &quot;note&quot;: &quot;التجمّع عند الاستقبال&quot;,
+      &quot;closesAt&quot;: &quot;2026-11-19T11:32:39.807Z&quot;,
+      &quot;expectedAt&quot;: &quot;2026-11-19T12:32:39.807Z&quot;,
+      &quot;deliveryFeeFils&quot;: 1000,
+      &quot;joinCode&quot;: &quot;549C8B&quot;,
+      &quot;status&quot;: &quot;Open&quot;,
+      &quot;createdAt&quot;: &quot;2026-11-19T10:32:39.807Z&quot;,
+      &quot;restaurantName&quot;: &quot;مطبخ المكتب&quot;,
+      &quot;isOrganizer&quot;: true,
+      &quot;memberCount&quot;: 1,
+      &quot;orderingMemberCount&quot;: 0,
+      &quot;myQuantity&quot;: 0
+    },
+    {
+      &quot;id&quot;: &quot;o-demo&quot;,
+      &quot;organizerId&quot;: &quot;u1&quot;,
+      &quot;restaurantId&quot;: &quot;r1&quot;,
+      &quot;title&quot;: &quot;جروب الغداء — خمسة أشخاص&quot;,
+      &quot;joinCode&quot;: &quot;TEAM01&quot;,
+      &quot;status&quot;: &quot;Open&quot;,
+      &quot;closesAt&quot;: &quot;2026-11-19T11:32:39.807Z&quot;,
+      &quot;expectedAt&quot;: &quot;2026-11-19T12:32:39.807Z&quot;,
+      &quot;pickupLocation&quot;: &quot;مكتب الاستقبال&quot;,
+      &quot;deliveryFeeFils&quot;: 1000,
+      &quot;note&quot;: &quot;بيانات تدريبية فقط&quot;,
+      &quot;createdAt&quot;: &quot;2026-11-19T10:22:39.807Z&quot;,
+      &quot;restaurantName&quot;: &quot;مطبخ المكتب&quot;,
+      &quot;isOrganizer&quot;: true,
+      &quot;memberCount&quot;: 5,
+      &quot;orderingMemberCount&quot;: 1,
+      &quot;myQuantity&quot;: 0
+    }
+  ]
+}</code></pre></div></details><details class="api-card" id="api-10"><summary><span class="api-top"><span class="method GET">GET</span><strong>10 · تفاصيل طلب جماعي</strong></span><span class="endpoint">/api/group-orders/:orderId</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>عضو في الطلب</p><p>استبدل <bdi dir="ltr">o-demo</bdi> بمعرّف الطلب. يوضح <bdi dir="ltr">isOrganizer</bdi> و<bdi dir="ltr">memberCount</bdi> و<bdi dir="ltr">orderingMemberCount</bdi> و<bdi dir="ltr">myQuantity</bdi>. لا يعرض سلال الآخرين.</p><p class="meta"><strong>أخطاء شائعة: </strong>401 <bdi dir="ltr">UNAUTHENTICATED</bdi> · 403 <bdi dir="ltr">NOT_MEMBER</bdi> · 404 <bdi dir="ltr">NOT_FOUND</bdi></p><h4>Request</h4><pre dir="ltr"><code>GET /api/group-orders/o-demo
+Authorization: Bearer YOUR_TOKEN
+</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;o-demo&quot;,
+    &quot;organizerId&quot;: &quot;u1&quot;,
+    &quot;restaurantId&quot;: &quot;r1&quot;,
+    &quot;title&quot;: &quot;جروب الغداء — خمسة أشخاص&quot;,
+    &quot;joinCode&quot;: &quot;TEAM01&quot;,
+    &quot;status&quot;: &quot;Open&quot;,
+    &quot;closesAt&quot;: &quot;2026-11-19T11:32:39.807Z&quot;,
+    &quot;expectedAt&quot;: &quot;2026-11-19T12:32:39.807Z&quot;,
+    &quot;pickupLocation&quot;: &quot;مكتب الاستقبال&quot;,
+    &quot;deliveryFeeFils&quot;: 1000,
+    &quot;note&quot;: &quot;بيانات تدريبية فقط&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-19T10:22:39.807Z&quot;,
+    &quot;restaurantName&quot;: &quot;مطبخ المكتب&quot;,
+    &quot;isOrganizer&quot;: true,
+    &quot;memberCount&quot;: 5,
+    &quot;orderingMemberCount&quot;: 1,
+    &quot;myQuantity&quot;: 0
+  }
+}</code></pre></div></details><details class="api-card" id="api-11"><summary><span class="api-top"><span class="method POST">POST</span><strong>11 · الانضمام برمز</strong></span><span class="endpoint">/api/group-orders/join</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>مستخدم مسجّل دخوله</p><p>رمز من 6 أحرف/أرقام، دون حساسية لحالة الأحرف. العضو الموجود يعود للطلب دون تكراره حتى لو أُغلق. العضو الجديد ينضم فقط في <bdi dir="ltr">Open</bdi>.</p><p class="meta"><strong>أخطاء شائعة: </strong>404 <bdi dir="ltr">INVALID_JOIN_CODE</bdi> · 409 <bdi dir="ltr">ORDER_NOT_OPEN</bdi> · 422 <bdi dir="ltr">VALIDATION_ERROR</bdi></p><h4>Request</h4><pre dir="ltr"><code>POST /api/group-orders/join
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+
+{
+  &quot;joinCode&quot;: &quot;TEAM01&quot;
+}</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;o-demo&quot;,
+    &quot;organizerId&quot;: &quot;u1&quot;,
+    &quot;restaurantId&quot;: &quot;r1&quot;,
+    &quot;title&quot;: &quot;جروب الغداء — خمسة أشخاص&quot;,
+    &quot;joinCode&quot;: &quot;TEAM01&quot;,
+    &quot;status&quot;: &quot;Open&quot;,
+    &quot;closesAt&quot;: &quot;2026-11-19T11:32:39.807Z&quot;,
+    &quot;expectedAt&quot;: &quot;2026-11-19T12:32:39.807Z&quot;,
+    &quot;pickupLocation&quot;: &quot;مكتب الاستقبال&quot;,
+    &quot;deliveryFeeFils&quot;: 1000,
+    &quot;note&quot;: &quot;بيانات تدريبية فقط&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-19T10:22:39.807Z&quot;,
+    &quot;restaurantName&quot;: &quot;مطبخ المكتب&quot;,
+    &quot;isOrganizer&quot;: false,
+    &quot;memberCount&quot;: 6,
+    &quot;orderingMemberCount&quot;: 1,
+    &quot;myQuantity&quot;: 0
+  }
+}</code></pre></div></details><details class="api-card" id="api-12"><summary><span class="api-top"><span class="method PATCH">PATCH</span><strong>12 · تعديل بيانات الطلب</strong></span><span class="endpoint">/api/group-orders/:orderId</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>منظّم الطلب، والحالة <bdi dir="ltr">Open</bdi></p><p>أرسل حقلًا واحدًا أو أكثر من <bdi dir="ltr">title / pickupLocation / note / closesAt / expectedAt / deliveryFeeFils</bdi>. لا يمكن تغيير المطعم أو المنظّم أو الحالة هنا.</p><p class="meta"><strong>أخطاء شائعة: </strong>403 <bdi dir="ltr">FORBIDDEN</bdi> · 409 <bdi dir="ltr">ORDER_NOT_OPEN</bdi> · 422 <bdi dir="ltr">VALIDATION_ERROR / IMMUTABLE_FIELD</bdi></p><h4>Request</h4><pre dir="ltr"><code>PATCH /api/group-orders/o-demo
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+
+{
+  &quot;title&quot;: &quot;غداء المكتب&quot;,
+  &quot;deliveryFeeFils&quot;: 1000
+}</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;o-demo&quot;,
+    &quot;organizerId&quot;: &quot;u1&quot;,
+    &quot;restaurantId&quot;: &quot;r1&quot;,
+    &quot;title&quot;: &quot;غداء المكتب&quot;,
+    &quot;joinCode&quot;: &quot;TEAM01&quot;,
+    &quot;status&quot;: &quot;Open&quot;,
+    &quot;closesAt&quot;: &quot;2026-11-19T11:32:39.807Z&quot;,
+    &quot;expectedAt&quot;: &quot;2026-11-19T12:32:39.807Z&quot;,
+    &quot;pickupLocation&quot;: &quot;مكتب الاستقبال&quot;,
+    &quot;deliveryFeeFils&quot;: 1000,
+    &quot;note&quot;: &quot;بيانات تدريبية فقط&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-19T10:22:39.807Z&quot;,
+    &quot;restaurantName&quot;: &quot;مطبخ المكتب&quot;,
+    &quot;isOrganizer&quot;: true,
+    &quot;memberCount&quot;: 6,
+    &quot;orderingMemberCount&quot;: 1,
+    &quot;myQuantity&quot;: 0
+  }
+}</code></pre></div></details><details class="api-card" id="api-13"><summary><span class="api-top"><span class="method GET">GET</span><strong>13 · قائمة المشاركين</strong></span><span class="endpoint">/api/group-orders/:orderId/members</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>عضو في الطلب</p><p>يعرض الاسم، وقت الانضمام، <bdi dir="ltr">isOrganizer</bdi> و<bdi dir="ltr">hasItems</bdi>. لا يعرض كلمات المرور أو تفاصيل السلال.</p><p class="meta"><strong>أخطاء شائعة: </strong>401 <bdi dir="ltr">UNAUTHENTICATED</bdi> · 403 <bdi dir="ltr">NOT_MEMBER</bdi> · 404 <bdi dir="ltr">NOT_FOUND</bdi></p><h4>Request</h4><pre dir="ltr"><code>GET /api/group-orders/o-demo/members
+Authorization: Bearer YOUR_TOKEN
+</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: [
+    {
+      &quot;userId&quot;: &quot;u1&quot;,
+      &quot;name&quot;: &quot;عمر&quot;,
+      &quot;joinedAt&quot;: &quot;2026-11-19T10:22:39.807Z&quot;,
+      &quot;isOrganizer&quot;: true,
+      &quot;hasItems&quot;: false
+    },
+    {
+      &quot;userId&quot;: &quot;u2&quot;,
+      &quot;name&quot;: &quot;سارة&quot;,
+      &quot;joinedAt&quot;: &quot;2026-11-19T10:24:19.807Z&quot;,
+      &quot;isOrganizer&quot;: false,
+      &quot;hasItems&quot;: true
+    },
+    {
+      &quot;userId&quot;: &quot;u4&quot;,
+      &quot;name&quot;: &quot;محمود&quot;,
+      &quot;joinedAt&quot;: &quot;2026-11-19T10:25:59.807Z&quot;,
+      &quot;isOrganizer&quot;: false,
+      &quot;hasItems&quot;: false
+    },
+    {
+      &quot;userId&quot;: &quot;u5&quot;,
+      &quot;name&quot;: &quot;نور&quot;,
+      &quot;joinedAt&quot;: &quot;2026-11-19T10:27:39.807Z&quot;,
+      &quot;isOrganizer&quot;: false,
+      &quot;hasItems&quot;: false
+    },
+    {
+      &quot;userId&quot;: &quot;u6&quot;,
+      &quot;name&quot;: &quot;رنا&quot;,
+      &quot;joinedAt&quot;: &quot;2026-11-19T10:29:19.807Z&quot;,
+      &quot;isOrganizer&quot;: false,
+      &quot;hasItems&quot;: false
+    },
+    {
+      &quot;userId&quot;: &quot;u3&quot;,
+      &quot;name&quot;: &quot;ليث&quot;,
+      &quot;joinedAt&quot;: &quot;2026-11-19T10:32:39.807Z&quot;,
+      &quot;isOrganizer&quot;: false,
+      &quot;hasItems&quot;: false
+    }
+  ]
+}</code></pre></div></details><details class="api-card" id="api-14"><summary><span class="api-top"><span class="method DELETE">DELETE</span><strong>14 · مغادرة الطلب</strong></span><span class="endpoint">/api/group-orders/:orderId/members/me</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>مشارك غير المنظّم، والحالة <bdi dir="ltr">Open</bdi></p><p>تُحذف سلة المغادر ويُعاد حساب توزيع التوصيل. اعرض تأكيدًا قبل الاستدعاء.</p><p class="meta"><strong>أخطاء شائعة: </strong>409 <bdi dir="ltr">ORGANIZER_CANNOT_LEAVE / ORDER_NOT_OPEN</bdi></p><h4>Request</h4><pre dir="ltr"><code>DELETE /api/group-orders/o-demo/members/me
+Authorization: Bearer YOUR_TOKEN
+</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;message&quot;: &quot;تمت المغادرة وحذف السلة الخاصة بك&quot;
+  }
+}</code></pre></div></details><details class="api-card" id="api-15"><summary><span class="api-top"><span class="method GET">GET</span><strong>15 · سلتي لهذا الطلب</strong></span><span class="endpoint">/api/group-orders/:orderId/cart</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>عضو في الطلب</p><p>يعرض <bdi dir="ltr">items</bdi> و<bdi dir="ltr">quantity</bdi> (مجموع القطع) و<bdi dir="ltr">foodTotalFils</bdi>. بعد <bdi dir="ltr">Confirmed</bdi> تُستخدم الأسعار المثبتة.</p><p class="meta"><strong>أخطاء شائعة: </strong>401 <bdi dir="ltr">UNAUTHENTICATED</bdi> · 403 <bdi dir="ltr">NOT_MEMBER</bdi> · 404 <bdi dir="ltr">NOT_FOUND</bdi></p><h4>Request</h4><pre dir="ltr"><code>GET /api/group-orders/o-demo/cart
+Authorization: Bearer YOUR_TOKEN
+</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;orderId&quot;: &quot;o-demo&quot;,
+    &quot;status&quot;: &quot;Open&quot;,
+    &quot;items&quot;: [],
+    &quot;quantity&quot;: 0,
+    &quot;foodTotalFils&quot;: 0
+  }
+}</code></pre></div></details><details class="api-card" id="api-16"><summary><span class="api-top"><span class="method POST">POST</span><strong>16 · إضافة منتج لسلتي</strong></span><span class="endpoint">/api/group-orders/:orderId/cart/items</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>عضو في الطلب، والحالة <bdi dir="ltr">Open</bdi></p><p><bdi dir="ltr">quantity</bdi> عدد صحيح 1–10. <bdi dir="ltr">note</bdi> اختياري حتى 200 حرف ويُحذف الفراغ في بدايته ونهايته. المنتج والملاحظة المتطابقان يندمجان. 201 لسطر جديد، و200 عند الدمج.</p><p class="meta"><strong>أخطاء شائعة: </strong>422 <bdi dir="ltr">INVALID_PRODUCT / INVALID_QUANTITY</bdi> · 409 <bdi dir="ltr">PRODUCT_UNAVAILABLE / RESTAURANT_CLOSED / ORDER_NOT_OPEN</bdi></p><h4>Request</h4><pre dir="ltr"><code>POST /api/group-orders/o-demo/cart/items
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+
+{
+  &quot;productId&quot;: &quot;m2&quot;,
+  &quot;quantity&quot;: 1,
+  &quot;note&quot;: &quot;بدون صوص&quot;
+}</code></pre><h4>Response · HTTP 201</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;ci-5f36a24e-c98a-4669-b5b3-76c7ececb7a7&quot;,
+    &quot;userId&quot;: &quot;u1&quot;,
+    &quot;productId&quot;: &quot;m2&quot;,
+    &quot;quantity&quot;: 1,
+    &quot;note&quot;: &quot;بدون صوص&quot;
+  }
+}</code></pre></div></details><details class="api-card" id="api-17"><summary><span class="api-top"><span class="method PATCH">PATCH</span><strong>17 · تعديل عنصر سلة</strong></span><span class="endpoint">/api/group-orders/:orderId/cart/items/:itemId</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>مالك عنصر السلة، والحالة <bdi dir="ltr">Open</bdi></p><p>أرسل <bdi dir="ltr">quantity</bdi> و/أو <bdi dir="ltr">note</bdi> فقط. إذا صارت الملاحظة مطابقة لسطر آخر لنفس المنتج، يندمجان بشرط ألا يتجاوز المجموع 10. <bdi dir="ltr">itemId</bdi> هو <bdi dir="ltr">id</bdi> لعنصر السلة وليس <bdi dir="ltr">productId</bdi>. إذا أصبح المنتج غير متوفر أو أُغلق المطعم يُرفض التعديل، ويبقى الحذف بالعملية 18 متاحًا.</p><p class="meta"><strong>أخطاء شائعة: </strong>403 <bdi dir="ltr">FORBIDDEN</bdi> · 404 <bdi dir="ltr">NOT_FOUND</bdi> · 422 <bdi dir="ltr">INVALID_QUANTITY</bdi> · 409 <bdi dir="ltr">ORDER_NOT_OPEN / PRODUCT_UNAVAILABLE / RESTAURANT_CLOSED</bdi></p><h4>Request</h4><pre dir="ltr"><code>PATCH /api/group-orders/o-demo/cart/items/ci-5f36a24e-c98a-4669-b5b3-76c7ececb7a7
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+
+{
+  &quot;quantity&quot;: 2,
+  &quot;note&quot;: &quot;بدون صوص&quot;
+}</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;ci-5f36a24e-c98a-4669-b5b3-76c7ececb7a7&quot;,
+    &quot;userId&quot;: &quot;u1&quot;,
+    &quot;productId&quot;: &quot;m2&quot;,
+    &quot;quantity&quot;: 2,
+    &quot;note&quot;: &quot;بدون صوص&quot;
+  }
+}</code></pre></div></details><details class="api-card" id="api-18"><summary><span class="api-top"><span class="method DELETE">DELETE</span><strong>18 · حذف عنصر سلة</strong></span><span class="endpoint">/api/group-orders/:orderId/cart/items/:itemId</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>مالك عنصر السلة، والحالة <bdi dir="ltr">Open</bdi></p><p>حذف العنصر هو طريقة إزالته؛ <bdi dir="ltr">quantity=0</bdi> غير مسموح.</p><p class="meta"><strong>أخطاء شائعة: </strong>403 <bdi dir="ltr">FORBIDDEN</bdi> · 404 <bdi dir="ltr">NOT_FOUND</bdi> · 409 <bdi dir="ltr">ORDER_NOT_OPEN</bdi></p><h4>Request</h4><pre dir="ltr"><code>DELETE /api/group-orders/o-demo/cart/items/ci-5f36a24e-c98a-4669-b5b3-76c7ececb7a7
+Authorization: Bearer YOUR_TOKEN
+</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;message&quot;: &quot;تم حذف العنصر&quot;
+  }
+}</code></pre></div></details><details class="api-card" id="api-19"><summary><span class="api-top"><span class="method POST">POST</span><strong>19 · إغلاق الطلب مبكرًا</strong></span><span class="endpoint">/api/group-orders/:orderId/lock</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>منظّم الطلب، والحالة <bdi dir="ltr">Open</bdi></p><p>يحوّل الحالة إلى <bdi dir="ltr">Locked</bdi>. الوصول إلى <bdi dir="ltr">closesAt</bdi> يغلق الطلب تلقائيًا عند أول <bdi dir="ltr">API</bdi> لاحق، حتى لو الصفحة قديمة.</p><p class="meta"><strong>أخطاء شائعة: </strong>403 <bdi dir="ltr">FORBIDDEN</bdi> · 409 <bdi dir="ltr">ORDER_NOT_OPEN</bdi></p><h4>Request</h4><pre dir="ltr"><code>POST /api/group-orders/o-demo/lock
+Authorization: Bearer YOUR_TOKEN
+</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;o-demo&quot;,
+    &quot;organizerId&quot;: &quot;u1&quot;,
+    &quot;restaurantId&quot;: &quot;r1&quot;,
+    &quot;title&quot;: &quot;غداء المكتب&quot;,
+    &quot;joinCode&quot;: &quot;TEAM01&quot;,
+    &quot;status&quot;: &quot;Locked&quot;,
+    &quot;closesAt&quot;: &quot;2026-11-19T11:32:39.807Z&quot;,
+    &quot;expectedAt&quot;: &quot;2026-11-19T12:32:39.807Z&quot;,
+    &quot;pickupLocation&quot;: &quot;مكتب الاستقبال&quot;,
+    &quot;deliveryFeeFils&quot;: 1000,
+    &quot;note&quot;: &quot;بيانات تدريبية فقط&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-19T10:22:39.807Z&quot;,
+    &quot;restaurantName&quot;: &quot;مطبخ المكتب&quot;,
+    &quot;isOrganizer&quot;: true,
+    &quot;memberCount&quot;: 5,
+    &quot;orderingMemberCount&quot;: 1,
+    &quot;myQuantity&quot;: 0
+  }
+}</code></pre></div></details><details class="api-card" id="api-20"><summary><span class="api-top"><span class="method POST">POST</span><strong>20 · إعادة فتح الطلب</strong></span><span class="endpoint">/api/group-orders/:orderId/reopen</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>منظّم الطلب، والحالة <bdi dir="ltr">Locked</bdi></p><p><bdi dir="ltr">closesAt</bdi> مطلوب ومستقبلي. <bdi dir="ltr">expectedAt</bdi> اختياري إن بقي بعد وقت الإغلاق الجديد. لا يعاد فتح الطلب المؤكد.</p><p class="meta"><strong>أخطاء شائعة: </strong>403 <bdi dir="ltr">FORBIDDEN</bdi> · 409 <bdi dir="ltr">INVALID_TRANSITION</bdi> · 422 <bdi dir="ltr">INVALID_DEADLINE / VALIDATION_ERROR</bdi></p><h4>Request</h4><pre dir="ltr"><code>POST /api/group-orders/o-demo/reopen
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+
+{
+  &quot;closesAt&quot;: &quot;2026-11-19T12:02:39.807Z&quot;,
+  &quot;expectedAt&quot;: &quot;2026-11-19T13:02:39.807Z&quot;
+}</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;o-demo&quot;,
+    &quot;organizerId&quot;: &quot;u1&quot;,
+    &quot;restaurantId&quot;: &quot;r1&quot;,
+    &quot;title&quot;: &quot;غداء المكتب&quot;,
+    &quot;joinCode&quot;: &quot;TEAM01&quot;,
+    &quot;status&quot;: &quot;Open&quot;,
+    &quot;closesAt&quot;: &quot;2026-11-19T12:02:39.807Z&quot;,
+    &quot;expectedAt&quot;: &quot;2026-11-19T13:02:39.807Z&quot;,
+    &quot;pickupLocation&quot;: &quot;مكتب الاستقبال&quot;,
+    &quot;deliveryFeeFils&quot;: 1000,
+    &quot;note&quot;: &quot;بيانات تدريبية فقط&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-19T10:22:39.807Z&quot;,
+    &quot;restaurantName&quot;: &quot;مطبخ المكتب&quot;,
+    &quot;isOrganizer&quot;: true,
+    &quot;memberCount&quot;: 5,
+    &quot;orderingMemberCount&quot;: 1,
+    &quot;myQuantity&quot;: 0
+  }
+}</code></pre></div></details><details class="api-card" id="api-21"><summary><span class="api-top"><span class="method POST">POST</span><strong>21 · تأكيد الطلب وتثبيت الحساب</strong></span><span class="endpoint">/api/group-orders/:orderId/confirm</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>منظّم الطلب، والحالة <bdi dir="ltr">Locked</bdi></p><p>يشترط وجود منتج واحد على الأقل وتوفر المنتجات والمطعم. يثبت الأسعار وحصص التوصيل. المقصود أن المنظّم أرسل الطلب للمطعم خارجيًا؛ المحاكاة لا تتواصل مع مطعم. إذا رُفض التأكيد بسبب منتج غير متوفر أو مطعم مغلق: أعد فتح الطلب بالعملية 20 ليحذف صاحب العنصر عنصره، أو انتظر فتح المطعم، أو ألغِ الطلب بالعملية 22. في المثال أُغلق الطلب مجددًا بعد المثال 20 ثم أُكّد.</p><p class="meta"><strong>أخطاء شائعة: </strong>403 <bdi dir="ltr">FORBIDDEN</bdi> · 409 <bdi dir="ltr">EMPTY_ORDER / INVALID_TRANSITION / PRODUCT_UNAVAILABLE / RESTAURANT_CLOSED</bdi></p><h4>Request</h4><pre dir="ltr"><code>POST /api/group-orders/o-demo/confirm
+Authorization: Bearer YOUR_TOKEN
+</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;o-demo&quot;,
+    &quot;organizerId&quot;: &quot;u1&quot;,
+    &quot;restaurantId&quot;: &quot;r1&quot;,
+    &quot;title&quot;: &quot;غداء المكتب&quot;,
+    &quot;joinCode&quot;: &quot;TEAM01&quot;,
+    &quot;status&quot;: &quot;Confirmed&quot;,
+    &quot;closesAt&quot;: &quot;2026-11-19T12:02:39.807Z&quot;,
+    &quot;expectedAt&quot;: &quot;2026-11-19T13:02:39.807Z&quot;,
+    &quot;pickupLocation&quot;: &quot;مكتب الاستقبال&quot;,
+    &quot;deliveryFeeFils&quot;: 1000,
+    &quot;note&quot;: &quot;بيانات تدريبية فقط&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-19T10:22:39.807Z&quot;,
+    &quot;restaurantName&quot;: &quot;مطبخ المكتب&quot;,
+    &quot;isOrganizer&quot;: true,
+    &quot;memberCount&quot;: 5,
+    &quot;orderingMemberCount&quot;: 1,
+    &quot;myQuantity&quot;: 0
+  }
+}</code></pre></div></details><details class="api-card" id="api-22"><summary><span class="api-top"><span class="method PATCH">PATCH</span><strong>22 · تغيير الحالة أو الإلغاء</strong></span><span class="endpoint">/api/group-orders/:orderId/status</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>منظّم الطلب</p><p>يسمح <bdi dir="ltr">Confirmed</bdi> إلى <bdi dir="ltr">Out for Delivery</bdi>، ثم <bdi dir="ltr">Delivered</bdi>. يسمح <bdi dir="ltr">Cancelled</bdi> من <bdi dir="ltr">Open</bdi> أو <bdi dir="ltr">Locked</bdi> فقط. لا يمكن القفز بين الحالات.</p><p class="meta"><strong>أخطاء شائعة: </strong>403 <bdi dir="ltr">FORBIDDEN</bdi> · 409 <bdi dir="ltr">INVALID_TRANSITION</bdi></p><h4>Request</h4><pre dir="ltr"><code>PATCH /api/group-orders/o-demo/status
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+
+{
+  &quot;status&quot;: &quot;Out for Delivery&quot;
+}</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;o-demo&quot;,
+    &quot;organizerId&quot;: &quot;u1&quot;,
+    &quot;restaurantId&quot;: &quot;r1&quot;,
+    &quot;title&quot;: &quot;غداء المكتب&quot;,
+    &quot;joinCode&quot;: &quot;TEAM01&quot;,
+    &quot;status&quot;: &quot;Out for Delivery&quot;,
+    &quot;closesAt&quot;: &quot;2026-11-19T12:02:39.807Z&quot;,
+    &quot;expectedAt&quot;: &quot;2026-11-19T13:02:39.807Z&quot;,
+    &quot;pickupLocation&quot;: &quot;مكتب الاستقبال&quot;,
+    &quot;deliveryFeeFils&quot;: 1000,
+    &quot;note&quot;: &quot;بيانات تدريبية فقط&quot;,
+    &quot;createdAt&quot;: &quot;2026-11-19T10:22:39.807Z&quot;,
+    &quot;restaurantName&quot;: &quot;مطبخ المكتب&quot;,
+    &quot;isOrganizer&quot;: true,
+    &quot;memberCount&quot;: 5,
+    &quot;orderingMemberCount&quot;: 1,
+    &quot;myQuantity&quot;: 0
+  }
+}</code></pre></div></details><details class="api-card" id="api-23"><summary><span class="api-top"><span class="method GET">GET</span><strong>23 · ملخص المنظّم والحسابات</strong></span><span class="endpoint">/api/group-orders/:orderId/summary</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>منظّم الطلب</p><p><bdi dir="ltr">items</bdi> تجميع حسب المنتج والملاحظة. <bdi dir="ltr">bills</bdi> لكل مشارك. <bdi dir="ltr">isFinal</bdi> يميّز الحساب المثبت من التقدير. في <bdi dir="ltr">Cancelled</bdi> تبقى الأرقام للعرض ويكون <bdi dir="ltr">unpaidTotalFils=0</bdi>؛ لا تحصيل. أرقام الطلب الملغى غير مثبتة، فتُحسب بالأسعار الحالية. <bdi dir="ltr">deliveryFeeFils</bdi> هنا هي الرسوم المحمّلة فعليًا: تصبح 0 عندما تكون كل السلال فارغة، حتى لو كانت رسوم الطلب أكبر من صفر.</p><p class="meta"><strong>أخطاء شائعة: </strong>403 <bdi dir="ltr">FORBIDDEN / NOT_MEMBER</bdi> · 404 <bdi dir="ltr">NOT_FOUND</bdi></p><h4>Request</h4><pre dir="ltr"><code>GET /api/group-orders/o-demo/summary
+Authorization: Bearer YOUR_TOKEN
+</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;bills&quot;: [
+      {
+        &quot;userId&quot;: &quot;u1&quot;,
+        &quot;name&quot;: &quot;عمر&quot;,
+        &quot;items&quot;: [],
+        &quot;foodTotalFils&quot;: 0,
+        &quot;deliveryShareFils&quot;: 0,
+        &quot;totalFils&quot;: 0,
+        &quot;paid&quot;: false,
+        &quot;paidAt&quot;: null
+      },
+      {
+        &quot;userId&quot;: &quot;u2&quot;,
+        &quot;name&quot;: &quot;سارة&quot;,
+        &quot;items&quot;: [
+          {
+            &quot;id&quot;: &quot;ci-demo&quot;,
+            &quot;userId&quot;: &quot;u2&quot;,
+            &quot;productId&quot;: &quot;m1&quot;,
+            &quot;quantity&quot;: 1,
+            &quot;note&quot;: &quot;بدون مخلل&quot;,
+            &quot;name&quot;: &quot;وجبة دجاج&quot;,
+            &quot;unitPriceFils&quot;: 4500,
+            &quot;lineTotalFils&quot;: 4500
+          }
+        ],
+        &quot;foodTotalFils&quot;: 4500,
+        &quot;deliveryShareFils&quot;: 1000,
+        &quot;totalFils&quot;: 5500,
+        &quot;paid&quot;: false,
+        &quot;paidAt&quot;: null
+      },
+      {
+        &quot;userId&quot;: &quot;u4&quot;,
+        &quot;name&quot;: &quot;محمود&quot;,
+        &quot;items&quot;: [],
+        &quot;foodTotalFils&quot;: 0,
+        &quot;deliveryShareFils&quot;: 0,
+        &quot;totalFils&quot;: 0,
+        &quot;paid&quot;: false,
+        &quot;paidAt&quot;: null
+      },
+      {
+        &quot;userId&quot;: &quot;u5&quot;,
+        &quot;name&quot;: &quot;نور&quot;,
+        &quot;items&quot;: [],
+        &quot;foodTotalFils&quot;: 0,
+        &quot;deliveryShareFils&quot;: 0,
+        &quot;totalFils&quot;: 0,
+        &quot;paid&quot;: false,
+        &quot;paidAt&quot;: null
+      },
+      {
+        &quot;userId&quot;: &quot;u6&quot;,
+        &quot;name&quot;: &quot;رنا&quot;,
+        &quot;items&quot;: [],
+        &quot;foodTotalFils&quot;: 0,
+        &quot;deliveryShareFils&quot;: 0,
+        &quot;totalFils&quot;: 0,
+        &quot;paid&quot;: false,
+        &quot;paidAt&quot;: null
+      }
+    ],
+    &quot;items&quot;: [
+      {
+        &quot;productId&quot;: &quot;m1&quot;,
+        &quot;name&quot;: &quot;وجبة دجاج&quot;,
+        &quot;note&quot;: &quot;بدون مخلل&quot;,
+        &quot;quantity&quot;: 1,
+        &quot;unitPriceFils&quot;: 4500,
+        &quot;lineTotalFils&quot;: 4500
+      }
+    ],
+    &quot;participantCount&quot;: 5,
+    &quot;orderingMemberCount&quot;: 1,
+    &quot;foodTotalFils&quot;: 4500,
+    &quot;deliveryFeeFils&quot;: 1000,
+    &quot;totalFils&quot;: 5500,
+    &quot;orderId&quot;: &quot;o-demo&quot;,
+    &quot;status&quot;: &quot;Out for Delivery&quot;,
+    &quot;isFinal&quot;: true,
+    &quot;paidTotalFils&quot;: 0,
+    &quot;unpaidTotalFils&quot;: 5500
+  }
+}</code></pre></div></details><details class="api-card" id="api-24"><summary><span class="api-top"><span class="method GET">GET</span><strong>24 · حسابي الشخصي</strong></span><span class="endpoint">/api/group-orders/:orderId/bill</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>عضو في الطلب</p><p>قيمة تقديرية قبل التأكيد ونهائية بعده. السلة الفارغة تساوي صفرًا ولا تتحمل توصيلًا. <bdi dir="ltr">paid</bdi> و<bdi dir="ltr">paidAt</bdi> يصفان تسجيل المنظّم للدفع.</p><p class="meta"><strong>أخطاء شائعة: </strong>403 <bdi dir="ltr">NOT_MEMBER</bdi> · 404 <bdi dir="ltr">NOT_FOUND</bdi> · 409 <bdi dir="ltr">ORDER_CANCELLED</bdi></p><h4>Request</h4><pre dir="ltr"><code>GET /api/group-orders/o-demo/bill
+Authorization: Bearer YOUR_TOKEN
+</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;userId&quot;: &quot;u2&quot;,
+    &quot;name&quot;: &quot;سارة&quot;,
+    &quot;items&quot;: [
+      {
+        &quot;id&quot;: &quot;ci-demo&quot;,
+        &quot;userId&quot;: &quot;u2&quot;,
+        &quot;productId&quot;: &quot;m1&quot;,
+        &quot;quantity&quot;: 1,
+        &quot;note&quot;: &quot;بدون مخلل&quot;,
+        &quot;name&quot;: &quot;وجبة دجاج&quot;,
+        &quot;unitPriceFils&quot;: 4500,
+        &quot;lineTotalFils&quot;: 4500
+      }
+    ],
+    &quot;foodTotalFils&quot;: 4500,
+    &quot;deliveryShareFils&quot;: 1000,
+    &quot;totalFils&quot;: 5500,
+    &quot;paid&quot;: false,
+    &quot;paidAt&quot;: null,
+    &quot;orderId&quot;: &quot;o-demo&quot;,
+    &quot;status&quot;: &quot;Out for Delivery&quot;,
+    &quot;isFinal&quot;: true
+  }
+}</code></pre></div></details><details class="api-card" id="api-25"><summary><span class="api-top"><span class="method PATCH">PATCH</span><strong>25 · تسجيل أو تصحيح الدفع</strong></span><span class="endpoint">/api/group-orders/:orderId/members/:memberId/payment</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>منظّم الطلب، بعد <bdi dir="ltr">Confirmed</bdi></p><p><bdi dir="ltr">memberId</bdi> هو <bdi dir="ltr">userId</bdi> من قائمة الأعضاء. <bdi dir="ltr">paid: Boolean</bdi> فقط. <bdi dir="ltr">true</bdi> يعني دفع المبلغ كاملًا؛ <bdi dir="ltr">false</bdi> يصحح التسجيل. لا يوجد دفع جزئي أو بوابة دفع. لا يُسجل دفع لفاتورة صفرية.</p><p class="meta"><strong>أخطاء شائعة: </strong>403 <bdi dir="ltr">FORBIDDEN</bdi> · 404 <bdi dir="ltr">NOT_FOUND</bdi> · 409 <bdi dir="ltr">NOT_CONFIRMED / EMPTY_BILL</bdi> · 422 <bdi dir="ltr">VALIDATION_ERROR</bdi></p><h4>Request</h4><pre dir="ltr"><code>PATCH /api/group-orders/o-demo/members/u2/payment
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+
+{
+  &quot;paid&quot;: true
+}</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;userId&quot;: &quot;u2&quot;,
+    &quot;paid&quot;: true,
+    &quot;paidAt&quot;: &quot;2026-11-19T10:32:39.807Z&quot;
+  }
+}</code></pre></div></details><details class="api-card" id="api-26"><summary><span class="api-top"><span class="method POST">POST</span><strong>26 · إضافة مطعم بواسطة الأدمن</strong></span><span class="endpoint">/api/admin/restaurants</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>أدمن النظام فقط</p><p>اسم المطعم من 2 إلى 80 حرفًا وفريد. <bdi dir="ltr">category</bdi> من 2 إلى 40. <bdi dir="ltr">description</bdi> اختياري حتى 200. أنشئه مغلقًا ثم أضف منتجاته وافتحه. المطعم سجل بيانات فقط، ولا ينشأ له حساب.</p><p class="meta"><strong>أخطاء شائعة: </strong>401 <bdi dir="ltr">UNAUTHENTICATED</bdi> · 403 <bdi dir="ltr">ADMIN_REQUIRED</bdi> · 409 <bdi dir="ltr">RESTAURANT_EXISTS</bdi> · 422 <bdi dir="ltr">CREATE_CLOSED / VALIDATION_ERROR</bdi></p><h4>Request</h4><pre dir="ltr"><code>POST /api/admin/restaurants
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+
+{
+  &quot;name&quot;: &quot;بيت البيتزا&quot;,
+  &quot;category&quot;: &quot;بيتزا&quot;,
+  &quot;description&quot;: &quot;بيتزا ومقبلات&quot;,
+  &quot;isOpen&quot;: false
+}</code></pre><h4>Response · HTTP 201</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;r-5ad88903-af6c-4e7c-8a6b-22a76b964dce&quot;,
+    &quot;name&quot;: &quot;بيت البيتزا&quot;,
+    &quot;category&quot;: &quot;بيتزا&quot;,
+    &quot;description&quot;: &quot;بيتزا ومقبلات&quot;,
+    &quot;isOpen&quot;: false
+  }
+}</code></pre></div></details><details class="api-card" id="api-27"><summary><span class="api-top"><span class="method PATCH">PATCH</span><strong>27 · تعديل المطعم وإتاحته</strong></span><span class="endpoint">/api/admin/restaurants/:restaurantId</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>أدمن النظام فقط</p><p>يمكن تعديل <bdi dir="ltr">name</bdi> أو <bdi dir="ltr">category</bdi> أو <bdi dir="ltr">description</bdi> أو <bdi dir="ltr">isOpen</bdi>. فتح المطعم يحتاج منتجًا متاحًا واحدًا على الأقل. إغلاقه يمنع الطلبات الجديدة وإضافة عناصر السلال وتعديلها والتأكيد في الطلبات غير المؤكدة، ويبقى حذف عناصر السلة متاحًا؛ لا يلغي الطلبات تلقائيًا ولا يغيّر الفواتير المثبتة. <bdi dir="ltr">MENU_EMPTY</bdi> يظهر أيضًا عند تعديل مطعم مفتوح لم يعد فيه منتج متاح.</p><p class="meta"><strong>أخطاء شائعة: </strong>401 <bdi dir="ltr">UNAUTHENTICATED</bdi> · 403 <bdi dir="ltr">ADMIN_REQUIRED</bdi> · 404 <bdi dir="ltr">NOT_FOUND</bdi> · 409 <bdi dir="ltr">MENU_EMPTY / RESTAURANT_EXISTS</bdi> · 422 <bdi dir="ltr">VALIDATION_ERROR</bdi></p><h4>Request</h4><pre dir="ltr"><code>PATCH /api/admin/restaurants/r-5ad88903-af6c-4e7c-8a6b-22a76b964dce
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+
+{
+  &quot;isOpen&quot;: true
+}</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;r-5ad88903-af6c-4e7c-8a6b-22a76b964dce&quot;,
+    &quot;name&quot;: &quot;بيت البيتزا&quot;,
+    &quot;category&quot;: &quot;بيتزا&quot;,
+    &quot;description&quot;: &quot;بيتزا ومقبلات&quot;,
+    &quot;isOpen&quot;: true
+  }
+}</code></pre></div></details><details class="api-card" id="api-28"><summary><span class="api-top"><span class="method POST">POST</span><strong>28 · إضافة منتج لمطعم</strong></span><span class="endpoint">/api/admin/restaurants/:restaurantId/menu</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>أدمن النظام فقط</p><p><bdi dir="ltr">name</bdi> من 2 إلى 80 حرفًا. <bdi dir="ltr">category</bdi> من 2 إلى 40. <bdi dir="ltr">priceFils</bdi> عدد صحيح من 1 إلى 1000000. <bdi dir="ltr">available</bdi> اختياري وقيمته الافتراضية <bdi dir="ltr">true</bdi>. ربط المنتج بالمطعم من المسار.</p><p class="meta"><strong>أخطاء شائعة: </strong>401 <bdi dir="ltr">UNAUTHENTICATED</bdi> · 403 <bdi dir="ltr">ADMIN_REQUIRED</bdi> · 404 <bdi dir="ltr">NOT_FOUND</bdi> · 422 <bdi dir="ltr">INVALID_PRICE / VALIDATION_ERROR</bdi></p><h4>Request</h4><pre dir="ltr"><code>POST /api/admin/restaurants/r-5ad88903-af6c-4e7c-8a6b-22a76b964dce/menu
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+
+{
+  &quot;name&quot;: &quot;بيتزا خضار&quot;,
+  &quot;category&quot;: &quot;بيتزا&quot;,
+  &quot;priceFils&quot;: 5000,
+  &quot;available&quot;: true
+}</code></pre><h4>Response · HTTP 201</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;m-438029a9-327c-424c-b390-b67ab01a0623&quot;,
+    &quot;restaurantId&quot;: &quot;r-5ad88903-af6c-4e7c-8a6b-22a76b964dce&quot;,
+    &quot;name&quot;: &quot;بيتزا خضار&quot;,
+    &quot;category&quot;: &quot;بيتزا&quot;,
+    &quot;priceFils&quot;: 5000,
+    &quot;available&quot;: true
+  }
+}</code></pre></div></details><details class="api-card" id="api-29"><summary><span class="api-top"><span class="method PATCH">PATCH</span><strong>29 · تعديل منتج وسعره وتوفره</strong></span><span class="endpoint">/api/admin/restaurants/:restaurantId/menu/:productId</span></summary><div class="api-body"><p><strong>الصلاحية: </strong>أدمن النظام فقط</p><p>يمكن تعديل <bdi dir="ltr">name</bdi> أو <bdi dir="ltr">category</bdi> أو <bdi dir="ltr">priceFils</bdi> أو <bdi dir="ltr">available</bdi>. لا يمكن نقل المنتج إلى مطعم آخر. السعر الجديد يغيّر التقديرات قبل <bdi dir="ltr">Confirmed</bdi>؛ الفواتير المثبتة تبقى كما هي. استخدم <bdi dir="ltr">available=false</bdi> لتعطيل المنتج بدل حذفه. تعطيل آخر منتج متاح لا يغلق المطعم تلقائيًا؛ بعدها يُرفض إنشاء الطلبات وأي تعديل على المطعم ما دام مفتوحًا (<bdi dir="ltr">MENU_EMPTY</bdi>).</p><p class="meta"><strong>أخطاء شائعة: </strong>401 <bdi dir="ltr">UNAUTHENTICATED</bdi> · 403 <bdi dir="ltr">ADMIN_REQUIRED</bdi> · 404 <bdi dir="ltr">NOT_FOUND</bdi> · 422 <bdi dir="ltr">INVALID_PRICE / VALIDATION_ERROR</bdi></p><h4>Request</h4><pre dir="ltr"><code>PATCH /api/admin/restaurants/r-5ad88903-af6c-4e7c-8a6b-22a76b964dce/menu/m-438029a9-327c-424c-b390-b67ab01a0623
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+
+{
+  &quot;priceFils&quot;: 5500,
+  &quot;available&quot;: true
+}</code></pre><h4>Response · HTTP 200</h4><pre dir="ltr"><code>{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;m-438029a9-327c-424c-b390-b67ab01a0623&quot;,
+    &quot;restaurantId&quot;: &quot;r-5ad88903-af6c-4e7c-8a6b-22a76b964dce&quot;,
+    &quot;name&quot;: &quot;بيتزا خضار&quot;,
+    &quot;category&quot;: &quot;بيتزا&quot;,
+    &quot;priceFils&quot;: 5500,
+    &quot;available&quot;: true
+  }
+}</code></pre></div></details></section><section id="data"><h2>البيانات وملف JSON</h2><p class="lead">المحاكاة محلية بالكامل. بيانات البداية واضحة في ملف، والتعديلات تبقى محفوظة بعد Refresh في نفس المتصفح والموقع.</p><div class="table-wrap"><table><thead><tr><th>الملف أو المكان</th><th>وظيفته</th></tr></thead><tbody><tr><td><code dir="ltr">public/data/db.json</code></td><td>بيانات البداية: <bdi dir="ltr">users</bdi> و<bdi dir="ltr">sessions</bdi> و<bdi dir="ltr">restaurants</bdi> و<bdi dir="ltr">menuItems</bdi> و<bdi dir="ltr">orders</bdi>. لا يُعدّل تلقائيًا أثناء تشغيل التطبيق.</td></tr><tr><td><code dir="ltr">localStorage</code></td><td>قاعدة المحاكاة الحالية تحت المفتاح <bdi dir="ltr">meen-talab-sho.db.v1</bdi>. يحفظها كود المحاكاة؛ واجهتك تتعامل مع <bdi dir="ltr">APIs</bdi>.</td></tr><tr><td><code dir="ltr">sessionStorage</code></td><td>مكان مقترح لحفظ <bdi dir="ltr">token</bdi> التجريبي في واجهتك. مستقل لكل تبويب. لا تحفظ فيه كلمة مرور المستخدم.</td></tr><tr><td><code dir="ltr">mock-tools.html</code></td><td>تجربة <bdi dir="ltr">APIs</bdi>، تصدير البيانات، استيرادها، إعادة البداية، ضبط التأخير، إفشال طلب واحد وإنهاء الجلسات.</td></tr><tr><td><code dir="ltr">db-export.json</code></td><td>ينزل عند التصدير ويحتوي البيانات الحالية دون الجلسات. يمكنك استيراده أو استخدامه بدل <bdi dir="ltr">db.json</bdi> ثم إعادة بيانات البداية.</td></tr></tbody></table></div><div class="grid"><div class="panel"><h3>حسابات جاهزة للتجربة</h3><p>كلمة المرور التدريبية للجميع: <code dir="ltr">Demo123!</code>. جميعها حسابات أشخاص، ولا يوجد حساب مطعم.</p><div class="table-wrap"><table><thead><tr><th>الاسم</th><th>البريد</th><th>الدور والجروب</th></tr></thead><tbody><tr><td>عمر</td><td><code dir="ltr">omar@example.test</code></td><td><bdi dir="ltr">TEAM01</bdi> · منظّم</td></tr><tr><td>سارة</td><td><code dir="ltr">sara@example.test</code></td><td><bdi dir="ltr">TEAM01</bdi> · مشارك</td></tr><tr><td>ليث</td><td><code dir="ltr">laith@example.test</code></td><td><bdi dir="ltr">TEAM02</bdi> · منظّم</td></tr><tr><td>محمود</td><td><code dir="ltr">mahmoud@example.test</code></td><td><bdi dir="ltr">TEAM01</bdi> · مشارك</td></tr><tr><td>نور</td><td><code dir="ltr">noor@example.test</code></td><td><bdi dir="ltr">TEAM01</bdi> · مشارك</td></tr><tr><td>رنا</td><td><code dir="ltr">rana@example.test</code></td><td><bdi dir="ltr">TEAM01</bdi> · مشارك</td></tr><tr><td>هدى</td><td><code dir="ltr">huda@example.test</code></td><td><bdi dir="ltr">TEAM02</bdi> · مشارك</td></tr><tr><td>أحمد</td><td><code dir="ltr">ahmad@example.test</code></td><td><bdi dir="ltr">TEAM02</bdi> · مشارك</td></tr><tr><td>خالد</td><td><code dir="ltr">khaled@example.test</code></td><td><bdi dir="ltr">TEAM02</bdi> · مشارك</td></tr><tr><td>أدمن النظام</td><td><code dir="ltr">admin@example.test</code></td><td>أدمن إدارة المطاعم</td></tr></tbody></table></div><p>يبدأ <bdi dir="ltr">TEAM01</bdi> بخمسة أعضاء وسلة سارة فقط؛ أكمل سلال البقية عند الاختبار. <bdi dir="ltr">TEAM02</bdi> فيه أربعة أعضاء ومنتج لكل واحد. موعد الأول بعد ساعة والثاني بعد ساعة ونصف من التهيئة أو إعادة الضبط، وبعده يصبح الطلب <bdi dir="ltr">Locked</bdi>. قبل اختبار التاسك 13 أو 26: صدّر بياناتك ثم اضغط «إعادة بيانات البداية».</p></div><div class="panel"><h3>كيف تحفظ نسخة في ملف؟</h3><ul><li>افتح أدوات المحاكاة واضغط «تصدير <bdi dir="ltr">JSON</bdi> محدث».</li><li>عند الاستيراد، تُستبدل البيانات الحالية ويجب تسجيل الدخول مجددًا.</li><li>للتعديل على بيانات البداية: عدّل <bdi dir="ltr">db.json</bdi> ثم اضغط «إعادة بيانات البداية». صدّر نسخة قبل ذلك.</li><li>قيم مثل <code dir="ltr">$NOW+3600000</code> في ملف البداية تعني ساعة بعد وقت التهيئة. التصدير يحوّلها إلى تواريخ فعلية.</li></ul></div></div><div class="callout warn"><p>التغييرات لا تُكتب تلقائيًا فوق ملف <bdi dir="ltr">db.json</bdi> على القرص. هذه محاكاة في المتصفح، والتصدير ينزّل ملفًا جديدًا. المتصفحات والأجهزة المختلفة لا تتشارك البيانات. حذف بيانات الموقع يمسح قاعدة المحاكاة المحلية.</p></div><div class="callout"><p>للتجربة بأكثر من حساب: استخدم تبويبات من نفس المتصفح ونفس عنوان الموقع. بيانات الطلبات مشتركة محليًا، لكن كل تبويب يحتاج <bdi dir="ltr">token</bdi> مستقلًا. عند فتح تبويب من تبويب آخر قد ينسخ المتصفح <bdi dir="ltr">sessionStorage</bdi> مبدئيًا؛ سجّل الدخول بالحساب المطلوب. لا توجد مزامنة لحظية؛ استخدم التحديث.</p><p>كلمات المرور و<bdi dir="ltr">tokens</bdi> هنا تجريبية فقط، والبيانات قابلة للعرض والتعديل محليًا. لا تستخدم معلومات أو كلمات مرور حقيقية، ولا تعتبر هذه المحاكاة نظام <bdi dir="ltr">Authentication</bdi> مناسبًا للإنتاج.</p></div><h3>الملفات التي ستعمل عليها</h3><pre dir="ltr"><code>Meen-Talab-Sho/
+  src/
+    App.jsx          # Empty entry for your UI
+    components/      # Your reusable components
+    pages/           # Your pages
+    hooks/           # Your custom hooks
+    context/         # Your AuthContext
+    store/           # Your Redux Toolkit setup
+    services/        # Your API calls
+    mocks/           # Supplied mock infrastructure
+    main.jsx         # Starts mocks before React
+  public/
+    data/db.json     # Initial JSON data
+    Requirements.html
+    API_Guide.html
+    mockServiceWorker.js
+  mock-tools.html
+  tests/             # API, admin, group isolation and storage tests
+  README.md
+  package.json
+  package-lock.json</code></pre></section><section id="delivery"><h2>التسليم والتقييم</h2><p class="lead">الهدف تطبيق تفهمه وتستطيع تعديله. مواعيد المراحل والمناقشات يحددها المدرّب.</p><div class="table-wrap"><table><thead><tr><th>التسليم المرحلي</th><th>ما يجب أن يكون جاهزًا</th></tr></thead><tbody><tr><td>المرحلة الأولى</td><td>التشغيل، الصفحات، التسجيل والدخول، <bdi dir="ltr">Session</bdi> وحماية الصفحات.</td></tr><tr><td>المرحلة الثانية</td><td>إدارة المطاعم للأدمن، اختيار المطاعم، إنشاء الطلب، الانضمام، تفاصيل الطلب، والسلة.</td></tr><tr><td>المرحلة الثالثة</td><td>الإغلاق والتأكيد، حسابات المشاركين، التوصيل والدفع.</td></tr><tr><td>التسليم النهائي</td><td>معالجة الأخطاء، فحص السيناريوهات، الواجهة المتجاوبة، <bdi dir="ltr">GitHub</bdi> و<bdi dir="ltr">README</bdi> و<bdi dir="ltr">JSON</bdi> تجريبي.</td></tr></tbody></table></div><div class="grid"><div class="panel"><h3>ملفات التسليم</h3><ul><li>رابط <bdi dir="ltr">GitHub</bdi> يتضمن الكود و<bdi dir="ltr">package-lock.json</bdi> و<bdi dir="ltr">README</bdi>.</li><li>نسخة <bdi dir="ltr">db-export.json</bdi> ببيانات وهمية توضح رحلة طلب مكتملة.</li><li>لقطات للشاشات وقائمة سيناريوهات اختبرتها.</li><li>توضيح أي جزء غير مكتمل أو مشكلة معروفة.</li></ul></div><div class="panel"><h3>توزيع التقييم</h3><div class="table-wrap"><table class="criteria" style="min-width:0"><tbody><tr><td>المشروع: الوظائف، التنظيم والتجربة</td><td>40%</td></tr><tr><td>مهام عملية تحت الإشراف</td><td>40%</td></tr><tr><td>مناقشة وتعديل مباشر</td><td>20%</td></tr></tbody></table></div></div></div><div class="callout warn"><h3>العمل الفردي</h3><p>يُمنع استخدام أدوات <bdi dir="ltr">AI</bdi> لكتابة الحل أو تصحيحه أو إعادة صياغة كوده. المسموح هو السلايدات وتمارينك السابقة والتوثيق والإكمال العادي للمحرّر. جهّز نفسك لشرح ما كتبته وتنفيذ تعديل صغير أثناء المناقشة.</p></div><div class="panel"><h3>قبل أن ترسل المشروع</h3><ul><li>اختبر تبديل الحساب، <bdi dir="ltr">Refresh</bdi>، رابطًا مباشرًا، فشل <bdi dir="ltr">API</bdi>، وسلة فارغة.</li><li>اختبر منع تعديل سلة شخص آخر ومنع التعديل بعد إغلاق الطلب.</li><li>اختبر توزيع التوصيل، وخروج مشارك قبل الإغلاق، واستقلال جروب من خمسة أشخاص عن جروب آخر من أربعة.</li><li>تحقق من أن <bdi dir="ltr">npm run build</bdi> يعمل ومن خلو <bdi dir="ltr">Console</bdi> من أخطاء واجهتك.</li><li>نجاح <bdi dir="ltr">npm test</bdi> يفحص المحاكاة المرفقة؛ لا يغني عن اختبار واجهتك.</li></ul></div></section><footer><p>إعداد: <bdi dir="ltr">Yanal Abuhadhoud</bdi> · مشروع React النهائي · الإصدار 1.1</p><p>مراجع البنية: <a href="https://mswjs.io/docs/integrations/browser" target="_blank" rel="noopener">MSW Browser</a> · <a href="https://vite.dev/guide/" target="_blank" rel="noopener">Vite</a> · <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank" rel="noopener">localStorage</a>. قواعد المشروع موضّحة في هذا المرجع.</p></footer></main><div class="toast" id="toast" role="status" hidden></div><script>
+const KEY='meen-talab-sho.requirements.progress.v2';let completed={};try{completed=JSON.parse(localStorage.getItem(KEY)||'{}');if(!completed||Array.isArray(completed)||typeof completed!=='object')completed={};}catch{}
+const $=id=>document.getElementById(id);const tasks=[...document.querySelectorAll('.task')];const apis=[...document.querySelectorAll('.api-card')];let toastTimer;
+function toast(text){$('toast').textContent=text;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,3000);}
+function progress(){let count=0;for(const task of tasks){const done=!!completed[task.dataset.id];task.classList.toggle('done',done);task.querySelector('input[type=checkbox]').checked=done;if(done)count++;}$('side-progress').textContent=`${count} من ${tasks.length} مهمة مكتملة`;$('side-bar').style.width=`${count/tasks.length*100}%`;filter();}
+function normalize(value){return value.toLowerCase().replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/[ً-ٟ]/g,'');}
+function filter(){const q=normalize($('search').value.trim()),mode=$('filter').value;let visible=0;for(const task of tasks){const done=!!completed[task.dataset.id];task.hidden=!(normalize(task.textContent).includes(q)&&(mode==='all'||(mode==='done'?done:!done)));if(!task.hidden)visible++;}for(const phase of document.querySelectorAll('.phase'))phase.hidden=![...phase.querySelectorAll('.task')].some(t=>!t.hidden);let apiCount=0;for(const api of apis){api.hidden=!normalize(api.textContent).includes(q);if(!api.hidden)apiCount++;}$('task-counter').textContent=`${visible} مهمة ظاهرة من ${tasks.length}`;$('api-counter').textContent=`${apiCount} عملية ظاهرة من ${apis.length}`;$('tasks-empty').hidden=visible>0;$('apis-empty').hidden=apiCount>0;}
+for(const checkbox of document.querySelectorAll('[data-check]'))checkbox.addEventListener('change',()=>{completed[checkbox.dataset.check]=checkbox.checked;try{localStorage.setItem(KEY,JSON.stringify(completed));}catch{toast('تعذر حفظ التقدم في هذا المتصفح. يمكنك تصديره.');}progress();});
+$('search').addEventListener('input',filter);$('filter').addEventListener('change',filter);
+$('expand').addEventListener('click',()=>{for(const task of tasks)if(!task.hidden)task.open=true;});$('collapse').addEventListener('click',()=>{for(const task of tasks)task.open=false;});
+$('export-progress').addEventListener('click',()=>{const data={project:'مين طالب شو؟',exportedAt:new Date().toISOString(),tasks:tasks.map(t=>({id:t.dataset.id,title:t.querySelector('.task-title').textContent,done:!!completed[t.dataset.id]}))};const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='my-project-progress.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('تم تصدير التقدم.');});
+for(const pre of document.querySelectorAll('pre')){const button=document.createElement('button');button.className='copy';button.textContent='نسخ المثال';button.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(pre.textContent);toast('تم النسخ.');}catch{const range=document.createRange();range.selectNodeContents(pre);const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);toast('تم تحديد النص؛ انسخه من لوحة المفاتيح.');}});pre.before(button);}
+let printState;window.addEventListener('beforeprint',()=>{printState=[...document.querySelectorAll('details')].map(d=>d.open);document.querySelectorAll('details').forEach(d=>d.open=true);});window.addEventListener('afterprint',()=>{if(printState)document.querySelectorAll('details').forEach((d,i)=>d.open=printState[i]);});$('print').addEventListener('click',()=>window.print());
+window.addEventListener('hashchange',()=>{const target=document.getElementById(location.hash.slice(1));if(target?.tagName==='DETAILS'){target.open=true;target.hidden=false;}});progress();
+if(location.hash){const target=document.getElementById(location.hash.slice(1));if(target?.tagName==='DETAILS')target.open=true;}
+</script><script>if(!location.hash)location.hash="api";</script></body></html>

@@ -1,0 +1,958 @@
+[
+  {
+    "n": 1,
+    "title": "إنشاء حساب",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "samplePath": "/api/auth/register",
+    "body": {
+      "name": "مها",
+      "email": "maha@example.test",
+      "password": "Demo123!"
+    },
+    "permission": "متاح دون تسجيل دخول",
+    "note": "name: من 2 إلى 60 حرفًا. email: بريد صالح وفريد ويُحوّل إلى أحرف صغيرة. password: من 8 إلى 72 حرفًا. النجاح لا يسجّل الدخول تلقائيًا. التسجيل ينشئ role=member فقط؛ إرسال role مرفوض.",
+    "errors": "409 EMAIL_EXISTS · 422 VALIDATION_ERROR / ROLE_NOT_ALLOWED",
+    "status": 201,
+    "response": {
+      "data": {
+        "user": {
+          "id": "u-e195e034-339d-4f45-9877-46c0a48d161a",
+          "name": "مها",
+          "email": "maha@example.test",
+          "role": "member"
+        }
+      }
+    }
+  },
+  {
+    "n": 2,
+    "title": "تسجيل الدخول",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "samplePath": "/api/auth/login",
+    "body": {
+      "email": "omar@example.test",
+      "password": "Demo123!"
+    },
+    "permission": "متاح دون تسجيل دخول",
+    "note": "يرجع token تجريبيًا وexpiresAt. الجلسة صالحة 8 ساعات؛ ليست JWT. احفظ token في sessionStorage لهذه المحاكاة فقط. user.role يحدد admin أو member. المنظّم ليس دور حساب دائمًا.",
+    "errors": "401 INVALID_CREDENTIALS",
+    "status": 200,
+    "response": {
+      "data": {
+        "user": {
+          "id": "u1",
+          "name": "عمر",
+          "email": "omar@example.test",
+          "role": "member"
+        },
+        "token": "demo-token-EXAMPLE",
+        "expiresAt": "2026-11-19T18:32:39.807Z"
+      }
+    }
+  },
+  {
+    "n": 3,
+    "title": "التحقق من الجلسة",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "samplePath": "/api/auth/me",
+    "body": {},
+    "permission": "مستخدم مسجّل دخوله",
+    "note": "استدعِه عند فتح التطبيق أو Refresh قبل عرض الصفحات المحمية. لا تُعد وجود token وحده إثباتًا لتسجيل الدخول.",
+    "errors": "401 UNAUTHENTICATED",
+    "status": 200,
+    "response": {
+      "data": {
+        "user": {
+          "id": "u1",
+          "name": "عمر",
+          "email": "omar@example.test",
+          "role": "member"
+        },
+        "expiresAt": "2026-11-19T18:32:39.807Z"
+      }
+    }
+  },
+  {
+    "n": 4,
+    "title": "تسجيل الخروج",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "samplePath": "/api/auth/logout",
+    "body": {},
+    "permission": "مستخدم مسجّل دخوله",
+    "note": "يلغي token الحالي فقط. امسح بعدها Session وContext وRedux الخاصة بالمستخدم من الواجهة.",
+    "errors": "401 UNAUTHENTICATED",
+    "status": 200,
+    "response": {
+      "data": {
+        "message": "تم تسجيل الخروج"
+      }
+    }
+  },
+  {
+    "n": 5,
+    "title": "قائمة المطاعم والبحث",
+    "method": "GET",
+    "path": "/api/restaurants",
+    "samplePath": "/api/restaurants",
+    "body": {},
+    "permission": "مستخدم مسجّل دخوله",
+    "note": "فلتر اختياري: ?q=برغر. تتضمن النتائج المطاعم المغلقة؛ isOpen يحدد إمكانية إنشاء طلب.",
+    "errors": "401 UNAUTHENTICATED",
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "id": "r1",
+          "name": "مطبخ المكتب",
+          "category": "وجبات عربية",
+          "description": "أرز ووجبات يومية",
+          "isOpen": true
+        },
+        {
+          "id": "r2",
+          "name": "برغر بريك",
+          "category": "برغر",
+          "description": "برغر وسناكات",
+          "isOpen": true
+        },
+        {
+          "id": "r3",
+          "name": "قهوة الفريق",
+          "category": "قهوة وفطور",
+          "description": "فطور وقهوة",
+          "isOpen": false
+        }
+      ]
+    }
+  },
+  {
+    "n": 6,
+    "title": "تفاصيل مطعم",
+    "method": "GET",
+    "path": "/api/restaurants/r1",
+    "samplePath": "/api/restaurants/r1",
+    "body": {},
+    "permission": "مستخدم مسجّل دخوله",
+    "note": "استبدل r1 بمعرّف المطعم.",
+    "errors": "401 UNAUTHENTICATED · 404 NOT_FOUND",
+    "status": 200,
+    "response": {
+      "data": {
+        "id": "r1",
+        "name": "مطبخ المكتب",
+        "category": "وجبات عربية",
+        "description": "أرز ووجبات يومية",
+        "isOpen": true
+      }
+    }
+  },
+  {
+    "n": 7,
+    "title": "قائمة المنتجات",
+    "method": "GET",
+    "path": "/api/restaurants/r1/menu",
+    "samplePath": "/api/restaurants/r1/menu",
+    "body": {},
+    "permission": "مستخدم مسجّل دخوله",
+    "note": "فلتر اختياري: ?category=مشروبات. سعر المنتج priceFils عدد صحيح. available=false يعني أنه غير متاح للإضافة.",
+    "errors": "401 UNAUTHENTICATED · 404 NOT_FOUND",
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "id": "m1",
+          "restaurantId": "r1",
+          "name": "وجبة دجاج",
+          "category": "وجبات",
+          "priceFils": 4500,
+          "available": true
+        },
+        {
+          "id": "m2",
+          "restaurantId": "r1",
+          "name": "سلطة",
+          "category": "مقبلات",
+          "priceFils": 1500,
+          "available": true
+        },
+        {
+          "id": "m3",
+          "restaurantId": "r1",
+          "name": "مياه",
+          "category": "مشروبات",
+          "priceFils": 500,
+          "available": true
+        },
+        {
+          "id": "m4",
+          "restaurantId": "r1",
+          "name": "وجبة لحم",
+          "category": "وجبات",
+          "priceFils": 6500,
+          "available": false
+        }
+      ]
+    }
+  },
+  {
+    "n": 8,
+    "title": "إنشاء طلب جماعي",
+    "method": "POST",
+    "path": "/api/group-orders",
+    "samplePath": "/api/group-orders",
+    "body": {
+      "restaurantId": "r1",
+      "title": "غداء فريق التطوير",
+      "closesAt": "2026-11-19T11:32:39.807Z",
+      "expectedAt": "2026-11-19T12:32:39.807Z",
+      "pickupLocation": "مكتب الاستقبال",
+      "deliveryFeeFils": 1000,
+      "note": "التجمّع عند الاستقبال"
+    },
+    "permission": "مستخدم مسجّل دخوله",
+    "note": "title: 3–80 حرفًا. pickupLocation: 3–160. note: حتى 300. deliveryFeeFils: عدد صحيح 0–100000. closesAt مستقبلي وexpectedAt بعده. حدّث تواريخ المثال قبل التجربة. المنظّم يصبح عضوًا بسلة فارغة.",
+    "errors": "422 VALIDATION_ERROR / INVALID_DEADLINE / INVALID_DELIVERY_TIME / INVALID_FEE / INVALID_RESTAURANT · 409 RESTAURANT_CLOSED · 409 MENU_EMPTY",
+    "status": 201,
+    "response": {
+      "data": {
+        "id": "o-e33bcac4-34c4-4b2b-a4f7-a3aa5bee19e9",
+        "organizerId": "u1",
+        "restaurantId": "r1",
+        "title": "غداء فريق التطوير",
+        "pickupLocation": "مكتب الاستقبال",
+        "note": "التجمّع عند الاستقبال",
+        "closesAt": "2026-11-19T11:32:39.807Z",
+        "expectedAt": "2026-11-19T12:32:39.807Z",
+        "deliveryFeeFils": 1000,
+        "joinCode": "549C8B",
+        "status": "Open",
+        "createdAt": "2026-11-19T10:32:39.807Z",
+        "restaurantName": "مطبخ المكتب",
+        "isOrganizer": true,
+        "memberCount": 1,
+        "orderingMemberCount": 0,
+        "myQuantity": 0
+      }
+    }
+  },
+  {
+    "n": 9,
+    "title": "طلباتي والفلترة",
+    "method": "GET",
+    "path": "/api/group-orders",
+    "samplePath": "/api/group-orders",
+    "body": {},
+    "permission": "مستخدم مسجّل دخوله",
+    "note": "يعرض الطلبات التي أنا عضو فيها فقط. role=all|organizer|member؛ member يعني مشاركًا ولست المنظّم. status يطابق اسم الحالة تمامًا. مثال: ?role=organizer&status=Open. كل طلب يمثل جروبًا مستقلًا؛ لا يُدمج طلبان لمجرد اختيار نفس المطعم.",
+    "errors": "401 UNAUTHENTICATED · 422 INVALID_FILTER",
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "id": "o-e33bcac4-34c4-4b2b-a4f7-a3aa5bee19e9",
+          "organizerId": "u1",
+          "restaurantId": "r1",
+          "title": "غداء فريق التطوير",
+          "pickupLocation": "مكتب الاستقبال",
+          "note": "التجمّع عند الاستقبال",
+          "closesAt": "2026-11-19T11:32:39.807Z",
+          "expectedAt": "2026-11-19T12:32:39.807Z",
+          "deliveryFeeFils": 1000,
+          "joinCode": "549C8B",
+          "status": "Open",
+          "createdAt": "2026-11-19T10:32:39.807Z",
+          "restaurantName": "مطبخ المكتب",
+          "isOrganizer": true,
+          "memberCount": 1,
+          "orderingMemberCount": 0,
+          "myQuantity": 0
+        },
+        {
+          "id": "o-demo",
+          "organizerId": "u1",
+          "restaurantId": "r1",
+          "title": "جروب الغداء — خمسة أشخاص",
+          "joinCode": "TEAM01",
+          "status": "Open",
+          "closesAt": "2026-11-19T11:32:39.807Z",
+          "expectedAt": "2026-11-19T12:32:39.807Z",
+          "pickupLocation": "مكتب الاستقبال",
+          "deliveryFeeFils": 1000,
+          "note": "بيانات تدريبية فقط",
+          "createdAt": "2026-11-19T10:22:39.807Z",
+          "restaurantName": "مطبخ المكتب",
+          "isOrganizer": true,
+          "memberCount": 5,
+          "orderingMemberCount": 1,
+          "myQuantity": 0
+        }
+      ]
+    }
+  },
+  {
+    "n": 10,
+    "title": "تفاصيل طلب جماعي",
+    "method": "GET",
+    "path": "/api/group-orders/o-demo",
+    "samplePath": "/api/group-orders/o-demo",
+    "body": {},
+    "permission": "عضو في الطلب",
+    "note": "استبدل o-demo بمعرّف الطلب. يوضح isOrganizer وmemberCount وorderingMemberCount وmyQuantity. لا يعرض سلال الآخرين.",
+    "errors": "401 UNAUTHENTICATED · 403 NOT_MEMBER · 404 NOT_FOUND",
+    "status": 200,
+    "response": {
+      "data": {
+        "id": "o-demo",
+        "organizerId": "u1",
+        "restaurantId": "r1",
+        "title": "جروب الغداء — خمسة أشخاص",
+        "joinCode": "TEAM01",
+        "status": "Open",
+        "closesAt": "2026-11-19T11:32:39.807Z",
+        "expectedAt": "2026-11-19T12:32:39.807Z",
+        "pickupLocation": "مكتب الاستقبال",
+        "deliveryFeeFils": 1000,
+        "note": "بيانات تدريبية فقط",
+        "createdAt": "2026-11-19T10:22:39.807Z",
+        "restaurantName": "مطبخ المكتب",
+        "isOrganizer": true,
+        "memberCount": 5,
+        "orderingMemberCount": 1,
+        "myQuantity": 0
+      }
+    }
+  },
+  {
+    "n": 11,
+    "title": "الانضمام برمز",
+    "method": "POST",
+    "path": "/api/group-orders/join",
+    "samplePath": "/api/group-orders/join",
+    "body": {
+      "joinCode": "TEAM01"
+    },
+    "permission": "مستخدم مسجّل دخوله",
+    "note": "رمز من 6 أحرف/أرقام، دون حساسية لحالة الأحرف. العضو الموجود يعود للطلب دون تكراره حتى لو أُغلق. العضو الجديد ينضم فقط في Open.",
+    "errors": "404 INVALID_JOIN_CODE · 409 ORDER_NOT_OPEN · 422 VALIDATION_ERROR",
+    "status": 200,
+    "response": {
+      "data": {
+        "id": "o-demo",
+        "organizerId": "u1",
+        "restaurantId": "r1",
+        "title": "جروب الغداء — خمسة أشخاص",
+        "joinCode": "TEAM01",
+        "status": "Open",
+        "closesAt": "2026-11-19T11:32:39.807Z",
+        "expectedAt": "2026-11-19T12:32:39.807Z",
+        "pickupLocation": "مكتب الاستقبال",
+        "deliveryFeeFils": 1000,
+        "note": "بيانات تدريبية فقط",
+        "createdAt": "2026-11-19T10:22:39.807Z",
+        "restaurantName": "مطبخ المكتب",
+        "isOrganizer": false,
+        "memberCount": 6,
+        "orderingMemberCount": 1,
+        "myQuantity": 0
+      }
+    }
+  },
+  {
+    "n": 12,
+    "title": "تعديل بيانات الطلب",
+    "method": "PATCH",
+    "path": "/api/group-orders/o-demo",
+    "samplePath": "/api/group-orders/o-demo",
+    "body": {
+      "title": "غداء المكتب",
+      "deliveryFeeFils": 1000
+    },
+    "permission": "منظّم الطلب، والحالة Open",
+    "note": "أرسل حقلًا واحدًا أو أكثر من title / pickupLocation / note / closesAt / expectedAt / deliveryFeeFils. لا يمكن تغيير المطعم أو المنظّم أو الحالة هنا.",
+    "errors": "403 FORBIDDEN · 409 ORDER_NOT_OPEN · 422 VALIDATION_ERROR / IMMUTABLE_FIELD",
+    "status": 200,
+    "response": {
+      "data": {
+        "id": "o-demo",
+        "organizerId": "u1",
+        "restaurantId": "r1",
+        "title": "غداء المكتب",
+        "joinCode": "TEAM01",
+        "status": "Open",
+        "closesAt": "2026-11-19T11:32:39.807Z",
+        "expectedAt": "2026-11-19T12:32:39.807Z",
+        "pickupLocation": "مكتب الاستقبال",
+        "deliveryFeeFils": 1000,
+        "note": "بيانات تدريبية فقط",
+        "createdAt": "2026-11-19T10:22:39.807Z",
+        "restaurantName": "مطبخ المكتب",
+        "isOrganizer": true,
+        "memberCount": 6,
+        "orderingMemberCount": 1,
+        "myQuantity": 0
+      }
+    }
+  },
+  {
+    "n": 13,
+    "title": "قائمة المشاركين",
+    "method": "GET",
+    "path": "/api/group-orders/o-demo/members",
+    "samplePath": "/api/group-orders/o-demo/members",
+    "body": {},
+    "permission": "عضو في الطلب",
+    "note": "يعرض الاسم، وقت الانضمام، isOrganizer وhasItems. لا يعرض كلمات المرور أو تفاصيل السلال.",
+    "errors": "401 UNAUTHENTICATED · 403 NOT_MEMBER · 404 NOT_FOUND",
+    "status": 200,
+    "response": {
+      "data": [
+        {
+          "userId": "u1",
+          "name": "عمر",
+          "joinedAt": "2026-11-19T10:22:39.807Z",
+          "isOrganizer": true,
+          "hasItems": false
+        },
+        {
+          "userId": "u2",
+          "name": "سارة",
+          "joinedAt": "2026-11-19T10:24:19.807Z",
+          "isOrganizer": false,
+          "hasItems": true
+        },
+        {
+          "userId": "u4",
+          "name": "محمود",
+          "joinedAt": "2026-11-19T10:25:59.807Z",
+          "isOrganizer": false,
+          "hasItems": false
+        },
+        {
+          "userId": "u5",
+          "name": "نور",
+          "joinedAt": "2026-11-19T10:27:39.807Z",
+          "isOrganizer": false,
+          "hasItems": false
+        },
+        {
+          "userId": "u6",
+          "name": "رنا",
+          "joinedAt": "2026-11-19T10:29:19.807Z",
+          "isOrganizer": false,
+          "hasItems": false
+        },
+        {
+          "userId": "u3",
+          "name": "ليث",
+          "joinedAt": "2026-11-19T10:32:39.807Z",
+          "isOrganizer": false,
+          "hasItems": false
+        }
+      ]
+    }
+  },
+  {
+    "n": 14,
+    "title": "مغادرة الطلب",
+    "method": "DELETE",
+    "path": "/api/group-orders/o-demo/members/me",
+    "samplePath": "/api/group-orders/o-demo/members/me",
+    "body": {},
+    "permission": "مشارك غير المنظّم، والحالة Open",
+    "note": "تُحذف سلة المغادر ويُعاد حساب توزيع التوصيل. اعرض تأكيدًا قبل الاستدعاء.",
+    "errors": "409 ORGANIZER_CANNOT_LEAVE / ORDER_NOT_OPEN",
+    "status": 200,
+    "response": {
+      "data": {
+        "message": "تمت المغادرة وحذف السلة الخاصة بك"
+      }
+    }
+  },
+  {
+    "n": 15,
+    "title": "سلتي لهذا الطلب",
+    "method": "GET",
+    "path": "/api/group-orders/o-demo/cart",
+    "samplePath": "/api/group-orders/o-demo/cart",
+    "body": {},
+    "permission": "عضو في الطلب",
+    "note": "يعرض items وquantity (مجموع القطع) وfoodTotalFils. بعد Confirmed تُستخدم الأسعار المثبتة.",
+    "errors": "401 UNAUTHENTICATED · 403 NOT_MEMBER · 404 NOT_FOUND",
+    "status": 200,
+    "response": {
+      "data": {
+        "orderId": "o-demo",
+        "status": "Open",
+        "items": [],
+        "quantity": 0,
+        "foodTotalFils": 0
+      }
+    }
+  },
+  {
+    "n": 16,
+    "title": "إضافة منتج لسلتي",
+    "method": "POST",
+    "path": "/api/group-orders/o-demo/cart/items",
+    "samplePath": "/api/group-orders/o-demo/cart/items",
+    "body": {
+      "productId": "m2",
+      "quantity": 1,
+      "note": "بدون صوص"
+    },
+    "permission": "عضو في الطلب، والحالة Open",
+    "note": "quantity عدد صحيح 1–10. note اختياري حتى 200 حرف ويُحذف الفراغ في بدايته ونهايته. المنتج والملاحظة المتطابقان يندمجان. 201 لسطر جديد، و200 عند الدمج.",
+    "errors": "422 INVALID_PRODUCT / INVALID_QUANTITY · 409 PRODUCT_UNAVAILABLE / RESTAURANT_CLOSED / ORDER_NOT_OPEN",
+    "status": 201,
+    "response": {
+      "data": {
+        "id": "ci-5f36a24e-c98a-4669-b5b3-76c7ececb7a7",
+        "userId": "u1",
+        "productId": "m2",
+        "quantity": 1,
+        "note": "بدون صوص"
+      }
+    }
+  },
+  {
+    "n": 17,
+    "title": "تعديل عنصر سلة",
+    "method": "PATCH",
+    "path": "/api/group-orders/o-demo/cart/items/:itemId",
+    "samplePath": "/api/group-orders/o-demo/cart/items/ci-5f36a24e-c98a-4669-b5b3-76c7ececb7a7",
+    "body": {
+      "quantity": 2,
+      "note": "بدون صوص"
+    },
+    "permission": "مالك عنصر السلة، والحالة Open",
+    "note": "أرسل quantity و/أو note فقط. إذا صارت الملاحظة مطابقة لسطر آخر لنفس المنتج، يندمجان بشرط ألا يتجاوز المجموع 10. itemId هو id لعنصر السلة وليس productId. إذا أصبح المنتج غير متوفر أو أُغلق المطعم يُرفض التعديل، ويبقى الحذف بالعملية 18 متاحًا.",
+    "errors": "403 FORBIDDEN · 404 NOT_FOUND · 422 INVALID_QUANTITY · 409 ORDER_NOT_OPEN / PRODUCT_UNAVAILABLE / RESTAURANT_CLOSED",
+    "status": 200,
+    "response": {
+      "data": {
+        "id": "ci-5f36a24e-c98a-4669-b5b3-76c7ececb7a7",
+        "userId": "u1",
+        "productId": "m2",
+        "quantity": 2,
+        "note": "بدون صوص"
+      }
+    }
+  },
+  {
+    "n": 18,
+    "title": "حذف عنصر سلة",
+    "method": "DELETE",
+    "path": "/api/group-orders/o-demo/cart/items/:itemId",
+    "samplePath": "/api/group-orders/o-demo/cart/items/ci-5f36a24e-c98a-4669-b5b3-76c7ececb7a7",
+    "body": {},
+    "permission": "مالك عنصر السلة، والحالة Open",
+    "note": "حذف العنصر هو طريقة إزالته؛ quantity=0 غير مسموح.",
+    "errors": "403 FORBIDDEN · 404 NOT_FOUND · 409 ORDER_NOT_OPEN",
+    "status": 200,
+    "response": {
+      "data": {
+        "message": "تم حذف العنصر"
+      }
+    }
+  },
+  {
+    "n": 19,
+    "title": "إغلاق الطلب مبكرًا",
+    "method": "POST",
+    "path": "/api/group-orders/o-demo/lock",
+    "samplePath": "/api/group-orders/o-demo/lock",
+    "body": {},
+    "permission": "منظّم الطلب، والحالة Open",
+    "note": "يحوّل الحالة إلى Locked. الوصول إلى closesAt يغلق الطلب تلقائيًا عند أول API لاحق، حتى لو الصفحة قديمة.",
+    "errors": "403 FORBIDDEN · 409 ORDER_NOT_OPEN",
+    "status": 200,
+    "response": {
+      "data": {
+        "id": "o-demo",
+        "organizerId": "u1",
+        "restaurantId": "r1",
+        "title": "غداء المكتب",
+        "joinCode": "TEAM01",
+        "status": "Locked",
+        "closesAt": "2026-11-19T11:32:39.807Z",
+        "expectedAt": "2026-11-19T12:32:39.807Z",
+        "pickupLocation": "مكتب الاستقبال",
+        "deliveryFeeFils": 1000,
+        "note": "بيانات تدريبية فقط",
+        "createdAt": "2026-11-19T10:22:39.807Z",
+        "restaurantName": "مطبخ المكتب",
+        "isOrganizer": true,
+        "memberCount": 5,
+        "orderingMemberCount": 1,
+        "myQuantity": 0
+      }
+    }
+  },
+  {
+    "n": 20,
+    "title": "إعادة فتح الطلب",
+    "method": "POST",
+    "path": "/api/group-orders/o-demo/reopen",
+    "samplePath": "/api/group-orders/o-demo/reopen",
+    "body": {
+      "closesAt": "2026-11-19T12:02:39.807Z",
+      "expectedAt": "2026-11-19T13:02:39.807Z"
+    },
+    "permission": "منظّم الطلب، والحالة Locked",
+    "note": "closesAt مطلوب ومستقبلي. expectedAt اختياري إن بقي بعد وقت الإغلاق الجديد. لا يعاد فتح الطلب المؤكد.",
+    "errors": "403 FORBIDDEN · 409 INVALID_TRANSITION · 422 INVALID_DEADLINE / VALIDATION_ERROR",
+    "status": 200,
+    "response": {
+      "data": {
+        "id": "o-demo",
+        "organizerId": "u1",
+        "restaurantId": "r1",
+        "title": "غداء المكتب",
+        "joinCode": "TEAM01",
+        "status": "Open",
+        "closesAt": "2026-11-19T12:02:39.807Z",
+        "expectedAt": "2026-11-19T13:02:39.807Z",
+        "pickupLocation": "مكتب الاستقبال",
+        "deliveryFeeFils": 1000,
+        "note": "بيانات تدريبية فقط",
+        "createdAt": "2026-11-19T10:22:39.807Z",
+        "restaurantName": "مطبخ المكتب",
+        "isOrganizer": true,
+        "memberCount": 5,
+        "orderingMemberCount": 1,
+        "myQuantity": 0
+      }
+    }
+  },
+  {
+    "n": 21,
+    "title": "تأكيد الطلب وتثبيت الحساب",
+    "method": "POST",
+    "path": "/api/group-orders/o-demo/confirm",
+    "samplePath": "/api/group-orders/o-demo/confirm",
+    "body": {},
+    "permission": "منظّم الطلب، والحالة Locked",
+    "note": "يشترط وجود منتج واحد على الأقل وتوفر المنتجات والمطعم. يثبت الأسعار وحصص التوصيل. المقصود أن المنظّم أرسل الطلب للمطعم خارجيًا؛ المحاكاة لا تتواصل مع مطعم. إذا رُفض التأكيد بسبب منتج غير متوفر أو مطعم مغلق: أعد فتح الطلب بالعملية 20 ليحذف صاحب العنصر عنصره، أو انتظر فتح المطعم، أو ألغِ الطلب بالعملية 22. في المثال أُغلق الطلب مجددًا بعد المثال 20 ثم أُكّد.",
+    "errors": "403 FORBIDDEN · 409 EMPTY_ORDER / INVALID_TRANSITION / PRODUCT_UNAVAILABLE / RESTAURANT_CLOSED",
+    "status": 200,
+    "response": {
+      "data": {
+        "id": "o-demo",
+        "organizerId": "u1",
+        "restaurantId": "r1",
+        "title": "غداء المكتب",
+        "joinCode": "TEAM01",
+        "status": "Confirmed",
+        "closesAt": "2026-11-19T12:02:39.807Z",
+        "expectedAt": "2026-11-19T13:02:39.807Z",
+        "pickupLocation": "مكتب الاستقبال",
+        "deliveryFeeFils": 1000,
+        "note": "بيانات تدريبية فقط",
+        "createdAt": "2026-11-19T10:22:39.807Z",
+        "restaurantName": "مطبخ المكتب",
+        "isOrganizer": true,
+        "memberCount": 5,
+        "orderingMemberCount": 1,
+        "myQuantity": 0
+      }
+    }
+  },
+  {
+    "n": 22,
+    "title": "تغيير الحالة أو الإلغاء",
+    "method": "PATCH",
+    "path": "/api/group-orders/o-demo/status",
+    "samplePath": "/api/group-orders/o-demo/status",
+    "body": {
+      "status": "Out for Delivery"
+    },
+    "permission": "منظّم الطلب",
+    "note": "يسمح Confirmed إلى Out for Delivery، ثم Delivered. يسمح Cancelled من Open أو Locked فقط. لا يمكن القفز بين الحالات.",
+    "errors": "403 FORBIDDEN · 409 INVALID_TRANSITION",
+    "status": 200,
+    "response": {
+      "data": {
+        "id": "o-demo",
+        "organizerId": "u1",
+        "restaurantId": "r1",
+        "title": "غداء المكتب",
+        "joinCode": "TEAM01",
+        "status": "Out for Delivery",
+        "closesAt": "2026-11-19T12:02:39.807Z",
+        "expectedAt": "2026-11-19T13:02:39.807Z",
+        "pickupLocation": "مكتب الاستقبال",
+        "deliveryFeeFils": 1000,
+        "note": "بيانات تدريبية فقط",
+        "createdAt": "2026-11-19T10:22:39.807Z",
+        "restaurantName": "مطبخ المكتب",
+        "isOrganizer": true,
+        "memberCount": 5,
+        "orderingMemberCount": 1,
+        "myQuantity": 0
+      }
+    }
+  },
+  {
+    "n": 23,
+    "title": "ملخص المنظّم والحسابات",
+    "method": "GET",
+    "path": "/api/group-orders/o-demo/summary",
+    "samplePath": "/api/group-orders/o-demo/summary",
+    "body": {},
+    "permission": "منظّم الطلب",
+    "note": "items تجميع حسب المنتج والملاحظة. bills لكل مشارك. isFinal يميّز الحساب المثبت من التقدير. في Cancelled تبقى الأرقام للعرض ويكون unpaidTotalFils=0؛ لا تحصيل. أرقام الطلب الملغى غير مثبتة، فتُحسب بالأسعار الحالية. deliveryFeeFils هنا هي الرسوم المحمّلة فعليًا: تصبح 0 عندما تكون كل السلال فارغة، حتى لو كانت رسوم الطلب أكبر من صفر.",
+    "errors": "403 FORBIDDEN / NOT_MEMBER · 404 NOT_FOUND",
+    "status": 200,
+    "response": {
+      "data": {
+        "bills": [
+          {
+            "userId": "u1",
+            "name": "عمر",
+            "items": [],
+            "foodTotalFils": 0,
+            "deliveryShareFils": 0,
+            "totalFils": 0,
+            "paid": false,
+            "paidAt": null
+          },
+          {
+            "userId": "u2",
+            "name": "سارة",
+            "items": [
+              {
+                "id": "ci-demo",
+                "userId": "u2",
+                "productId": "m1",
+                "quantity": 1,
+                "note": "بدون مخلل",
+                "name": "وجبة دجاج",
+                "unitPriceFils": 4500,
+                "lineTotalFils": 4500
+              }
+            ],
+            "foodTotalFils": 4500,
+            "deliveryShareFils": 1000,
+            "totalFils": 5500,
+            "paid": false,
+            "paidAt": null
+          },
+          {
+            "userId": "u4",
+            "name": "محمود",
+            "items": [],
+            "foodTotalFils": 0,
+            "deliveryShareFils": 0,
+            "totalFils": 0,
+            "paid": false,
+            "paidAt": null
+          },
+          {
+            "userId": "u5",
+            "name": "نور",
+            "items": [],
+            "foodTotalFils": 0,
+            "deliveryShareFils": 0,
+            "totalFils": 0,
+            "paid": false,
+            "paidAt": null
+          },
+          {
+            "userId": "u6",
+            "name": "رنا",
+            "items": [],
+            "foodTotalFils": 0,
+            "deliveryShareFils": 0,
+            "totalFils": 0,
+            "paid": false,
+            "paidAt": null
+          }
+        ],
+        "items": [
+          {
+            "productId": "m1",
+            "name": "وجبة دجاج",
+            "note": "بدون مخلل",
+            "quantity": 1,
+            "unitPriceFils": 4500,
+            "lineTotalFils": 4500
+          }
+        ],
+        "participantCount": 5,
+        "orderingMemberCount": 1,
+        "foodTotalFils": 4500,
+        "deliveryFeeFils": 1000,
+        "totalFils": 5500,
+        "orderId": "o-demo",
+        "status": "Out for Delivery",
+        "isFinal": true,
+        "paidTotalFils": 0,
+        "unpaidTotalFils": 5500
+      }
+    }
+  },
+  {
+    "n": 24,
+    "title": "حسابي الشخصي",
+    "method": "GET",
+    "path": "/api/group-orders/o-demo/bill",
+    "samplePath": "/api/group-orders/o-demo/bill",
+    "body": {},
+    "permission": "عضو في الطلب",
+    "note": "قيمة تقديرية قبل التأكيد ونهائية بعده. السلة الفارغة تساوي صفرًا ولا تتحمل توصيلًا. paid وpaidAt يصفان تسجيل المنظّم للدفع.",
+    "errors": "403 NOT_MEMBER · 404 NOT_FOUND · 409 ORDER_CANCELLED",
+    "status": 200,
+    "response": {
+      "data": {
+        "userId": "u2",
+        "name": "سارة",
+        "items": [
+          {
+            "id": "ci-demo",
+            "userId": "u2",
+            "productId": "m1",
+            "quantity": 1,
+            "note": "بدون مخلل",
+            "name": "وجبة دجاج",
+            "unitPriceFils": 4500,
+            "lineTotalFils": 4500
+          }
+        ],
+        "foodTotalFils": 4500,
+        "deliveryShareFils": 1000,
+        "totalFils": 5500,
+        "paid": false,
+        "paidAt": null,
+        "orderId": "o-demo",
+        "status": "Out for Delivery",
+        "isFinal": true
+      }
+    }
+  },
+  {
+    "n": 25,
+    "title": "تسجيل أو تصحيح الدفع",
+    "method": "PATCH",
+    "path": "/api/group-orders/o-demo/members/u2/payment",
+    "samplePath": "/api/group-orders/o-demo/members/u2/payment",
+    "body": {
+      "paid": true
+    },
+    "permission": "منظّم الطلب، بعد Confirmed",
+    "note": "memberId هو userId من قائمة الأعضاء. paid: Boolean فقط. true يعني دفع المبلغ كاملًا؛ false يصحح التسجيل. لا يوجد دفع جزئي أو بوابة دفع. لا يُسجل دفع لفاتورة صفرية.",
+    "errors": "403 FORBIDDEN · 404 NOT_FOUND · 409 NOT_CONFIRMED / EMPTY_BILL · 422 VALIDATION_ERROR",
+    "status": 200,
+    "response": {
+      "data": {
+        "userId": "u2",
+        "paid": true,
+        "paidAt": "2026-11-19T10:32:39.807Z"
+      }
+    }
+  },
+  {
+    "n": 26,
+    "title": "إضافة مطعم بواسطة الأدمن",
+    "method": "POST",
+    "path": "/api/admin/restaurants",
+    "samplePath": "/api/admin/restaurants",
+    "body": {
+      "name": "بيت البيتزا",
+      "category": "بيتزا",
+      "description": "بيتزا ومقبلات",
+      "isOpen": false
+    },
+    "permission": "أدمن النظام فقط",
+    "note": "اسم المطعم من 2 إلى 80 حرفًا وفريد. category من 2 إلى 40. description اختياري حتى 200. أنشئه مغلقًا ثم أضف منتجاته وافتحه. المطعم سجل بيانات فقط، ولا ينشأ له حساب.",
+    "errors": "401 UNAUTHENTICATED · 403 ADMIN_REQUIRED · 409 RESTAURANT_EXISTS · 422 CREATE_CLOSED / VALIDATION_ERROR",
+    "status": 201,
+    "response": {
+      "data": {
+        "id": "r-5ad88903-af6c-4e7c-8a6b-22a76b964dce",
+        "name": "بيت البيتزا",
+        "category": "بيتزا",
+        "description": "بيتزا ومقبلات",
+        "isOpen": false
+      }
+    }
+  },
+  {
+    "n": 27,
+    "title": "تعديل المطعم وإتاحته",
+    "method": "PATCH",
+    "path": "/api/admin/restaurants/r-5ad88903-af6c-4e7c-8a6b-22a76b964dce",
+    "samplePath": "/api/admin/restaurants/r-5ad88903-af6c-4e7c-8a6b-22a76b964dce",
+    "body": {
+      "isOpen": true
+    },
+    "permission": "أدمن النظام فقط",
+    "note": "يمكن تعديل name أو category أو description أو isOpen. فتح المطعم يحتاج منتجًا متاحًا واحدًا على الأقل. إغلاقه يمنع الطلبات الجديدة وإضافة عناصر السلال وتعديلها والتأكيد في الطلبات غير المؤكدة، ويبقى حذف عناصر السلة متاحًا؛ لا يلغي الطلبات تلقائيًا ولا يغيّر الفواتير المثبتة. MENU_EMPTY يظهر أيضًا عند تعديل مطعم مفتوح لم يعد فيه منتج متاح.",
+    "errors": "401 UNAUTHENTICATED · 403 ADMIN_REQUIRED · 404 NOT_FOUND · 409 MENU_EMPTY / RESTAURANT_EXISTS · 422 VALIDATION_ERROR",
+    "status": 200,
+    "response": {
+      "data": {
+        "id": "r-5ad88903-af6c-4e7c-8a6b-22a76b964dce",
+        "name": "بيت البيتزا",
+        "category": "بيتزا",
+        "description": "بيتزا ومقبلات",
+        "isOpen": true
+      }
+    }
+  },
+  {
+    "n": 28,
+    "title": "إضافة منتج لمطعم",
+    "method": "POST",
+    "path": "/api/admin/restaurants/r-5ad88903-af6c-4e7c-8a6b-22a76b964dce/menu",
+    "samplePath": "/api/admin/restaurants/r-5ad88903-af6c-4e7c-8a6b-22a76b964dce/menu",
+    "body": {
+      "name": "بيتزا خضار",
+      "category": "بيتزا",
+      "priceFils": 5000,
+      "available": true
+    },
+    "permission": "أدمن النظام فقط",
+    "note": "name من 2 إلى 80 حرفًا. category من 2 إلى 40. priceFils عدد صحيح من 1 إلى 1000000. available اختياري وقيمته الافتراضية true. ربط المنتج بالمطعم من المسار.",
+    "errors": "401 UNAUTHENTICATED · 403 ADMIN_REQUIRED · 404 NOT_FOUND · 422 INVALID_PRICE / VALIDATION_ERROR",
+    "status": 201,
+    "response": {
+      "data": {
+        "id": "m-438029a9-327c-424c-b390-b67ab01a0623",
+        "restaurantId": "r-5ad88903-af6c-4e7c-8a6b-22a76b964dce",
+        "name": "بيتزا خضار",
+        "category": "بيتزا",
+        "priceFils": 5000,
+        "available": true
+      }
+    }
+  },
+  {
+    "n": 29,
+    "title": "تعديل منتج وسعره وتوفره",
+    "method": "PATCH",
+    "path": "/api/admin/restaurants/r-5ad88903-af6c-4e7c-8a6b-22a76b964dce/menu/m-438029a9-327c-424c-b390-b67ab01a0623",
+    "samplePath": "/api/admin/restaurants/r-5ad88903-af6c-4e7c-8a6b-22a76b964dce/menu/m-438029a9-327c-424c-b390-b67ab01a0623",
+    "body": {
+      "priceFils": 5500,
+      "available": true
+    },
+    "permission": "أدمن النظام فقط",
+    "note": "يمكن تعديل name أو category أو priceFils أو available. لا يمكن نقل المنتج إلى مطعم آخر. السعر الجديد يغيّر التقديرات قبل Confirmed؛ الفواتير المثبتة تبقى كما هي. استخدم available=false لتعطيل المنتج بدل حذفه. تعطيل آخر منتج متاح لا يغلق المطعم تلقائيًا؛ بعدها يُرفض إنشاء الطلبات وأي تعديل على المطعم ما دام مفتوحًا (MENU_EMPTY).",
+    "errors": "401 UNAUTHENTICATED · 403 ADMIN_REQUIRED · 404 NOT_FOUND · 422 INVALID_PRICE / VALIDATION_ERROR",
+    "status": 200,
+    "response": {
+      "data": {
+        "id": "m-438029a9-327c-424c-b390-b67ab01a0623",
+        "restaurantId": "r-5ad88903-af6c-4e7c-8a6b-22a76b964dce",
+        "name": "بيتزا خضار",
+        "category": "بيتزا",
+        "priceFils": 5500,
+        "available": true
+      }
+    }
+  }
+]

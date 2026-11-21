@@ -1,0 +1,310 @@
+{
+  "schemaVersion": 1,
+  "users": [
+    {
+      "id": "u1",
+      "name": "عمر",
+      "email": "omar@example.test",
+      "password": "Demo123!",
+      "role": "member"
+    },
+    {
+      "id": "u2",
+      "name": "سارة",
+      "email": "sara@example.test",
+      "password": "Demo123!",
+      "role": "member"
+    },
+    {
+      "id": "u3",
+      "name": "ليث",
+      "email": "laith@example.test",
+      "password": "Demo123!",
+      "role": "member"
+    },
+    {
+      "id": "u4",
+      "name": "محمود",
+      "email": "mahmoud@example.test",
+      "password": "Demo123!",
+      "role": "member"
+    },
+    {
+      "id": "u5",
+      "name": "نور",
+      "email": "noor@example.test",
+      "password": "Demo123!",
+      "role": "member"
+    },
+    {
+      "id": "u6",
+      "name": "رنا",
+      "email": "rana@example.test",
+      "password": "Demo123!",
+      "role": "member"
+    },
+    {
+      "id": "u7",
+      "name": "هدى",
+      "email": "huda@example.test",
+      "password": "Demo123!",
+      "role": "member"
+    },
+    {
+      "id": "u8",
+      "name": "أحمد",
+      "email": "ahmad@example.test",
+      "password": "Demo123!",
+      "role": "member"
+    },
+    {
+      "id": "u9",
+      "name": "خالد",
+      "email": "khaled@example.test",
+      "password": "Demo123!",
+      "role": "member"
+    },
+    {
+      "id": "u-admin",
+      "name": "أدمن النظام",
+      "email": "admin@example.test",
+      "password": "Demo123!",
+      "role": "admin"
+    }
+  ],
+  "sessions": [],
+  "restaurants": [
+    {
+      "id": "r1",
+      "name": "مطبخ المكتب",
+      "category": "وجبات عربية",
+      "description": "أرز ووجبات يومية",
+      "isOpen": true
+    },
+    {
+      "id": "r2",
+      "name": "برغر بريك",
+      "category": "برغر",
+      "description": "برغر وسناكات",
+      "isOpen": true
+    },
+    {
+      "id": "r3",
+      "name": "قهوة الفريق",
+      "category": "قهوة وفطور",
+      "description": "فطور وقهوة",
+      "isOpen": false
+    }
+  ],
+  "menuItems": [
+    {
+      "id": "m1",
+      "restaurantId": "r1",
+      "name": "وجبة دجاج",
+      "category": "وجبات",
+      "priceFils": 4500,
+      "available": true
+    },
+    {
+      "id": "m2",
+      "restaurantId": "r1",
+      "name": "سلطة",
+      "category": "مقبلات",
+      "priceFils": 1500,
+      "available": true
+    },
+    {
+      "id": "m3",
+      "restaurantId": "r1",
+      "name": "مياه",
+      "category": "مشروبات",
+      "priceFils": 500,
+      "available": true
+    },
+    {
+      "id": "m4",
+      "restaurantId": "r1",
+      "name": "وجبة لحم",
+      "category": "وجبات",
+      "priceFils": 6500,
+      "available": false
+    },
+    {
+      "id": "m5",
+      "restaurantId": "r2",
+      "name": "برغر لحم",
+      "category": "برغر",
+      "priceFils": 4000,
+      "available": true
+    },
+    {
+      "id": "m6",
+      "restaurantId": "r2",
+      "name": "برغر دجاج",
+      "category": "برغر",
+      "priceFils": 3500,
+      "available": true
+    },
+    {
+      "id": "m7",
+      "restaurantId": "r2",
+      "name": "بطاطا",
+      "category": "إضافات",
+      "priceFils": 1250,
+      "available": true
+    },
+    {
+      "id": "m8",
+      "restaurantId": "r2",
+      "name": "عصير",
+      "category": "مشروبات",
+      "priceFils": 750,
+      "available": true
+    },
+    {
+      "id": "m9",
+      "restaurantId": "r3",
+      "name": "قهوة",
+      "category": "مشروبات",
+      "priceFils": 1750,
+      "available": true
+    },
+    {
+      "id": "m10",
+      "restaurantId": "r3",
+      "name": "لاتيه",
+      "category": "مشروبات",
+      "priceFils": 2500,
+      "available": true
+    },
+    {
+      "id": "m11",
+      "restaurantId": "r3",
+      "name": "كرواسون",
+      "category": "فطور",
+      "priceFils": 2000,
+      "available": true
+    },
+    {
+      "id": "m12",
+      "restaurantId": "r3",
+      "name": "ساندويش جبنة",
+      "category": "فطور",
+      "priceFils": 2250,
+      "available": true
+    }
+  ],
+  "orders": [
+    {
+      "id": "o-demo",
+      "organizerId": "u1",
+      "restaurantId": "r1",
+      "title": "جروب الغداء — خمسة أشخاص",
+      "joinCode": "TEAM01",
+      "status": "Open",
+      "closesAt": "$NOW+3600000",
+      "expectedAt": "$NOW+7200000",
+      "pickupLocation": "مكتب الاستقبال",
+      "deliveryFeeFils": 1000,
+      "note": "بيانات تدريبية فقط",
+      "createdAt": "$NOW-600000",
+      "members": [
+        {
+          "userId": "u1",
+          "joinedAt": "$NOW-600000"
+        },
+        {
+          "userId": "u2",
+          "joinedAt": "$NOW-500000"
+        },
+        {
+          "userId": "u4",
+          "joinedAt": "$NOW-400000"
+        },
+        {
+          "userId": "u5",
+          "joinedAt": "$NOW-300000"
+        },
+        {
+          "userId": "u6",
+          "joinedAt": "$NOW-200000"
+        }
+      ],
+      "cartItems": [
+        {
+          "id": "ci-demo",
+          "userId": "u2",
+          "productId": "m1",
+          "quantity": 1,
+          "note": "بدون مخلل"
+        }
+      ],
+      "payments": [],
+      "confirmedSnapshot": null
+    },
+    {
+      "id": "o-burger",
+      "organizerId": "u3",
+      "restaurantId": "r2",
+      "title": "جروب البرغر — أربعة أشخاص",
+      "joinCode": "TEAM02",
+      "status": "Open",
+      "closesAt": "$NOW+5400000",
+      "expectedAt": "$NOW+9000000",
+      "pickupLocation": "غرفة الاجتماعات",
+      "deliveryFeeFils": 2000,
+      "note": "طلب مستقل تمامًا عن جروب الغداء",
+      "createdAt": "$NOW-500000",
+      "members": [
+        {
+          "userId": "u3",
+          "joinedAt": "$NOW-500000"
+        },
+        {
+          "userId": "u7",
+          "joinedAt": "$NOW-400000"
+        },
+        {
+          "userId": "u8",
+          "joinedAt": "$NOW-300000"
+        },
+        {
+          "userId": "u9",
+          "joinedAt": "$NOW-200000"
+        }
+      ],
+      "cartItems": [
+        {
+          "id": "ci-burger-3",
+          "userId": "u3",
+          "productId": "m5",
+          "quantity": 1,
+          "note": ""
+        },
+        {
+          "id": "ci-burger-7",
+          "userId": "u7",
+          "productId": "m5",
+          "quantity": 1,
+          "note": ""
+        },
+        {
+          "id": "ci-burger-8",
+          "userId": "u8",
+          "productId": "m5",
+          "quantity": 1,
+          "note": ""
+        },
+        {
+          "id": "ci-burger-9",
+          "userId": "u9",
+          "productId": "m5",
+          "quantity": 1,
+          "note": ""
+        }
+      ],
+      "payments": [],
+      "confirmedSnapshot": null
+    }
+  ]
+}
