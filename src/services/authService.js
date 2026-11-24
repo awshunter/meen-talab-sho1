@@ -48,3 +48,19 @@ export async function fetchCurrentUser(token) {
 
   return result.data || result;
 }
+
+export async function logoutUser(token) {
+  const response = await fetch('/api/auth/logout', {
+    method: 'POST',
+    headers: {
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+  });
+
+  if (!response.ok) {
+    const result = await response.json().catch(() => ({}));
+    throw result.error || { message: 'تعذّر إلغاء الجلسة من السيرفر' };
+  }
+
+  return true;
+}

@@ -1,51 +1,48 @@
-import React, { useEffect } from 'react';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
 export default function Layout() {
-  const { user, isAuthenticated, isCheckingAuth, logout } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!isCheckingAuth && !isAuthenticated) {
-      navigate('/login', { replace: true });
-    }
-  }, [isCheckingAuth, isAuthenticated, navigate]);
-
-  const handleLogout = () => {
-    logout();
-    navigate('/login', { replace: true });
+  const handleLogout = async () => {
+    const { logoutWarning } = await logout();
+    navigate('/login', {
+      replace: true,
+      state: logoutWarning ? { logoutWarning } : null,
+    });
   };
-
-  if (isCheckingAuth) {
-    return <p>جاري التحقق من الجلسة...</p>;
-  }
 
   return (
     <div>
-      <header>
-        <nav>
-          <NavLink to="/orders">طلباتي</NavLink> |{' '}
-          <NavLink to="/restaurants">المطاعم</NavLink> |{' '}
-          <NavLink to="/orders/new">إنشاء طلب</NavLink> |{' '}
-          <NavLink to="/orders/join">انضمام لطلب</NavLink> |{' '}
+      <header className="app-header">
+        <Link to="/orders" className="app-brand">
+          مين طالب شو؟
+        </Link>
+
+        <nav className="app-nav">
+          <NavLink to="/orders" end>طلباتي</NavLink>
+          <NavLink to="/restaurants">المطاعم</NavLink>
+          <NavLink to="/orders/new">إنشاء طلب</NavLink>
+          <NavLink to="/orders/join">انضمام لطلب</NavLink>
           <NavLink to="/profile">حسابي</NavLink>
           {user?.role === 'admin' && (
-            <>
-              {' '}| <NavLink to="/admin/restaurants">إدارة المطاعم</NavLink>
-            </>
+            <NavLink to="/admin/restaurants">إدارة المطاعم</NavLink>
           )}
         </nav>
 
-        <div>
-          <span>أهلاً، {user?.name} ({user?.role})</span>{' '}
-          <button onClick={handleLogout}>تسجيل الخروج</button>
+        <div className="app-user-bar">
+          <span>
+            أهلاً، <strong>{user?.name}</strong> ({user?.role})
+          </span>
+          <button type="button" onClick={handleLogout} className="btn-logout">
+            تسجيل الخروج
+          </button>
         </div>
       </header>
 
-      <hr />
-
-      <main>
+      <main className="app-main">
         <Outlet />
       </main>
     </div>

@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { loginUser, fetchCurrentUser } from '../services/authService';
+import { loginUser, fetchCurrentUser, logoutUser } from '../services/authService';
 
 export const AuthContext = createContext(null);
 
@@ -52,10 +52,23 @@ export function AuthProvider({ children }) {
     return receivedUser;
   };
 
-  const logout = () => {
-    sessionStorage.removeItem(TOKEN_KEY);
-    setToken(null);
-    setUser(null);
+  const logout = async () => {
+    const currentToken = sessionStorage.getItem(TOKEN_KEY) || token;
+    let logoutWaring = "";
+
+   try {
+      if (currentToken) {
+        await logoutUser(currentToken);
+      }
+    } catch {
+      logoutWarning = 'تم تسجيل الخروج محلياً، لكن تعذّر إلغاء الجلسة على السيرفر.';
+    } finally {
+      sessionStorage.removeItem(TOKEN_KEY);
+      setToken(null);
+      setUser(null);
+    }
+
+    return { logoutWarning };
   };
 
   const value = {

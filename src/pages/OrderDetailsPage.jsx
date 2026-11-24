@@ -13,25 +13,37 @@ export default function OrderDetailsPage() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    const controller = new AbortController();
+    let isActive = true;
+
     const loadOrder = async () => {
       setLoading(true);
       setError(null);
       try {
-        const data = await apiRequest(`/api/orders/${orderId}`);
+        const data = await apiRequest(`/api/orders/${orderId}`, {
+          signal: controller.signal,
+        });
+        if (!isActive) return;
         setOrder(data);
       } catch (err) {
+        if (!isActive || err.name === 'AbortError') return;
         if (err.status === 401) {
-          logout();
+          await logout();
           navigate('/login', { replace: true });
           return;
         }
         setError(err);
       } finally {
-        setLoading(false);
+        if (isActive) setLoading(false);
       }
     };
 
     loadOrder();
+
+    return () => {
+      isActive = false;
+      controller.abort();
+    };
   }, [orderId, logout, navigate]);
 
   if (loading) return <p>جاري تحميل تفاصيل الطلب...</p>;

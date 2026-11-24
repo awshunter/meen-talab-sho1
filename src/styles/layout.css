@@ -1,0 +1,66 @@
+.app-header {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.app-nav {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.app-nav a {
+  color: var(--text-main);
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.app-nav a.active {
+  background: var(--primary);
+  color: #fff;
+  text-decoration: none;
+}
+
+.app-user-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.app-main {
+  max-width: 960px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+.app-brand {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.app-brand:hover {
+  text-decoration: none;
+}
+
+.btn-logout {
+  background: transparent;
+  color: var(--danger-text);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  font-size: 0.85rem;
+}
+
+.btn-logout:hover:not(:disabled) {
+  background: var(--danger-bg);
+}

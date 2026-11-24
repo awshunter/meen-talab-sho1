@@ -2,6 +2,9 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.jsx';
 import { startMocking } from './mocks/browser.js';
+import './styles/variables.css';
+import './styles/global.css';
+import './styles/layout.css';
 
 // يجب تشغيل المحاكاة قبل أول طلب API. اترك هذا الإعداد كما هو.
 startMocking().then(() => {

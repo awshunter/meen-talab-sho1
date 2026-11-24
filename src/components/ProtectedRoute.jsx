@@ -3,7 +3,8 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
 export default function ProtectedRoute() {
-  const { isAuthenticated, isCheckingAuth } = useAuth();
+  const {user, isAuthenticated, isCheckingAuth } = useAuth();
+  
 
   if (isCheckingAuth) {
     return <p>جاري التحقق من الجلسة...</p>;
@@ -13,5 +14,5 @@ export default function ProtectedRoute() {
     return <Navigate to="/login" replace />;
   }
 
-  return <Outlet />;
+  return <Outlet key={user?.id || 'guest'} />;
 }
