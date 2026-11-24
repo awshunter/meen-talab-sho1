@@ -15,9 +15,13 @@ import ProfilePage from './pages/ProfilePage';
 import AdminRestaurantsPage from './pages/AdminRestaurantsPage';
 import AdminMenuPage from './pages/AdminMenuPage';
 import NotFoundPage from './pages/NotFoundPage';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import AdminRoute from './components/AdminRoute';
 
 export default function App() {
   return (
+    <AuthProvider>
     <BrowserRouter>
       <Routes>
         
@@ -25,6 +29,7 @@ export default function App() {
         <Route path="/register" element={<RegisterPage />} />
 
         {/* الصفحات الداخلية (داخل Layout) */}
+        <Route element={<ProtectedRoute />}>
         <Route path="/" element={<Layout />}>
           <Route index element={<Navigate to="/orders" replace />} />
           <Route path="orders" element={<MyOrdersPage />} />
@@ -40,13 +45,18 @@ export default function App() {
           <Route path="profile" element={<ProfilePage />} />
 
           {/* صفحات الأدمن */}
+        <Route element={<AdminRoute />}>
           <Route path="admin/restaurants" element={<AdminRestaurantsPage />} />
           <Route path="admin/restaurants/:restaurantId/items" element={<AdminMenuPage />} />
         </Route>
+        </Route>
+        </Route>
+
 
         {/* صفحة غير موجودة 404 */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   );
 }
